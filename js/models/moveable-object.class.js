@@ -1,9 +1,9 @@
 class MoveableObject {
-    x;
-    y;
+    x = 100;
+    y = 150;
+    width = 100; 
+    height = 280;
     img;
-    height;
-    width;
 
     /**
      * it will generate a new Image

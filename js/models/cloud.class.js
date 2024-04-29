@@ -1,8 +1,8 @@
 class Cloud extends MoveableObject {
-    x = 40;
-    y = 50;
-    height = 100;
-    width = 500;
+    x = 0;
+    y = 20;
+    height = 400;
+    width = 480;
 
     constructor() {
         super().loadImage('img/5_background/layers/4_clouds/1.png');
