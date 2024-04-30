@@ -8,35 +8,35 @@ let keyboard = new Keyboard();
  */
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas);
+    world = new World(canvas, keyboard);
 }
 
 
 /**
  * put true if key press
  */
-window.addEventListener('keydown', (key) => {
-    if(key.keycode == 38) {
+window.addEventListener("keydown", (key) => {
+    if(key.which == 38) {
         keyboard.UP = true;
     }
 
-    if(key.keycode == 39) {
+    if(key.which == 39) {
         keyboard.RIGHT = true;
     }
 
-    if(key.keycode == 40) {
+    if(key.which == 40) {
         keyboard.DOWN = true;
     }
 
-    if(key.keycode == 37) {
+    if(key.which == 37) {
         keyboard.LEFT = true;
     }
 
-    if(key.keycode == 32) {
+    if(key.which == 32) {
         keyboard.SPACE = true;
     }
 
-    if(key.keycode == 68) {
+    if(key.which == 68) {
         keyboard.D = true;
     }
 })
@@ -45,28 +45,28 @@ window.addEventListener('keydown', (key) => {
 /**
  * put key on false if the key is not pressed
  */
-window.addEventListener('keyup', (key) => {
-    if(key.keycode == 38) {
+window.addEventListener("keyup", (key) => {
+    if(key.which == 38) {
         keyboard.UP = false;
     }
 
-    if(key.keycode == 39) {
+    if(key.which == 39) {
         keyboard.RIGHT = false;
     }
 
-    if(key.keycode == 40) {
+    if(key.which == 40) {
         keyboard.DOWN = false;
     }
 
-    if(key.keycode == 37) {
+    if(key.which == 37) {
         keyboard.LEFT = false;
     }
 
-    if(key.keycode == 32) {
+    if(key.which == 32) {
         keyboard.SPACE = false;
     }
 
-    if(key.keycode == 68) {
+    if(key.which == 68) {
         keyboard.D = false;
     }
 })

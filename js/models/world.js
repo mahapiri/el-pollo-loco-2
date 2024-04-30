@@ -1,6 +1,7 @@
 class World {
     ctx;
     canvas;
+    keyboard;
     character = new Character();
     enemies = [
         new Chicken(),
@@ -25,10 +26,17 @@ class World {
      * draw all objects to the world
      * @param {string} canvas - get the element by id of canvas in game.js
      */
-    constructor(canvas) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
+    }
+
+
+    setWorld() {
+        this.character.world = this;
     }
 
 
