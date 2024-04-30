@@ -13,15 +13,6 @@ class Chicken extends MoveableObject {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ];
 
-    CHICK_WALK = [
-        'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
-        'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
-        'img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
-    ];
-
-    CHICK_DEAD = [
-        'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
-    ];
 
     /**
      * it will load the chicken and place it to the x position of 200px + random number of 500px

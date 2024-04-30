@@ -10,6 +10,7 @@ class MoveableObject {
     };
     currentImage = 0;
     speed = 0.2;
+    otherDirection = false;
 
 
     /**

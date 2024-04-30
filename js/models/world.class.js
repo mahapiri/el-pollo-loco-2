@@ -2,23 +2,12 @@ class World {
     ctx;
     canvas;
     keyboard;
+    camera_x = 0;
     character = new Character();
-    enemies = [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-    ];
+    enemies = level1.enemies;
     endboss = new Endboss();
     cloud = new Cloud();
-    backgroundObject = [
-        new BackgroundObject('img/5_background/layers/air.png'),
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png'),
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png'),
-        new BackgroundObject('img/5_background/layers/1_first_layer/1.png')
-    ];
+    backgroundObject = level1.backgroundObject;
 
 
     /**
@@ -48,11 +37,15 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+        this.ctx.translate(this.camera_x, 0);
+
         this.addObjectsToMap(this.backgroundObject);
         this.addToMap(this.cloud);
         this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
         this.addToMap(this.endboss);
+
+        this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
         requestAnimationFrame(() => {
@@ -77,6 +70,16 @@ class World {
      * @param {array} mo - get the object 
      */
     addToMap(mo) {
+        if (mo.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(mo.width, 0);
+            this.ctx.scale(-1, 1);
+            mo.x = mo.x * -1;
+        }
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if (mo.otherDirection) {
+            mo.x = mo.x * -1;
+            this.ctx.restore();
+        }
     }
 }

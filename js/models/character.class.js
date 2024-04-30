@@ -1,6 +1,6 @@
 class Character extends MoveableObject {
     world;
-    speed = 15;
+    speed = 5;
 
     IMAGE_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -25,11 +25,14 @@ class Character extends MoveableObject {
         setInterval(() => {
             if (this.world.keyboard.RIGHT) {
                 this.x += this.speed;
+                this.otherDirection = false;
             }
 
             if (this.world.keyboard.LEFT) {
                 this.x -= this.speed;
+                this.otherDirection = true;
             }
+            this.world.camera_x = -this.x;
         }, 1000 / 60);
 
         setInterval(() => {
@@ -39,7 +42,7 @@ class Character extends MoveableObject {
                 this.img = this.imageCache[path];
                 this.currentImage++;
             }
-        }, 50);
+        }, 1000 / 25);
     }
 
 
