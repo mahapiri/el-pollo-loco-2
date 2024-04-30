@@ -10,6 +10,11 @@ class BackgroundObject extends MoveableObject {
         'img/5_background/layers/2_second_layer/1.png',
         'img/5_background/layers/1_first_layer/1.png'
     ];
+
+    /**
+     * it will load the image
+     * @param {*} get the image source file
+     */
     constructor(path) {
         super().loadImage(path);
     }

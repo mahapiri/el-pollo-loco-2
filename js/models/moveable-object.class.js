@@ -5,6 +5,7 @@ class MoveableObject {
     height = 280;
     img;
 
+    
     /**
      * it will generate a new Image
      * @param {path} here you can put your path from your img file 
@@ -14,10 +15,18 @@ class MoveableObject {
         this.img.src = path;
     }
 
+
+    /**
+     * object will move to the right
+     */
     moveRight() {
         console.log('Moving Right');
     }
 
+
+    /**
+     * object will move to the left
+     */
     moveLeft() {
         
     }
