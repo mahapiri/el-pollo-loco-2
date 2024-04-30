@@ -13,7 +13,7 @@ class BackgroundObject extends MoveableObject {
 
     /**
      * it will load the image
-     * @param {*} get the image source file
+     * @param {string} path - get the image source file
      */
     constructor(path) {
         super().loadImage(path);

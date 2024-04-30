@@ -3,10 +3,14 @@ class World {
     canvas;
     character = new Character();
     enemies = [
-    new Chicken(),
-    new Chicken(),
-    new Chicken()
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
     ];
+    endboss = new Endboss();
     cloud = new Cloud();
     backgroundObject = [
         new BackgroundObject('img/5_background/layers/air.png'),
@@ -15,11 +19,11 @@ class World {
         new BackgroundObject('img/5_background/layers/1_first_layer/1.png')
     ];
 
-    
+
     /**
      * create a canvas field in 2D
      * draw all objects to the world
-     * @param {canvas} get the element by id of canvas in game.js
+     * @param {string} canvas - get the element by id of canvas in game.js
      */
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
@@ -40,6 +44,7 @@ class World {
         this.addToMap(this.cloud);
         this.addToMap(this.character);
         this.addObjectsToMap(this.enemies);
+        this.addToMap(this.endboss);
 
         let self = this;
         requestAnimationFrame(() => {
@@ -50,7 +55,7 @@ class World {
 
     /**
      * draw the image for each object in an array
-     * @param {object} validate the object 
+     * @param {array} object - get the array of the object
      */
     addObjectsToMap(object) {
         object.forEach(o => {
@@ -58,10 +63,10 @@ class World {
         })
     }
 
-    
+
     /**
      * draw the image
-     * @param {mo} get the object 
+     * @param {array} mo - get the object 
      */
     addToMap(mo) {
         this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
