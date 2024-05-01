@@ -13,6 +13,10 @@ class Chicken extends MoveableObject {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ];
 
+    chicken_sound = new Audio('audio/chicken.mp3');
+    sound_volume = 0;
+    play_sound = 1000;
+
 
     /**
      * it will load the chicken and place it to the x position of 200px + random number of 500px
@@ -25,16 +29,33 @@ class Chicken extends MoveableObject {
         this.x = 200 + Math.random() * 500;
         this.speed = 0.15 + Math.random() * 0.5;
         this.animate();
+        this.playSound();
     }
 
+
+    /**
+     * all images are loading while modular operator is repeating the images
+     * 
+     */
     animate() {
         this.moveLeft();
-
         setInterval(() => {
             let i = this.currentImage % this.IMAGE_WALKING.length;
             let path = this.IMAGE_WALKING[i];
             this.img = this.imageCache[path];
             this.currentImage++;
         }, 1000 / 10);
+    }
+
+
+    /**
+     * play the sound for the chicken
+     */
+    playSound() {
+        setInterval(() => {
+            this.chicken_sound.volume = this.sound_volume;
+            this.chicken_sound.play();
+        }, this.play_sound);
+        
     }
 }

@@ -13,12 +13,22 @@ class Chick extends Chicken {
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ];
 
+    chicken_sound = new Audio('audio/chick.mp3');
+    sound_volume = 0;
+    play_sound = 2000;
 
+
+    /**
+     * load chick
+     * position x to the canvas
+     * move left with the animate images of the chick
+     * play sound for the chick
+     */
     constructor() {
         super().loadImages(this.IMAGE_WALKING);
         this.x = 200 + Math.random() * 500;
         this.speed = 0.15 + Math.random() * 0.5;
         this.animate();
+        this.playSound();
     }
-
 }

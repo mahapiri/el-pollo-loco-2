@@ -3,12 +3,9 @@ class World {
     canvas;
     keyboard;
     camera_x = 0;
+    level = level1;
     character = new Character();
-    enemies = level1.enemies;
     endboss = new Endboss();
-    cloud = new Cloud();
-    backgroundObject = level1.backgroundObject;
-
 
     /**
      * create a canvas field in 2D
@@ -24,6 +21,9 @@ class World {
     }
 
 
+    /**
+     * set world to the character
+     */
     setWorld() {
         this.character.world = this;
     }
@@ -35,14 +35,15 @@ class World {
      * 3. Draw all objects to the canvas depending of the graphic performance
      */
     draw() {
+        this.playBackgroundMusic();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToMap(this.backgroundObject);
-        this.addToMap(this.cloud);
+        this.addObjectsToMap(this.level.backgroundObject);
+        this.addObjectsToMap(this.level.cloud);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.endboss);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -81,5 +82,14 @@ class World {
             mo.x = mo.x * -1;
             this.ctx.restore();
         }
+    }
+
+
+    /**
+     * play the background music + set the volume
+     */
+    playBackgroundMusic() {
+        this.level.background_music[0].play();
+        this.level.background_music[0].volume = 0;
     }
 }
