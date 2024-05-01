@@ -29,6 +29,6 @@ class Chick extends Chicken {
         this.x = 200 + Math.random() * 500;
         this.speed = 0.15 + Math.random() * 0.5;
         this.animate();
-        this.playSound();
+        // this.playSound();
     }
 }
