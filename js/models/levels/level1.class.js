@@ -10,6 +10,9 @@ const level1 = new Level (
         new Chick()
     ],
     [
+        new Endboss()
+    ],
+    [
         new Cloud()
     ],
     [

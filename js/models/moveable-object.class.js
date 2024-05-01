@@ -36,6 +36,14 @@ class MoveableObject {
     }
 
 
+    playAnimation(image) {
+        let i = this.currentImage % image.length;
+        let path = image[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+
+
     /**
      * object will move to the right
      */

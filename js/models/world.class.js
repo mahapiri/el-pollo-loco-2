@@ -5,7 +5,6 @@ class World {
     camera_x = 0;
     level = level1;
     character = new Character();
-    endboss = new Endboss();
 
     /**
      * create a canvas field in 2D
@@ -44,7 +43,7 @@ class World {
         this.addObjectsToMap(this.level.cloud);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.endboss);
+        this.addObjectsToMap(this.level.endboss);
 
         this.ctx.translate(-this.camera_x, 0);
 
