@@ -17,6 +17,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollision();
     }
 
 
@@ -101,5 +102,19 @@ class World {
     playBackgroundMusic() {
         this.level.background_music[0].play();
         this.level.background_music[0].volume = 1;
+    }
+
+
+    /**
+     * checking if two objects are colliding
+     */
+    checkCollision() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if(this.character.isColliding(enemy)) {
+                    console.log('Kollision');
+                }
+            });
+        }, 200);
     }
 }
