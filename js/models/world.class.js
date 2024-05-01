@@ -84,6 +84,12 @@ class World {
     }
 
 
+    /**
+     * 1. save context
+     * 2. Move to mo.width
+     * 3. 
+     * @param {*} mo - object of moveableobject 
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
