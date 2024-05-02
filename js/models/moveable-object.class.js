@@ -1,20 +1,16 @@
-class MoveableObject {
-    x = 100;
-    y = 50;
-    width = 100;
-    height = 280;
-    img;
-    speed;
-    imageCache = {
-
-    };
+class MoveableObject extends DrawableObject {
     currentImage = 0;
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
     acceleration = 1;
+    energy = 100;
+    lastHit = 0;
 
 
+    /**
+     * when characte is in the air, then character will automatically come down
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -24,58 +20,19 @@ class MoveableObject {
         }, 1000 / 25);
     }
 
+    /**
+     * 
+     * @returns check if character is above ground
+     */
     isAboveGround() {
         return this.y < 150;
     }
 
 
     /**
-     * drawing the objects
-     * @param {*} ctx - canas
+     * play all images to create a animation
+     * @param {array} image - array of images
      */
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
-
-    /**
-     * is drawing a frame 
-     * @param {string} ctx - our data of the canvas
-     */
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Chick) {
-            ctx.beginPath();
-            ctx.lineWidth = "3";
-            ctx.strokeStyle = "blue";
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-
-    /**
-     * it will generate a new Image
-     * @param {string} path - here you can put your path from your img file 
-     */
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-
-    /**
-     * load images of an array to push to imageCach
-     * @param {array} arr - array of the image source files 
-     */
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image(); // <img src="">
-            img.src = path;
-            this.imageCache[path] = img;
-        })
-    }
-
-
     playAnimation(image) {
         let i = this.currentImage % image.length;
         let path = image[i];
@@ -118,12 +75,37 @@ class MoveableObject {
     //         (this.y + this.offsetY) <= (obj.y + obj.height); //&&
     //         // obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
     // }
-  
 
+
+    /**
+     * proof it two characte are colliding
+     * @param {object} mo - get the moveableobject
+     * @returns 
+     */
     isColliding(mo) {
         return this.x + this.width > mo.x &&
-        this.y + this.height > mo.y &&
-        this.x < mo.x &&
-        this.y < mo.y + mo.height
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height
+    }
+
+
+    hit() {
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
+        return timepassed < 0.5;
+    }
+
+    isDead() {
+        return this.energy == 0;
     }
 }

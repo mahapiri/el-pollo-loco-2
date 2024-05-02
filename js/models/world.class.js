@@ -5,6 +5,10 @@ class World {
     camera_x = 0;
     level = level1;
     character = new Character();
+    health = new Health();
+    coin = new Coin();
+    bottle = new Bottle();
+    endboss_health = new EndbossHealth();
 
     /**
      * create a canvas field in 2D
@@ -40,11 +44,21 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);
 
+
         this.addObjectsToMap(this.level.backgroundObject);
         this.addObjectsToMap(this.level.cloud);
+
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.health);
+        this.addToMap(this.coin);
+        this.addToMap(this.bottle);
+        this.addToMap(this.endboss_health);
+        this.ctx.translate(this.camera_x, 0);
+
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
+
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -75,7 +89,6 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-
         mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
@@ -118,7 +131,8 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if(this.character.isColliding(enemy)) {
-                    console.log('Kollision');
+                    this.character.hit();
+                    this.health.setPercentage(this.character.energy);         
                 }
             });
         }, 200);
