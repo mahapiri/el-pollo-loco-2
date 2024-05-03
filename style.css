@@ -23,6 +23,7 @@ h1 {
     text-shadow: 4px 2px 6px black;
     margin-top: 0;
     margin-bottom: 16px;
+    user-select: none;
 }
 
 
@@ -34,4 +35,5 @@ canvas {
 
 button {
     cursor: pointer;
+    user-select: none;
 }

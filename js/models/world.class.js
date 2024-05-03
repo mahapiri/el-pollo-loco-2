@@ -56,12 +56,14 @@ class World {
         this.addObjectsToMap(this.level.backgroundObject);
         this.addObjectsToMap(this.level.cloud);
 
+
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.characterBar);
         this.addToMap(this.coinBar);
         this.addToMap(this.bottleBar);
         this.addToMap(this.endbossBar);
         this.ctx.translate(this.camera_x, 0);
+
 
         this.addObjectsToMap(this.coin);
         this.addObjectsToMap(this.bottle);
