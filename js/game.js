@@ -70,3 +70,11 @@ window.addEventListener("keyup", (key) => {
         keyboard.D = false;
     }
 })
+
+
+/**
+ * fullscreen mode
+ */
+function fullscreen() {
+    document.getElementById('canvas').requestFullscreen();
+}
