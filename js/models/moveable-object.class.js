@@ -22,10 +22,15 @@ class MoveableObject extends DrawableObject {
 
     /**
      * 
-     * @returns check if character is above ground
+     * @returns check if character is above ground expect Throwable Object
      */
     isAboveGround() {
-        return this.y < 150;
+        if (this instanceof ThrowableObject) {
+            return true;
+        } else {
+            return this.y < 150;
+        }
+
     }
 
 

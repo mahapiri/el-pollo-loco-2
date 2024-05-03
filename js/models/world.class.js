@@ -9,6 +9,7 @@ class World {
     coin = new Coin();
     bottle = new Bottle();
     endboss_health = new EndbossHealth();
+    throwObject = [];
 
     /**
      * create a canvas field in 2D
@@ -21,7 +22,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollision();
+        this.run();
     }
 
 
@@ -56,6 +57,7 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.character);
+        this.addObjectsToMap(this.throwObject);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
 
@@ -124,17 +126,35 @@ class World {
     }
 
 
+
+    /**
+     * 
+     */
+        run() {
+            setInterval(() => {
+                this.checkCollisions();
+                this.checkThrowObjects();
+            }, 100);
+        }
+
+
     /**
      * checking if two objects are colliding
      */
-    checkCollision() {
-        setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if(this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.health.setPercentage(this.character.energy);         
-                }
-            });
-        }, 200);
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                this.character.hit();
+                this.health.setPercentage(this.character.energy);
+            }
+        });
     }
+
+    checkThrowObjects() {
+        if (this.keyboard.D) {
+            let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120);
+            this.throwObject.push(bottle);
+        }
+    }
+
 }
