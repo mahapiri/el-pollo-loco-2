@@ -11,10 +11,17 @@ class World {
     endbossBar = new EndbossBar();
     throwObject = [];
     coin = [
-        new Coin(100, 300)
+        new Coin(400, 300),
+        new Coin(500, 300),
+        new Coin(600, 300),
+        new Coin(700, 300),
+        new Coin(800, 300),
+        new Coin(900, 300),
+        new Coin(1000, 300),
+        new Coin(1100, 300),
     ];
     bottle = [
-        new Bottle(200, 335)
+        new Bottle(600, 335)
     ];
 
 
@@ -102,7 +109,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -144,6 +151,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.collectObjects();
         }, 100);
     }
 
@@ -169,6 +177,30 @@ class World {
             let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120);
             this.throwObject.push(bottle);
         }
+    }
+
+    collectObjects() {
+        this.coin.forEach((coin, i) => {
+            if(this.character.isColliding(coin)) {
+                console.log(i);
+                this.addCoins();
+                this.deleteCoin(i);
+            }
+        })
+    }
+
+    addCoins() {
+        if (this.coinBar.coins >= 100) {
+            this.coinBar.coins = 100;
+        } else {
+            this.coinBar.coins += 10;
+            this.coinBar.setPercentage(this.coinBar.coins);
+        }
+    }
+
+
+    deleteCoin(object) {
+        delete this.coin[object];
     }
 
 }
