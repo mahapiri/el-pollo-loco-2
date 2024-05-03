@@ -5,6 +5,7 @@ class DrawableObject {
     height = 280;
     img;
     imageCache = {};
+    currentImage = 0;
 
 
     /**
@@ -21,7 +22,7 @@ class DrawableObject {
      * @param {string} ctx - our data of the canvas
      */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Chick) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
@@ -51,5 +52,17 @@ class DrawableObject {
             img.src = path;
             this.imageCache[path] = img;
         })
+    }
+
+
+    /**
+     * play all images to create a animation
+     * @param {array} image - array of images
+     */
+    playAnimation(image) {
+        let i = this.currentImage % image.length;
+        let path = image[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
     }
 }

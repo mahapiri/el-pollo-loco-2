@@ -1,4 +1,4 @@
-class Coin extends Statusbar {
+class CoinBar extends Statusbar {
     percentage = 0;
     y = 42.5;
 

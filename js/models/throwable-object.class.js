@@ -1,6 +1,6 @@
 class ThrowableObject extends MoveableObject {
-    height = 60;
-    width = 30;
+    height = 80;
+    width = 40;
 
     
     BOTTLE_ROTATION = [
@@ -19,10 +19,10 @@ class ThrowableObject extends MoveableObject {
     }
 
     throw() {
-        this.speedY =  10;
+        this.speedY =  12;
         this.applyGravity();
         setInterval(() => {
-            this.x += 20;
+            this.x += 12;
         }, 25);
     }
 }

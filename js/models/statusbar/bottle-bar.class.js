@@ -1,4 +1,4 @@
-class Bottle extends Statusbar {
+class BottleBar extends Statusbar {
     percentage = 20;
     y = 85;
 

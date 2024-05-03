@@ -1,4 +1,4 @@
-class Health extends Statusbar {
+class CharacterBar extends Statusbar {
     percentage = 100;
     y = 0;
 

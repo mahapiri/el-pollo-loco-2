@@ -1,4 +1,4 @@
-class EndbossHealth extends Statusbar {
+class EndbossBar extends Statusbar {
     percentage = 100;
     y = 85 + 42.5;
 

@@ -1,5 +1,4 @@
 class MoveableObject extends DrawableObject {
-    currentImage = 0;
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
@@ -31,18 +30,6 @@ class MoveableObject extends DrawableObject {
             return this.y < 150;
         }
 
-    }
-
-
-    /**
-     * play all images to create a animation
-     * @param {array} image - array of images
-     */
-    playAnimation(image) {
-        let i = this.currentImage % image.length;
-        let path = image[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
     }
 
 

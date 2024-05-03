@@ -5,11 +5,18 @@ class World {
     camera_x = 0;
     level = level1;
     character = new Character();
-    health = new Health();
-    coin = new Coin();
-    bottle = new Bottle();
-    endboss_health = new EndbossHealth();
+    characterBar = new CharacterBar();
+    coinBar = new CoinBar();
+    bottleBar = new BottleBar();
+    endbossBar = new EndbossBar();
     throwObject = [];
+    coin = [
+        new Coin(100, 300)
+    ];
+    bottle = [
+        new Bottle(200, 335)
+    ];
+
 
     /**
      * create a canvas field in 2D
@@ -50,15 +57,17 @@ class World {
         this.addObjectsToMap(this.level.cloud);
 
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.health);
-        this.addToMap(this.coin);
-        this.addToMap(this.bottle);
-        this.addToMap(this.endboss_health);
+        this.addToMap(this.characterBar);
+        this.addToMap(this.coinBar);
+        this.addToMap(this.bottleBar);
+        this.addToMap(this.endbossBar);
         this.ctx.translate(this.camera_x, 0);
 
+        this.addObjectsToMap(this.coin);
+        this.addObjectsToMap(this.bottle);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwObject);
-        this.addObjectsToMap(this.level.enemies);
+        // this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
 
 
@@ -91,7 +100,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -126,16 +135,15 @@ class World {
     }
 
 
-
     /**
      * 
      */
-        run() {
-            setInterval(() => {
-                this.checkCollisions();
-                this.checkThrowObjects();
-            }, 100);
-        }
+    run() {
+        setInterval(() => {
+            this.checkCollisions();
+            this.checkThrowObjects();
+        }, 100);
+    }
 
 
     /**
@@ -145,11 +153,15 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
-                this.health.setPercentage(this.character.energy);
+                this.characterBar.setPercentage(this.character.energy);
             }
         });
     }
 
+
+    /**
+     * if you press keyboard "D" then it will create a new Bottel to throw.
+     */
     checkThrowObjects() {
         if (this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120);

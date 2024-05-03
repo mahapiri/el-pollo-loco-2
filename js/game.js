@@ -76,5 +76,19 @@ window.addEventListener("keyup", (key) => {
  * fullscreen mode
  */
 function fullscreen() {
-    document.getElementById('canvas').requestFullscreen();
+    let canvas = document.getElementById('canvas')
+    canvas.requestFullscreen();
 }
+
+
+/**
+ * check if game is on fullscreen or not to change the border color
+ */
+window.addEventListener('fullscreenchange', (e) => {
+    if(document.fullscreenElement) {
+        canvas.style.border = '4px solid black';
+    } else {
+        canvas.style.border = '4px solid white';
+    }
+})
+
