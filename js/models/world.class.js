@@ -182,6 +182,7 @@ class World {
      */
     checkThrowObjects() {
         if (this.keyboard.D && this.bottleBar.percentage > 0) {
+            this.character.loadImage('img/2_character_pepe/2_walk/W-21.png');
             this.bottleBar.percentage -= 20;
             this.bottleBar.setPercentage(this.bottleBar.percentage);
             let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120, this.character.otherDirection);

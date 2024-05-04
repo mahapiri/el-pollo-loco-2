@@ -11,6 +11,10 @@ function init() {
     world = new World(canvas, keyboard);
 }
 
+function playGame() {
+
+}
+
 
 /**
  * put true if key press
