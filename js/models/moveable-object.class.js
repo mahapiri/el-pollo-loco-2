@@ -29,10 +29,9 @@ class MoveableObject extends DrawableObject {
         } else {
             return this.y < 150;
         }
-
     }
 
-
+    
     /**
      * object will move to the right
      */
@@ -47,6 +46,7 @@ class MoveableObject extends DrawableObject {
     moveLeft() {
         this.x -= this.speed;
     }
+
 
     /**
      *  jump function with a speedy = 20

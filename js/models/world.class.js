@@ -21,7 +21,13 @@ class World {
         new Coin(1100, 300),
     ];
     bottle = [
-        new Bottle(600, 335)
+        new Bottle(400, 335),
+        new Bottle(500, 335),
+        new Bottle(600, 335),
+        new Bottle(700, 335),
+        new Bottle(800, 335),
+        new Bottle(900, 335),
+        new Bottle(1000, 335)
     ];
 
 
@@ -76,7 +82,7 @@ class World {
         this.addObjectsToMap(this.bottle);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwObject);
-        // this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
 
 
@@ -151,7 +157,8 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-            this.collectObjects();
+            this.collectObjects(this.coin);
+            this.collectObjects(this.bottle);
         }, 100);
     }
 
@@ -173,34 +180,75 @@ class World {
      * if you press keyboard "D" then it will create a new Bottel to throw.
      */
     checkThrowObjects() {
-        if (this.keyboard.D) {
-            let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120);
+        if (this.keyboard.D && this.bottleBar.percentage > 0) {
+            this.bottleBar.percentage -= 20;
+            this.bottleBar.setPercentage(this.bottleBar.percentage);
+            let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120, this.character.otherDirection);
             this.throwObject.push(bottle);
         }
     }
 
-    collectObjects() {
-        this.coin.forEach((coin, i) => {
-            if(this.character.isColliding(coin)) {
-                console.log(i);
-                this.addCoins();
-                this.deleteCoin(i);
+
+    /**
+     * collect the object and delete the collected object
+     * @param {array} arr - array of the collectable object
+     */
+    collectObjects(arr) {
+        arr.forEach((object, i) => {
+            if (this.character.isColliding(object)) {
+                this.addObject(object);
+                this.deleteObject(arr, i);
             }
         })
     }
 
-    addCoins() {
-        if (this.coinBar.coins >= 100) {
-            this.coinBar.coins = 100;
-        } else {
-            this.coinBar.coins += 10;
-            this.coinBar.setPercentage(this.coinBar.coins);
+
+    /**
+     * Add Coins or Bottles 
+     * @param {*} object of the class Coin or Bottle
+     */
+    addObject(object) {
+        if (object instanceof Coin) {
+            this.addCoin();
+        } else if (object instanceof Bottle) {
+            this.addBottle();
         }
     }
 
 
-    deleteCoin(object) {
-        delete this.coin[object];
+    /**
+     * add coins to the coin bar 
+     */
+    addCoin() {
+        if (this.coinBar.percentage >= 100) {
+            this.coinBar.percentage = 100;
+        } else {
+            this.coinBar.percentage += 20;
+            this.coinBar.setPercentage(this.coinBar.percentage);
+        }
+    }
+
+
+    /**
+     * add bottles to the bottle bar
+     */
+    addBottle() {
+        if (this.bottleBar.percentage >= 100) {
+            this.bottleBar.percentage = 100;
+        } else {
+            this.bottleBar.percentage += 20;
+            this.bottleBar.setPercentage(this.bottleBar.percentage);
+        }
+    }
+
+
+    /**
+     * delete the object
+     * @param {array} array of coins or bottles 
+     * @param {*} object of coins or bottles
+     */
+    deleteObject(arr, object) {
+        delete arr[object];
     }
 
 }
