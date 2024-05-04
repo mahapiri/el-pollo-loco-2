@@ -5,9 +5,10 @@ class World {
     camera_x = 0;
     level = level1;
     character = new Character();
-    characterBar = new CharacterBar();
+    bottleBar = new BottleBar(); 
+    characterBar = new CharacterBar();   bottleBar = new BottleBar();
     coinBar = new CoinBar();
-    bottleBar = new BottleBar();
+
     endbossBar = new EndbossBar();
     throwObject = [];
     coin = [
@@ -71,9 +72,9 @@ class World {
 
 
         this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.bottleBar);
         this.addToMap(this.characterBar);
         this.addToMap(this.coinBar);
-        this.addToMap(this.bottleBar);
         this.addToMap(this.endbossBar);
         this.ctx.translate(this.camera_x, 0);
 
