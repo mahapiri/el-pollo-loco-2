@@ -6,7 +6,8 @@ class World {
     level = level1;
     character = new Character();
     bottleBar = new BottleBar(); 
-    characterBar = new CharacterBar();   bottleBar = new BottleBar();
+    characterBar = new CharacterBar();   
+    bottleBar = new BottleBar();
     coinBar = new CoinBar();
 
     endbossBar = new EndbossBar();
