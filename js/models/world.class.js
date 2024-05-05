@@ -137,6 +137,11 @@ class World {
         mo.x = mo.x * -1;
     }
 
+
+    /**
+     * it will flip the image with the same x position
+     * @param {*} mo  - object of moveableobejct
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
@@ -152,7 +157,9 @@ class World {
 
 
     /**
-     * 
+     * it will check if character is colliding with enemy, bottle or coin
+     * start to throw the bottle
+     * collecting bottle or coin
      */
     run() {
         setInterval(() => {

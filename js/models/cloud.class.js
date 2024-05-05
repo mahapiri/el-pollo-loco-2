@@ -20,6 +20,10 @@ class Cloud extends MoveableObject {
         this.animate();
     }
 
+
+    /**
+     * animate the movement of the cloud
+     */
     animate() {
         setInterval(() => {
             this.moveLeft();
@@ -27,6 +31,9 @@ class Cloud extends MoveableObject {
         }, 25);
     }
 
+    /**
+     * change the x position at -1440 to 480 * 7
+     */
     changeX() {
         if (this.x == -1440) {
             this.x = 480 * 7;

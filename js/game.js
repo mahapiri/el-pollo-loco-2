@@ -7,12 +7,12 @@ let keyboard = new Keyboard();
  * Initialize the 2D Game
  */
 function init() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+
 }
 
-function playGame() {
-
+function startGame() {
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
 }
 
 

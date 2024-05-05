@@ -132,6 +132,10 @@ class Character extends MoveableObject {
         }, 1000 / 15);
     }
 
+
+    /**
+     * when the character nothing do
+     */
     nothingToDo() {
         let timepassed = this.proofTime();
         this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
@@ -142,6 +146,9 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * proof the Time between the actual time and the time where the character is nothing to do 
+     */
     proofTime() {
         let time = new Date().getTime();
         let timepassed = time - this.currentTime;
@@ -149,10 +156,18 @@ class Character extends MoveableObject {
         return timepassed;
     }
 
+
+    /**
+     * play the wait images 
+     */
     wait() {
         this.playAnimation(this.IMAGE_IDLE);
     }
 
+
+    /**
+     * play the long wait images
+     */
     longWait() {
         this.playAnimation(this.IMAGE_LONG_IDLE);
     }
