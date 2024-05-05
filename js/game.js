@@ -30,8 +30,8 @@ function showIntro() {
  */
 function startGame() {
     if (!gameStarted) {
-        world = new World(canvas, keyboard);
         gameStarted = true;
+        world = new World(canvas, keyboard);
     }
 }
 
@@ -114,4 +114,3 @@ window.addEventListener('fullscreenchange', () => {
         canvas.style.border = '4px solid white';
     }
 })
-
