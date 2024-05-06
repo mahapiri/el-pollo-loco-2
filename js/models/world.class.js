@@ -182,7 +182,6 @@ class World {
     collectObjects() {
         this.coin.forEach((coin, i) => {
             if(this.character.isColliding(coin)) {
-                console.log(i);
                 this.addCoins();
                 this.deleteCoin(i);
             }
