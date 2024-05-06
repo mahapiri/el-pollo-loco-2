@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
     <script src="js/models/drawable-object.class.js"></script>
+    <script src="js/models/background.class.js"></script>
     <script src="js/models/intro.class.js"></script>
     <script src="js/models/moveable-object.class.js"></script>
     <script src="js/models/statusbar.class.js"></script>
@@ -31,10 +32,14 @@
 
   </head>
   <body onload="init()">
-    <h1>EL POLLO LOCO</h1>
+    <div class="main-div">
+      <h1>EL POLLO LOCO</h1>
+      <div class="main-screen" id="main-screen">
+        <canvas id="canvas" width="720" height="480"></canvas>
+        <a href="#" class="start-btn buttons"><img src="/img/9_intro_outro_screens/start.png" onclick="startGame()" alt="Start Game"></a>
+        <a href="#" class="fullscreen-btn buttons"><img src="/img/9_intro_outro_screens/fullscreen.png" onclick="fullscreen()" alt="Fullscreen Mode"></a>
+      </div>
 
-    <canvas id="canvas" width="720" height="480"></canvas>
-    <button onclick="fullscreen()">FULL</button>
-    <button onclick="startGame()">PLAY GAME</button>
+    </div>
   </body>
 </html>

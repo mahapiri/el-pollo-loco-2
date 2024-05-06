@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 let intro;
 let introStarted = true;
 let gameStarted = false;
+let fullscreenIsOn = false;
 
 
 /**
@@ -100,7 +101,9 @@ window.addEventListener("keyup", (key) => {
  * fullscreen mode
  */
 function fullscreen() {
-    canvas.requestFullscreen();
+    let screen = document.getElementById('main-screen');
+    screen.requestFullscreen();
+    fullscreenIsOn = true;
 }
 
 
