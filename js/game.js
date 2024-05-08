@@ -1,6 +1,10 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let intro;
+let introStarted = true;
+let gameStarted = false;
+let fullscreenIsOn = false;
 
 
 /**
@@ -8,7 +12,28 @@ let keyboard = new Keyboard();
  */
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    showIntro();
+}
+
+
+/**
+ * show the Intro to start the game
+ */
+function showIntro() {
+    if (introStarted && !gameStarted) {
+        intro = new Intro(canvas, keyboard);
+    }
+}
+
+
+/**
+ * start the game when pressing the play button
+ */
+function startGame() {
+    if (!gameStarted) {
+        gameStarted = true;
+        world = new World(canvas, keyboard);
+    }
 }
 
 
@@ -76,19 +101,19 @@ window.addEventListener("keyup", (key) => {
  * fullscreen mode
  */
 function fullscreen() {
-    let canvas = document.getElementById('canvas')
-    canvas.requestFullscreen();
+    let screen = document.getElementById('main-screen');
+    screen.requestFullscreen();
+    fullscreenIsOn = true;
 }
 
 
 /**
  * check if game is on fullscreen or not to change the border color
  */
-window.addEventListener('fullscreenchange', (e) => {
+window.addEventListener('fullscreenchange', () => {
     if(document.fullscreenElement) {
         canvas.style.border = '4px solid black';
     } else {
         canvas.style.border = '4px solid white';
     }
 })
-

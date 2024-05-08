@@ -3,18 +3,27 @@
     src: url(fonts/Zabars.ttf);
 }
 
+@font-face {
+    font-family: 'Boogaloo';
+    src: url(fonts/Boogaloo-Regular.ttf);
+}
+
 body {
-    font-family: 'Zabars', Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    font-family: 'Boogaloo', Arial, Helvetica, sans-serif;
     margin: 0;
     background-image: url(/img/window-backdrop.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.main-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
 }
 
 h1 {
@@ -26,14 +35,44 @@ h1 {
     user-select: none;
 }
 
-
 canvas {
     background-color: rgba(0, 0, 0);
     border: 4px solid rgb(255, 255, 255);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
 }
 
-button {
+.buttons {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    cursor: unset;
+}
+
+.buttons img {
     cursor: pointer;
-    user-select: none;
+}
+
+.buttons img:hover {
+    transform: scale(1.05);
+}
+
+.start-btn {
+    bottom: 472px;
+}
+
+.start-btn img {
+    width: 240px;
+    height: 120px;
+}
+
+.fullscreen-btn {
+    bottom: 180px;
+    right: 16px;
+    justify-content: flex-end;
+}
+
+.fullscreen-btn img {
+    width: 40px;
+    height: 40px;
 }

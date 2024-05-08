@@ -1,6 +1,34 @@
 class Character extends MoveableObject {
     world;
     speed = 5;
+    y = 155;
+    currentTime = new Date().getTime();
+
+    IMAGE_IDLE = [
+        'img/2_character_pepe/1_idle/idle/I-1.png',
+        'img/2_character_pepe/1_idle/idle/I-2.png',
+        'img/2_character_pepe/1_idle/idle/I-3.png',
+        'img/2_character_pepe/1_idle/idle/I-4.png',
+        'img/2_character_pepe/1_idle/idle/I-5.png',
+        'img/2_character_pepe/1_idle/idle/I-6.png',
+        'img/2_character_pepe/1_idle/idle/I-7.png',
+        'img/2_character_pepe/1_idle/idle/I-8.png',
+        'img/2_character_pepe/1_idle/idle/I-9.png',
+        'img/2_character_pepe/1_idle/idle/I-10.png'
+    ];
+
+    IMAGE_LONG_IDLE = [
+        'img/2_character_pepe/1_idle/long_idle/I-11.png',
+        'img/2_character_pepe/1_idle/long_idle/I-12.png',
+        'img/2_character_pepe/1_idle/long_idle/I-13.png',
+        'img/2_character_pepe/1_idle/long_idle/I-14.png',
+        'img/2_character_pepe/1_idle/long_idle/I-15.png',
+        'img/2_character_pepe/1_idle/long_idle/I-16.png',
+        'img/2_character_pepe/1_idle/long_idle/I-17.png',
+        'img/2_character_pepe/1_idle/long_idle/I-18.png',
+        'img/2_character_pepe/1_idle/long_idle/I-19.png',
+        'img/2_character_pepe/1_idle/long_idle/I-20.png',
+    ];
 
     IMAGE_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -39,8 +67,6 @@ class Character extends MoveableObject {
         'img/2_character_pepe/5_dead/D-57.png'
     ];
 
-
-
     walking_sound = new Audio('audio/running.mp3');
 
 
@@ -48,7 +74,9 @@ class Character extends MoveableObject {
      * load the image of the main character
      */
     constructor() {
-        super().loadImage('img/2_character_pepe/2_walk/W-21.png');
+        super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+        this.loadImages(this.IMAGE_IDLE);
+        this.loadImages(this.IMAGE_LONG_IDLE);
         this.loadImages(this.IMAGE_WALKING);
         this.loadImages(this.IMAGE_JUMPING);
         this.loadImages(this.IMAGE_DEAD);
@@ -85,8 +113,10 @@ class Character extends MoveableObject {
 
         setInterval(() => {
 
-            if(this.isDead()) {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGE_DEAD);
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGE_HURT);
             } else if (this.isAboveGround()) {
@@ -94,8 +124,51 @@ class Character extends MoveableObject {
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGE_WALKING);
+                    this.currentTime = new Date().getTime();
+                } else {
+                    this.nothingToDo();
                 }
             }
-        }, 1000 / 25);
+        }, 1000 / 15);
+    }
+
+
+    /**
+     * when the character nothing do
+     */
+    nothingToDo() {
+        let timepassed = this.proofTime();
+        this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+        if (timepassed > 10) {
+            this.longWait();
+        } else if (timepassed > 2) {
+            this.wait();
+        }
+    }
+
+    /**
+     * proof the Time between the actual time and the time where the character is nothing to do 
+     */
+    proofTime() {
+        let time = new Date().getTime();
+        let timepassed = time - this.currentTime;
+        timepassed = timepassed / 1000;
+        return timepassed;
+    }
+
+
+    /**
+     * play the wait images 
+     */
+    wait() {
+        this.playAnimation(this.IMAGE_IDLE);
+    }
+
+
+    /**
+     * play the long wait images
+     */
+    longWait() {
+        this.playAnimation(this.IMAGE_LONG_IDLE);
     }
 }

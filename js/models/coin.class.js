@@ -17,6 +17,10 @@ class Coin extends DrawableObject {
         this.y = y;
     }
 
+
+    /**
+     * play the animation for the coin icon
+     */
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGE); 

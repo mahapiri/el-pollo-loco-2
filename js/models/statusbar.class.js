@@ -3,7 +3,7 @@ class Statusbar extends DrawableObject {
     y;
     width = 200;
     height = 50;
-    percentage;
+    percentage = 0;
     path;
 
     IMAGE = [];

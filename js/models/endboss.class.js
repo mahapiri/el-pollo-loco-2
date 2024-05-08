@@ -23,6 +23,10 @@ class Endboss extends MoveableObject {
         this.animate();
     }
 
+
+    /**
+     * animate the angry endboss
+     */
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGE_ANGRY);

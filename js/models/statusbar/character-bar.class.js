@@ -1,6 +1,6 @@
 class CharacterBar extends Statusbar {
     percentage = 100;
-    y = 0;
+    y = 45;
 
     IMAGE = [
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png', // 0

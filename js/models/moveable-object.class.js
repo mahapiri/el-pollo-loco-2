@@ -29,10 +29,9 @@ class MoveableObject extends DrawableObject {
         } else {
             return this.y < 150;
         }
-
     }
 
-
+    
     /**
      * object will move to the right
      */
@@ -47,6 +46,7 @@ class MoveableObject extends DrawableObject {
     moveLeft() {
         this.x -= this.speed;
     }
+
 
     /**
      *  jump function with a speedy = 20
@@ -82,6 +82,9 @@ class MoveableObject extends DrawableObject {
     }
 
 
+    /**
+     * reduce the energy level by hitting
+     */
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -91,12 +94,21 @@ class MoveableObject extends DrawableObject {
         }
     }
 
+
+    /**
+     * get the boolean value by hurting
+     * @returns 
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 0.5;
     }
 
+    /**
+     * returns the energy level by 0 when the character is dead
+     * @returns 
+     */
     isDead() {
         return this.energy == 0;
     }
