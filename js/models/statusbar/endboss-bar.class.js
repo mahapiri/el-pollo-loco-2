@@ -1,6 +1,7 @@
 class EndbossBar extends Statusbar {
     percentage = 100;
-    y = 85 + 45;
+    x = 490;
+    y = 5;
 
     IMAGE = [
         'img/7_statusbars/2_statusbar_endboss/blue/blue0.png',

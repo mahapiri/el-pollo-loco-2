@@ -27,18 +27,31 @@ body {
 }
 
 h1 {
+    position: absolute;
+    top: 32px;
     font-size: 72px;
     color: rgb(255, 255, 255);
     text-shadow: 4px 2px 6px black;
     margin-top: 0;
     margin-bottom: 16px;
     user-select: none;
+    text-align: center;
 }
 
 canvas {
+    position: absolute;
+    z-index: 1;
     background-color: rgba(0, 0, 0);
     border: 4px solid rgb(255, 255, 255);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+}
+
+.control-panel {
+    position: relative;
+    z-index: 2;
+    min-height: 100%;
+    width: 0;
+    height: 0;
 }
 
 .buttons {
@@ -47,10 +60,13 @@ canvas {
     display: flex;
     align-items: center;
     cursor: unset;
+    user-select: none;
 }
 
 .buttons img {
     cursor: pointer;
+    width: 40px;
+    height: 40px;
 }
 
 .buttons img:hover {
@@ -58,7 +74,8 @@ canvas {
 }
 
 .start-btn {
-    bottom: 472px;
+    bottom: 218px;
+    user-select: none;
 }
 
 .start-btn img {
@@ -67,19 +84,22 @@ canvas {
 }
 
 .fullscreen-btn {
-    bottom: 180px;
-    right: 16px;
-    justify-content: flex-end;
+    min-width: 100%;
+    bottom: -64px;
+    right: -316px;
 }
 
-.fullscreen-btn img {
-    width: 40px;
-    height: 40px;
+.play-btn {
+    top: -383px;
+    right: -266px;
+}
+
+.sound-btn {
+    top: -423px;
+    right: -322px;
 }
 
 .main-screen {
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

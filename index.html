@@ -25,6 +25,7 @@
     <script src="js/models/world.class.js"></script>
     <script src="js/models/background-object.class.js"></script>
     <script src="js/models/keyboard.class.js"></script>
+    <script src="js/models/button.class.js"></script>
     <script src="js/level.class.js"></script>
     <script src="js/models/endboss.class.js"></script>
     <script src="js/models/levels/level1.class.js"></script>
@@ -36,8 +37,13 @@
       <h1>EL POLLO LOCO</h1>
       <div class="main-screen" id="main-screen">
         <canvas id="canvas" width="720" height="480"></canvas>
-        <a href="#" class="start-btn buttons"><img src="/img/9_intro_outro_screens/start.png" onclick="startGame()" alt="Start Game"></a>
-        <a href="#" class="fullscreen-btn buttons"><img src="/img/9_intro_outro_screens/fullscreen.png" onclick="fullscreen()" alt="Fullscreen Mode"></a>
+        <div class="control-panel">
+          <img src="img/9_intro_outro_screens/game_over/game over.png" class="game-over-screen" id="game-over-screen" alt="Game Over" style="display: none;">
+          <a href="#" class="start-btn buttons"><img src="/img/9_intro_outro_screens/start.png" onclick="startGame()" alt="Start Game"></a>
+          <a href="#" class="fullscreen-btn buttons"><img src="/img/9_intro_outro_screens/fullscreen.png" id="fullscreen-img" onclick="toggleFullscreen()" alt="Fullscreen Mode"></a>
+          <a href="#" class="play-btn buttons"><img src="img/9_intro_outro_screens/play.png" id="play-img" onclick="togglePlayMode()" alt="Play Mode"></a>
+          <a href="#" class="sound-btn buttons"><img src="img/9_intro_outro_screens/sound_off.png" id="sound-img" onclick="toggleSoundMode()" alt="Sound Mode"></a>
+        </div>
       </div>
 
     </div>

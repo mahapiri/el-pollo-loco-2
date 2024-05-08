@@ -2,6 +2,7 @@ class World {
     ctx;
     canvas;
     keyboard;
+    button;
     camera_x = 0;
     level = level1;
     character = new Character();
@@ -38,10 +39,11 @@ class World {
      * draw all objects to the world
      * @param {string} canvas - get the element by id of canvas in game.js
      */
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, button) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.button = button;
         this.draw();
         this.setWorld();
         this.run();
@@ -62,7 +64,7 @@ class World {
      * 3. Draw all objects to the canvas depending of the graphic performance
      */
     draw() {
-        // this.playBackgroundMusic();
+        this.playBackgroundMusic();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -152,8 +154,12 @@ class World {
      * play the background music + set the volume
      */
     playBackgroundMusic() {
-        this.level.background_music[0].play();
-        this.level.background_music[0].volume = 1;
+        if(!this.button.sound || this.character.dead) {
+            this.level.background_music[0].pause();
+        } else {
+            this.level.background_music[0].play();
+            this.level.background_music[0].volume = 1;
+        }
     }
 
 
