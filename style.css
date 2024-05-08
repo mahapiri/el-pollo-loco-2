@@ -58,7 +58,7 @@ canvas {
 }
 
 .start-btn {
-    top: -488px;
+    bottom: 472px;
 }
 
 .start-btn img {
@@ -67,8 +67,9 @@ canvas {
 }
 
 .fullscreen-btn {
-    top: -180px;
-    left: 326px;
+    bottom: 180px;
+    right: 16px;
+    justify-content: flex-end;
 }
 
 .fullscreen-btn img {
@@ -76,11 +77,3 @@ canvas {
     height: 40px;
 }
 
-.main-screen {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
