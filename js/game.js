@@ -32,6 +32,7 @@ function showIntro() {
 function startGame() {
     if (!gameStarted) {
         gameStarted = true;
+        document.querySelector('.start-btn').style.display = 'none';
         world = new World(canvas, keyboard);
     }
 }
