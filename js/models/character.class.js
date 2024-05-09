@@ -93,6 +93,11 @@ class Character extends MoveableObject {
         setInterval(() => {
             this.walking_sound.pause();
             if(!this.dead) {
+                    if (this.world.keyboard.D) {
+                        this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+                        this.currentTime = new Date().getTime();
+                    }
+
                     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                         this.moveRight();
                         this.otherDirection = false;
@@ -106,7 +111,7 @@ class Character extends MoveableObject {
                     }
 
                     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                        this.jump();
+                        this.jump(20);
                         this.currentTime = new Date().getTime();
                     }
 
@@ -122,14 +127,16 @@ class Character extends MoveableObject {
                 this.speedY -= this.acceleration;
                 this.dead = true;
             } else if (this.isHurt()) {
+                this.currentTime = new Date().getTime();
                 this.playAnimation(this.IMAGE_HURT);
+                this.x += -5;
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGE_JUMPING);
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGE_WALKING);
                     this.currentTime = new Date().getTime();
-                } else if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT || !this.world.keyboard.SPACE) {
+                } else if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT || !this.world.keyboard.SPACE || !this.isHurt()) {
                     this.nothingToDo();
                 }
             }

@@ -22,7 +22,7 @@ class DrawableObject {
      * @param {string} ctx - our data of the canvas
      */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin || this instanceof Bottle || this instanceof Intro) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin || this instanceof Bottle || this instanceof Intro || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';

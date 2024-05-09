@@ -12,6 +12,7 @@ class World {
     coinBar = new CoinBar();
     timepassed = -1100;
 
+
     endbossBar = new EndbossBar();
     throwObject = [];
     coin = [
@@ -186,6 +187,7 @@ class World {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingUp(enemy) || enemy.dead){
                 enemy.isDead();
+                this.character.jump(5);
                 setTimeout(() => {
                     this.deleteObject(this.level.enemies, i)
                 }, 500);
@@ -211,7 +213,16 @@ class World {
             this.bottleBar.setPercentage(this.bottleBar.percentage);
             let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120, this.character.otherDirection);
             this.throwObject.push(bottle);
+            bottle.throw();
         }
+
+        this.throwObject.forEach((bottle) => {
+            this.level.endboss.forEach((endboss) => {
+                if (bottle.isColliding(endboss)){
+                    bottle.hit(endboss.x, endboss.y);
+            }
+            });
+        });
     }
 
 
