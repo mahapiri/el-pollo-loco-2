@@ -4,16 +4,15 @@ class World {
     keyboard;
     button;
     camera_x = 0;
+    timepassed = -1100;
     level = level1;
     character = new Character();
-    bottleBar = new BottleBar(); 
-    characterBar = new CharacterBar();   
+    bottleBar = new BottleBar();
+    characterBar = new CharacterBar();
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
-    timepassed = -1100;
-
-
     endbossBar = new EndbossBar();
+
     throwObject = [];
     coin = [
         new Coin(400, 300),
@@ -87,9 +86,9 @@ class World {
         this.addObjectsToMap(this.coin);
         this.addObjectsToMap(this.bottle);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.throwObject);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
+        this.addObjectsToMap(this.throwObject);
 
 
         this.ctx.translate(-this.camera_x, 0);
@@ -156,7 +155,7 @@ class World {
      * play the background music + set the volume
      */
     playBackgroundMusic() {
-        if(!this.button.sound || this.character.dead) {
+        if (!this.button.sound || this.character.dead) {
             this.level.background_music[0].pause();
         } else {
             this.level.background_music[0].play();
@@ -176,7 +175,7 @@ class World {
             this.checkThrowObjects();
             this.collectObjects(this.coin);
             this.collectObjects(this.bottle);
-        }, 100);
+        }, 10);
     }
 
 
@@ -185,7 +184,7 @@ class World {
      */
     checkCollisions() {
         this.level.enemies.forEach((enemy, i) => {
-            if (this.character.isCollidingUp(enemy) || enemy.dead){
+            if (this.character.isCollidingUp(enemy) || enemy.dead) {
                 enemy.isDead();
                 this.character.jump(5);
                 setTimeout(() => {
@@ -216,11 +215,15 @@ class World {
             bottle.throw();
         }
 
-        this.throwObject.forEach((bottle) => {
-            this.level.endboss.forEach((endboss) => {
-                if (bottle.isColliding(endboss)){
-                    bottle.hit(endboss.x, endboss.y);
-            }
+        this.throwObject.forEach((bottle, i) => {
+            this.level.endboss.forEach((endboss, j) => {
+                if (bottle.isColliding(endboss)) {
+                    bottle.hit(bottle.x, bottle.y);
+                    this.hitEndboss(j);
+                    setTimeout(() => {
+                        this.deleteObject(this.throwObject, i);
+                    }, 500);
+                }
             });
         });
     }
@@ -275,6 +278,21 @@ class World {
         } else {
             this.bottleBar.percentage += 20;
             this.bottleBar.setPercentage(this.bottleBar.percentage);
+        }
+    }
+
+    hitEndboss(j) {
+        if (this.endbossBar.percentage <= 0) {
+            this.level.endboss[0].dead = true;
+            this.level.endboss[0].energy = 0;
+            this.level.endboss[0].playDeadAnimation();
+            setTimeout(() => {
+                this.deleteObject(this.level.endboss, j);
+            }, 4000);
+        } else {
+            this.level.endboss[0].energy -= 40;
+            this.endbossBar.percentage -= 40;
+            this.endbossBar.setPercentage(this.endbossBar.percentage);
         }
     }
 

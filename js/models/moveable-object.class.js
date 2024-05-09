@@ -6,13 +6,14 @@ class MoveableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     dead = false;
+    gravity;
 
 
     /**
      * when characte is in the air, then character will automatically come down
      */
     applyGravity() {
-        setInterval(() => {
+        this.gravity = setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;

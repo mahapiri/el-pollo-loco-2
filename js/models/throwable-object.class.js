@@ -2,6 +2,8 @@ class ThrowableObject extends MoveableObject {
     height = 80;
     width = 40;
     otherDirection = false;
+    throwInterval;
+    i = 0;
 
     
     BOTTLE_ROTATION = [
@@ -48,7 +50,7 @@ class ThrowableObject extends MoveableObject {
     throw() {
         this.speedY =  12;
         this.applyGravity();
-        setInterval(() => {
+        this.throwInterval = setInterval(() => {
             if(this.otherDirection) {
                 this.x -= 25;
             } else {
@@ -58,14 +60,20 @@ class ThrowableObject extends MoveableObject {
         }, 35);
     }
 
+
+    /**
+     * play the splash animation of the bottle when hitting
+     * @param {number} x position of the endboss
+     * @param {number} y position of the endboss
+     */
     hit(x, y) {
-        setInterval(() => {
-            this.x = x;
-            this.y = y;
-            this.speedY = 0;
-            this.speed = 0;
-            console.log(this.x);
-            this.playAnimation(this.BOTTLE_SPLASH);
-        }, 10000);
+        clearInterval(this.throwInterval);
+        clearInterval(this.gravity);
+        this.x = x + 50;
+        this.y = y;
+        this.speedY = 0;
+        this.speed = 0;
+        this.playAnimation(this.BOTTLE_SPLASH);
     }
+    
 }
