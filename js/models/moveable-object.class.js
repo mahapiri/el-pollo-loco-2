@@ -5,6 +5,7 @@ class MoveableObject extends DrawableObject {
     acceleration = 1;
     energy = 100;
     lastHit = 0;
+    dead = false;
 
 
     /**
@@ -31,7 +32,7 @@ class MoveableObject extends DrawableObject {
         }
     }
 
-    
+
     /**
      * object will move to the right
      */
@@ -61,12 +62,20 @@ class MoveableObject extends DrawableObject {
     //  * @param {string} obj - object
     //  * @returns 
     //  */
-    // isColliding(obj) {
-    //     return (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) &&
-    //         (this.y + this.offsetY + this.height) >= obj.y &&
-    //         (this.y + this.offsetY) <= (obj.y + obj.height); //&&
-    //         // obj.onCollisionCourse; // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    // isColliding(mo) {
+    //     return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+    //         this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+    //         this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+    //         this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     // }
+
+    isCollidingUp(mo) {
+        return this.y + this.height >= mo.y && 
+            this.y + this.height <= mo.y + mo.height && 
+            this.x < mo.x + mo.width && 
+            this.x + this.width > mo.x;
+    }
+
 
 
     /**

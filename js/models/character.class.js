@@ -3,7 +3,6 @@ class Character extends MoveableObject {
     speed = 5;
     y = 155;
     currentTime = new Date().getTime();
-    dead = false;
 
     IMAGE_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -108,6 +107,7 @@ class Character extends MoveableObject {
 
                     if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                         this.jump();
+                        this.currentTime = new Date().getTime();
                     }
 
                     this.world.camera_x = -this.x + 100;
@@ -129,7 +129,7 @@ class Character extends MoveableObject {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGE_WALKING);
                     this.currentTime = new Date().getTime();
-                } else {
+                } else if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT || !this.world.keyboard.SPACE) {
                     this.nothingToDo();
                 }
             }
@@ -143,9 +143,9 @@ class Character extends MoveableObject {
     nothingToDo() {
         let timepassed = this.proofTime();
         this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-        if (timepassed > 10) {
+        if (timepassed > 9) {
             this.longWait();
-        } else if (timepassed > 2) {
+        } else if (timepassed > 3) {
             this.wait();
         }
     }

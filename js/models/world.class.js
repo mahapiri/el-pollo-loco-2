@@ -64,7 +64,7 @@ class World {
      * 3. Draw all objects to the canvas depending of the graphic performance
      */
     draw() {
-        this.playBackgroundMusic();
+        // this.playBackgroundMusic();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -182,8 +182,13 @@ class World {
      * checking if two objects are colliding
      */
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+        this.level.enemies.forEach((enemy, i) => {
+            if (this.character.isCollidingUp(enemy) || enemy.dead){
+                enemy.isDead();
+                setTimeout(() => {
+                    this.deleteObject(this.level.enemies, i)
+                }, 500);
+            } else if (this.character.isColliding(enemy) && !this.character.isCollidingUp(enemy)) {
                 this.character.hit();
                 this.characterBar.setPercentage(this.character.energy);
             }
