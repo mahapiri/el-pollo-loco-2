@@ -145,7 +145,7 @@ class Character extends MoveableObject {
         this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
         if (timepassed > 9) {
             this.longWait();
-        } else if (timepassed > 3) {
+        } else if (timepassed > 2) {
             this.wait();
         }
     }

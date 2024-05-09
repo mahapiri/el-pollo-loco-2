@@ -66,6 +66,7 @@ window.addEventListener("keydown", (key) => {
 
     if(key.which == 68) {
         keyboard.D = true;
+        keyboard.currentTime = new Date().getTime();
     }
 })
 

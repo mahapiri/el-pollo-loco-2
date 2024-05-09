@@ -10,6 +10,7 @@ class World {
     characterBar = new CharacterBar();   
     bottleBar = new BottleBar();
     coinBar = new CoinBar();
+    timepassed = -1100;
 
     endbossBar = new EndbossBar();
     throwObject = [];
@@ -24,13 +25,13 @@ class World {
         new Coin(1100, 300),
     ];
     bottle = [
-        new Bottle(400, 335),
-        new Bottle(500, 335),
-        new Bottle(600, 335),
-        new Bottle(700, 335),
-        new Bottle(800, 335),
-        new Bottle(900, 335),
-        new Bottle(1000, 335)
+        new Bottle(400, 340),
+        new Bottle(500, 340),
+        new Bottle(600, 340),
+        new Bottle(700, 340),
+        new Bottle(800, 340),
+        new Bottle(900, 340),
+        new Bottle(1000, 340)
     ];
 
 
@@ -200,7 +201,11 @@ class World {
      * if you press keyboard "D" then it will create a new Bottel to throw.
      */
     checkThrowObjects() {
-        if (this.keyboard.D && this.bottleBar.percentage > 0) {
+        if (this.keyboard.D && this.bottleBar.percentage > 0 && this.timepassed) {
+            this.timepassed = false;
+            setTimeout(() => {
+                return this.timepassed = true;
+            }, 300);
             this.character.loadImage('img/2_character_pepe/2_walk/W-21.png');
             this.bottleBar.percentage -= 20;
             this.bottleBar.setPercentage(this.bottleBar.percentage);

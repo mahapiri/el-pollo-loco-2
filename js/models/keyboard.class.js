@@ -5,4 +5,5 @@ class Keyboard {
     LEFT = false;
     SPACE = false;
     D = false;
+    currentTime = 0;
 }
