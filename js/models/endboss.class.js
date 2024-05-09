@@ -1,11 +1,13 @@
 class Endboss extends MoveableObject {
-    x = 1000;
-    y = 95;
+    x = 2300;
+    y = 70;
     width = 200;
     height = 380;
     energy = 100;
-    animation;
     speedY = 50;
+    walking;
+    hurting;
+    angry;
 
     IMAGE_WALK = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -58,6 +60,7 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.IMAGE_HURT);
         this.loadImages(this.IMAGE_DEAD);
+        this.speed = 0.75 + Math.random() * 0.5;
         this.animate();
     }
 
@@ -66,22 +69,41 @@ class Endboss extends MoveableObject {
      * animate the angry endboss
      */
     animate() {
-        this.animation = setInterval(() => {
+        this.walking = setInterval(() => {
             this.playAnimation(this.IMAGE_WALK);
-        }, 1000 / 10);
+            this.moveLeft();
+        }, 1000 / 3);
     }
 
 
     playDeadAnimation() {
-        clearInterval(this.animation);
         this.y = 85;
+        this.clearIntervals();
         setInterval(() => {
-
             this.y += this.speedY
             this.speedY -= this.acceleration;
             this.playAnimation(this.IMAGE_DEAD);
+        }, 1000 / 3);
+    }
+
+    playHurtAnimation() {
+        this.clearIntervals();
+        this.hurting = setInterval(() => {
+            this.playAnimation(this.IMAGE_HURT);
+        }, 1000 / 10);
+    }
+
+    playAngryAnimation() {
+        this.clearIntervals();
+        this.angry = setInterval(() => {
+            this.playAnimation(this.IMAGE_ANGRY);
         }, 1000 / 2);
     }
 
+    clearIntervals() {
+            clearInterval(this.walking);
+            clearInterval(this.angry);
+            clearInterval(this.hurting);
+    }
 
 }

@@ -6,6 +6,7 @@ let intro;
 let introStarted = true;
 let gameStarted = false;
 let fullscreenIsOn = false;
+let proofing;
 
 
 /**
@@ -192,10 +193,15 @@ function proofDead() {
         if(world.character.dead) {
             document.getElementById('game-over-screen').style.display = 'block';
         }
+
+        if(world.level.endboss[0].dead) {
+            clearInterval(proofing);
+            document.getElementById('win-screen').style.display = 'block';
+        }
     }
 }
 
 
-setInterval(() => {
+proofing = setInterval(() => {
     proofDead();
 }, 1000 / 60);

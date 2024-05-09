@@ -171,18 +171,19 @@ class World {
      */
     run() {
         setInterval(() => {
-            this.checkCollisions();
+            this.checkCollisionsEnemies();
+            this.checkCollisionsEndboss();
             this.checkThrowObjects();
             this.collectObjects(this.coin);
             this.collectObjects(this.bottle);
-        }, 10);
+        }, 1);
     }
 
 
     /**
      * checking if two objects are colliding
      */
-    checkCollisions() {
+    checkCollisionsEnemies() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingUp(enemy) || enemy.dead) {
                 enemy.isDead();
@@ -191,6 +192,15 @@ class World {
                     this.deleteObject(this.level.enemies, i)
                 }, 500);
             } else if (this.character.isColliding(enemy) && !this.character.isCollidingUp(enemy)) {
+                this.character.hit();
+                this.characterBar.setPercentage(this.character.energy);
+            }
+        });
+    }
+
+    checkCollisionsEndboss() {
+        this.level.endboss.forEach((endboss) => {
+            if(this.character.isColliding(endboss)) {
                 this.character.hit();
                 this.characterBar.setPercentage(this.character.energy);
             }
@@ -289,21 +299,25 @@ class World {
             setTimeout(() => {
                 this.deleteObject(this.level.endboss, j);
             }, 4000);
-        } else {
-            this.level.endboss[0].energy -= 40;
-            this.endbossBar.percentage -= 40;
-            this.endbossBar.setPercentage(this.endbossBar.percentage);
+        } else if (this.endbossBar.percentage > 0) {
+            this.level.endboss[0].playHurtAnimation();
+            setTimeout(() => {
+                this.level.endboss[0].playAngryAnimation();
+            }, 1500);
         }
-    }
+        this.level.endboss[0].energy -= 40;
+        this.endbossBar.percentage -= 40;
+        this.endbossBar.setPercentage(this.endbossBar.percentage);
+}
 
 
-    /**
-     * delete the object
-     * @param {array} array of coins or bottles 
-     * @param {*} object of coins or bottles
-     */
-    deleteObject(arr, object) {
-        delete arr[object];
-    }
+/**
+ * delete the object
+ * @param {array} array of coins or bottles 
+ * @param {*} object of coins or bottles
+ */
+deleteObject(arr, object) {
+    delete arr[object];
+}
 
 }
