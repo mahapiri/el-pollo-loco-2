@@ -89,14 +89,15 @@ canvas {
 
 .control-dashboard {
     position: absolute;
-    right: 22px;
-    top: 22px;
+    right: 18px;
+    top: 18px;
+    user-select: none;
 }
 
 .start-btn {
     user-select: none;
     position: absolute;
-    top: 22px;
+    top: 18px;
     right: 240px;
     left: 240px;
 }
@@ -108,8 +109,8 @@ canvas {
 
 .fullscreen-btn {
     position: absolute;
-    bottom: 22px;
-    right: 22px;
+    bottom: 18px;
+    right: 18px;
     
 }
 

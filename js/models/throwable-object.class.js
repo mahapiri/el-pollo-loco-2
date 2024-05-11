@@ -69,7 +69,7 @@ class ThrowableObject extends MoveableObject {
     hit(x, y) {
         clearInterval(this.throwInterval);
         clearInterval(this.gravity);
-        this.x = x + 50;
+        this.x = x - 5;
         this.y = y;
         this.speedY = 0;
         this.speed = 0;

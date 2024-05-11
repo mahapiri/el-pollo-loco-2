@@ -32,11 +32,11 @@ function showIntro() {
 /**
  * start the game when pressing the play button
  */
-function startGame() {
+async function startGame() {
     if (!gameStarted) {
         gameStarted = true;
         document.querySelector('.start-btn').style.display = 'none';
-        world = new World(canvas, keyboard, button);
+        world = await new World(canvas, keyboard, button);
         togglePlayMode();
     }
 }

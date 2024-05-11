@@ -4,10 +4,17 @@ class Endboss extends MoveableObject {
     width = 200;
     height = 380;
     energy = 100;
-    speedY = 50;
+    speedY = 1;
+    acceleration = 1;
     walking;
     hurting;
     angry;
+    offset = {
+        top: 70,
+        bottom: 30,
+        left: 30,
+        right: 30
+    }
 
     IMAGE_WALK = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -56,6 +63,10 @@ class Endboss extends MoveableObject {
      */
     constructor() {
         super().loadImages(this.IMAGE_ANGRY);
+        setInterval(() => {
+            console.log(this.x);
+        }, 10);
+
         this.loadImages(this.IMAGE_WALK);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.IMAGE_HURT);
@@ -81,9 +92,9 @@ class Endboss extends MoveableObject {
         this.clearIntervals();
         setInterval(() => {
             this.y += this.speedY
-            this.speedY -= this.acceleration;
+            this.speedY += this.acceleration;
             this.playAnimation(this.IMAGE_DEAD);
-        }, 1000 / 3);
+        }, 700);
     }
 
     playHurtAnimation() {

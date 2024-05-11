@@ -58,18 +58,19 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    // /**
-    //  * detect if two objects are colliding
-    //  * @param {string} obj - object
-    //  * @returns 
-    //  */
-    // isColliding(mo) {
-    //     return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-    //         this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-    //         this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
-    //         this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
-    // }
+    /**
+     * detect if two objects are colliding
+     * @param {string} obj - object
+     * @returns 
+     */
+    isColliding(mo) {
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
+    }
 
+    
     isCollidingUp(mo) {
         return this.y + this.height >= mo.y && 
             this.y + this.height <= mo.y + mo.height && 
@@ -79,17 +80,17 @@ class MoveableObject extends DrawableObject {
 
 
 
-    /**
-     * proof it two characte are colliding
-     * @param {object} mo - get the moveableobject
-     * @returns 
-     */
-    isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height
-    }
+    // /**
+    //  * proof it two characte are colliding
+    //  * @param {object} mo - get the moveableobject
+    //  * @returns 
+    //  */
+    // isColliding(mo) {
+    //     return this.x + this.width > mo.x &&
+    //         this.y + this.height > mo.y &&
+    //         this.x < mo.x &&
+    //         this.y < mo.y + mo.height
+    // }
 
 
     /**

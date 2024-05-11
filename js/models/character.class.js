@@ -3,6 +3,12 @@ class Character extends MoveableObject {
     speed = 5;
     y = 155;
     currentTime = new Date().getTime();
+    offset = {
+        top: 150,
+        bottom: 20,
+        left: 25,
+        right: 35
+    }
 
     IMAGE_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',

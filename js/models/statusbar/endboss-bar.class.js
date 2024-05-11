@@ -1,7 +1,8 @@
 class EndbossBar extends Statusbar {
+    world;
     percentage = 100;
-    x = 490;
-    y = 5;
+    x;
+    y;
 
     IMAGE = [
         'img/7_statusbars/2_statusbar_endboss/blue/blue0.png',
@@ -16,5 +17,16 @@ class EndbossBar extends Statusbar {
     constructor() {
         super().loadImages(this.IMAGE);
         this.setPercentage(this.percentage);
+        this.setPosition();
+
+    }
+
+    setPosition() {
+        setInterval(() => {
+            if(typeof this.world !== 'undefined') {
+                this.x = this.world.level.endboss[0].x;
+                this.y = this.world.level.endboss[0].y - 15;
+            }
+        }, 10);
     }
 }

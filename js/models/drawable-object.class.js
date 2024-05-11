@@ -6,6 +6,13 @@ class DrawableObject {
     img;
     imageCache = {};
     currentImage = 0;
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0
+    }
+
 
 
     /**
@@ -31,6 +38,21 @@ class DrawableObject {
         }
     }
 
+
+    drawFrameRed(ctx) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin || this instanceof Bottle || this instanceof Intro || this instanceof Endboss) {
+            let frameX = this.x + this.offset.left;
+            let frameY = this.y + this.offset.top;
+            let frameWidth = this.width - this.offset.left - this.offset.right;
+            let frameHeight = this.height - this.offset.top - this.offset.bottom;
+            
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'red';
+            ctx.rect(frameX, frameY, frameWidth, frameHeight);
+            ctx.stroke();
+        }
+    }
 
     /**
     * it will generate a new Image

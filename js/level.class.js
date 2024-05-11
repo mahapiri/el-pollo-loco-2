@@ -11,6 +11,7 @@ class Level {
     bottle;
     level_end_x = 720 * 3;
     background_music;
+    world;
 
     constructor(enemies, endboss, cloud, backgroundObject, background_music, bottleBar, characterBar, coinBar, endbossBar, coin, bottle) {
         this.enemies = enemies;

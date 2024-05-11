@@ -31,6 +31,7 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        this.level.endbossBar.world = this;
     }
 
 
@@ -54,7 +55,6 @@ class World {
         this.addToMap(this.level.bottleBar);
         this.addToMap(this.level.characterBar);
         this.addToMap(this.level.coinBar);
-        this.addToMap(this.level.endbossBar);
         this.ctx.translate(this.camera_x, 0);
 
 
@@ -63,6 +63,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
+        this.addToMap(this.level.endbossBar);
         this.addObjectsToMap(this.throwObject);
 
 
@@ -95,7 +96,8 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
+        // mo.drawFrameRed(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -278,17 +280,18 @@ class World {
             this.level.endboss[0].dead = true;
             this.level.endboss[0].energy = 0;
             this.level.endboss[0].playDeadAnimation();
-            setTimeout(() => {
-                this.deleteObject(this.level.endboss, j);
-            }, 4000);
+            // setTimeout(() => {
+            //     this.deleteObject(this.level.endboss, j);
+            //     this.deleteObject(this.level.endbossBar);
+            // }, 4000);
         } else if (this.level.endbossBar.percentage > 0) {
             this.level.endboss[0].playHurtAnimation();
             setTimeout(() => {
                 this.level.endboss[0].playAngryAnimation();
             }, 1500);
         }
-        this.level.endboss[0].energy -= 40;
-        this.level.endbossBar.percentage -= 40;
+        this.level.endboss[0].energy -= 10;
+        this.level.endbossBar.percentage -= 10;
         this.level.endbossBar.setPercentage(this.level.endbossBar.percentage);
     }
 
