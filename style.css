@@ -16,15 +16,10 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-.body-div {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
+    align-items: center;
 }
 
 .legal-div {
@@ -54,8 +49,6 @@ body {
 }
 
 h1 {
-    /* position: absolute; */
-    top: 32px;
     font-size: 72px;
     color: rgb(255, 255, 255);
     text-shadow: 4px 2px 6px black;
@@ -66,7 +59,6 @@ h1 {
 }
 
 canvas {
-    /* position: absolute; */
     z-index: 0;
     background-color: rgba(0, 0, 0);
     border: 4px solid rgb(255, 255, 255);
@@ -74,18 +66,13 @@ canvas {
 }
 
 .control-panel {
-    position: relative;
+    position: absolute;
+    width: 720px;
+    height: 480px;
     z-index: 1;
-    min-height: 100%;
-    width: 0;
-    height: 0;
 }
 
 .buttons {
-    position: relative;
-    justify-content: center;
-    display: flex;
-    align-items: center;
     cursor: unset;
     user-select: none;
 }
@@ -100,9 +87,18 @@ canvas {
     transform: scale(1.05);
 }
 
+.control-dashboard {
+    position: absolute;
+    right: 22px;
+    top: 22px;
+}
+
 .start-btn {
-    bottom: 218px;
     user-select: none;
+    position: absolute;
+    top: 22px;
+    right: 240px;
+    left: 240px;
 }
 
 .start-btn img {
@@ -111,36 +107,31 @@ canvas {
 }
 
 .fullscreen-btn {
-    min-width: 100%;
-    bottom: -64px;
-    right: -316px;
+    position: absolute;
+    bottom: 22px;
+    right: 22px;
+    
 }
 
 .play-btn {
-    top: -383px;
-    right: -266px;
+    margin-right: 8px;
 }
 
 .sound-btn {
-    top: -423px;
-    right: -322px;
-}
-
-.faq-btn {
-    top: -463px;
-    right: -209px;
+    margin-right: 8px;
 }
 
 .main-screen {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 #faq {
+    position: absolute;
     width: 660px;
     height: 400px;
     z-index: 2;
@@ -148,7 +139,6 @@ canvas {
     border-radius: 20px;
     border: 2px solid rgb(255, 255, 255, 0.1);
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
-
 }
 
 .instruction {
@@ -206,4 +196,10 @@ a {
     border-spacing: 8px;
     text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.9);
     user-select: none;
+}
+
+.game-over-screen {
+    position: absolute;
+    width: 720px;
+    height: 480px;
 }

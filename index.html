@@ -33,39 +33,39 @@
 
   </head>
   <body onload="init()">
-    <div class="body-div">
-      <h1>EL POLLO LOCO</h1>
-      <div class="main-screen" id="main-screen">
-        <canvas id="canvas" width="720" height="480"></canvas>
-        <div id="faq" style="display: none;">
-          <a href="#" class="close-icon" onclick="toggleFaq()">X</a>
-          <div class="instruction">
-            <h2>How to play</h2>
-            <table>
-              <tr class="instruction-set">
-                <td>Move Left:</td>
-                <td>Left Arrow</td>
-              </tr>
-              <tr>
-                <td>Move Right:</td>
-                <td>Right Arrow</td>
-              </tr>
-              <tr>
-                <td>Jump:</td>
-                <td>Space</td>
-              </tr>
-              <tr>
-                <td>Throw:</td>
-                <td>D</td>
-              </tr>
-            </table>
-          </div>
+    <h1>EL POLLO LOCO</h1>
+    <div class="main-screen" id="main-screen">
+      <canvas id="canvas" width="720" height="480"></canvas>
+      <div id="faq" style="display: none;">
+        <a href="#" class="close-icon" onclick="toggleFaq()">X</a>
+        <div class="instruction">
+          <h2>How to play</h2>
+          <table>
+            <tr class="instruction-set">
+              <td>Move Left:</td>
+              <td>Left Arrow</td>
+            </tr>
+            <tr>
+              <td>Move Right:</td>
+              <td>Right Arrow</td>
+            </tr>
+            <tr>
+              <td>Jump:</td>
+              <td>Space</td>
+            </tr>
+            <tr>
+              <td>Throw:</td>
+              <td>D</td>
+            </tr>
+          </table>
         </div>
-        <div class="control-panel">
-          <img src="img/9_intro_outro_screens/game_over/game over.png" class="game-over-screen" id="game-over-screen" alt="Game Over" style="display: none;">
-          <img src="img/9_intro_outro_screens/game_over/game over.png" class="game-over-screen" id="win-screen" alt="Win" style="display: none;">
-          <a href="#" class="start-btn buttons"><img src="/img/9_intro_outro_screens/start.png" onclick="startGame()" alt="Start Game"></a>
-          <a href="#" class="fullscreen-btn buttons"><img src="/img/9_intro_outro_screens/fullscreen.png" id="fullscreen-img" onclick="toggleFullscreen()" alt="Fullscreen Mode"></a>
+      </div>
+      <div class="control-panel">
+        <img src="img/9_intro_outro_screens/game_over/game over.png" class="game-over-screen" id="game-over-screen" alt="Game Over" style="display: none;">
+        <img src="img/9_intro_outro_screens/game_over/game over.png" class="game-over-screen" id="win-screen" alt="Win" style="display: none;">
+        <a href="#" class="start-btn buttons"><img src="/img/9_intro_outro_screens/start.png" onclick="startGame()" alt="Start Game"></a>
+        <a href="#" class="fullscreen-btn buttons"><img src="/img/9_intro_outro_screens/fullscreen.png" id="fullscreen-img" onclick="toggleFullscreen()" alt="Fullscreen Mode"></a>
+        <div class="control-dashboard">
           <a href="#" class="play-btn buttons"><img src="img/9_intro_outro_screens/play.png" id="play-img" onclick="togglePlayMode()" alt="Play Mode"></a>
           <a href="#" class="sound-btn buttons"><img src="img/9_intro_outro_screens/sound_off.png" id="sound-img" onclick="toggleSoundMode()" alt="Sound Mode"></a>
           <a href="#" class="faq-btn buttons"><img src="img/9_intro_outro_screens/faq.png" id="faq-img" onclick="toggleFaq()" alt="FAQ"></a>
