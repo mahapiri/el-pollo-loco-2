@@ -7,32 +7,7 @@ class World {
     timepassed = -1100;
     level = level1;
     character = new Character();
-    bottleBar = new BottleBar();
-    characterBar = new CharacterBar();
-    bottleBar = new BottleBar();
-    coinBar = new CoinBar();
-    endbossBar = new EndbossBar();
-
     throwObject = [];
-    coin = [
-        new Coin(400, 300),
-        new Coin(500, 300),
-        new Coin(600, 300),
-        new Coin(700, 300),
-        new Coin(800, 300),
-        new Coin(900, 300),
-        new Coin(1000, 300),
-        new Coin(1100, 300),
-    ];
-    bottle = [
-        new Bottle(400, 340),
-        new Bottle(500, 340),
-        new Bottle(600, 340),
-        new Bottle(700, 340),
-        new Bottle(800, 340),
-        new Bottle(900, 340),
-        new Bottle(1000, 340)
-    ];
 
 
     /**
@@ -76,15 +51,15 @@ class World {
 
 
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.bottleBar);
-        this.addToMap(this.characterBar);
-        this.addToMap(this.coinBar);
-        this.addToMap(this.endbossBar);
+        this.addToMap(this.level.bottleBar);
+        this.addToMap(this.level.characterBar);
+        this.addToMap(this.level.coinBar);
+        this.addToMap(this.level.endbossBar);
         this.ctx.translate(this.camera_x, 0);
 
 
-        this.addObjectsToMap(this.coin);
-        this.addObjectsToMap(this.bottle);
+        this.addObjectsToMap(this.level.coin);
+        this.addObjectsToMap(this.level.bottle);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
@@ -174,8 +149,8 @@ class World {
             this.checkCollisionsEnemies();
             this.checkCollisionsEndboss();
             this.checkThrowObjects();
-            this.collectObjects(this.coin, this.coinBar);
-            this.collectObjects(this.bottle, this.bottleBar);
+            this.collectObjects(this.level.coin, this.level.coinBar);
+            this.collectObjects(this.level.bottle, this.level.bottleBar);
         }, 1);
     }
 
@@ -193,16 +168,16 @@ class World {
                 }, 500);
             } else if (this.character.isColliding(enemy) && !this.character.isCollidingUp(enemy)) {
                 this.character.hit();
-                this.characterBar.setPercentage(this.character.energy);
+                this.level.characterBar.setPercentage(this.character.energy);
             }
         });
     }
 
     checkCollisionsEndboss() {
         this.level.endboss.forEach((endboss) => {
-            if(this.character.isColliding(endboss)) {
+            if (this.character.isColliding(endboss)) {
                 this.character.hit();
-                this.characterBar.setPercentage(this.character.energy);
+                this.level.characterBar.setPercentage(this.character.energy);
             }
         });
     }
@@ -212,14 +187,14 @@ class World {
      * if you press keyboard "D" then it will create a new Bottel to throw.
      */
     checkThrowObjects() {
-        if (this.keyboard.D && this.bottleBar.percentage > 0 && this.timepassed) {
+        if (this.keyboard.D && this.level.bottleBar.percentage > 0 && this.timepassed) {
             this.timepassed = false;
             setTimeout(() => {
                 return this.timepassed = true;
             }, 300);
             this.character.loadImage('img/2_character_pepe/2_walk/W-21.png');
-            this.bottleBar.percentage -= 20;
-            this.bottleBar.setPercentage(this.bottleBar.percentage);
+            this.level.bottleBar.percentage -= 20;
+            this.level.bottleBar.setPercentage(this.level.bottleBar.percentage);
             let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120, this.character.otherDirection);
             this.throwObject.push(bottle);
             bottle.throw();
@@ -272,11 +247,11 @@ class World {
      * add coins to the coin bar 
      */
     addCoin() {
-        if (this.coinBar.percentage >= 100) {
-            this.coinBar.percentage = 100;
+        if (this.level.coinBar.percentage >= 100) {
+            this.level.coinBar.percentage = 100;
         } else {
-            this.coinBar.percentage += 10;
-            this.coinBar.setPercentage(this.coinBar.percentage);
+            this.level.coinBar.percentage += 10;
+            this.level.coinBar.setPercentage(this.level.coinBar.percentage);
         }
     }
 
@@ -285,41 +260,46 @@ class World {
      * add bottles to the bottle bar
      */
     addBottle() {
-        if (this.bottleBar.percentage >= 100) {
-            this.bottleBar.percentage = 100;
+        if (this.level.bottleBar.percentage >= 100) {
+            this.level.bottleBar.percentage = 100;
         } else {
-            this.bottleBar.percentage += 20;
-            this.bottleBar.setPercentage(this.bottleBar.percentage);
+            this.level.bottleBar.percentage += 20;
+            this.level.bottleBar.setPercentage(this.level.bottleBar.percentage);
         }
     }
 
+
+    /**
+     * get the right function when the endboss was hitting
+     * @param {*} j - position of the array 
+     */
     hitEndboss(j) {
-        if (this.endbossBar.percentage <= 0) {
+        if (this.level.endbossBar.percentage <= 0) {
             this.level.endboss[0].dead = true;
             this.level.endboss[0].energy = 0;
             this.level.endboss[0].playDeadAnimation();
             setTimeout(() => {
                 this.deleteObject(this.level.endboss, j);
             }, 4000);
-        } else if (this.endbossBar.percentage > 0) {
+        } else if (this.level.endbossBar.percentage > 0) {
             this.level.endboss[0].playHurtAnimation();
             setTimeout(() => {
                 this.level.endboss[0].playAngryAnimation();
             }, 1500);
         }
         this.level.endboss[0].energy -= 40;
-        this.endbossBar.percentage -= 40;
-        this.endbossBar.setPercentage(this.endbossBar.percentage);
-}
+        this.level.endbossBar.percentage -= 40;
+        this.level.endbossBar.setPercentage(this.level.endbossBar.percentage);
+    }
 
 
-/**
- * delete the object
- * @param {array} array of coins or bottles 
- * @param {*} object of coins or bottles
- */
-deleteObject(arr, object) {
-    delete arr[object];
-}
+    /**
+     * delete the object
+     * @param {array} array of coins or bottles 
+     * @param {*} object of coins or bottles
+     */
+    deleteObject(arr, object) {
+        delete arr[object];
+    }
 
 }

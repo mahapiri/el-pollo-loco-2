@@ -1,6 +1,6 @@
 class Bottle extends DrawableObject {
     x;
-    y;
+    y = 340;
     height = 80;
     width = 60;
 
@@ -9,17 +9,16 @@ class Bottle extends DrawableObject {
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ];
 
-    constructor(x, y) {
+    constructor() {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGES_GROUND);
+        this.x = 300 + Math.random() * 1000;
         this.animate();
-        this.x = x;
-        this.y = y;
     }
 
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_GROUND);
-        }, 300 + Math.random() * 200);
+        }, 200 + Math.random() * 200);
     }
 }

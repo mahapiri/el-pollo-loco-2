@@ -58,5 +58,30 @@ const level1 = new Level (
     ],
     [
         new Audio('audio/background-music.mp3')
-    ]
+    ],
+    new BottleBar(),
+    new CharacterBar(),
+    new CoinBar(),
+    new EndbossBar(),
+    [
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin(),
+        new Coin()
+    ],
+    [
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle()
+    ],
 )
