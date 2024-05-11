@@ -6,6 +6,7 @@ let intro;
 let introStarted = true;
 let gameStarted = false;
 let fullscreenIsOn = false;
+let faqIsOn = false;
 let proofing;
 
 
@@ -45,27 +46,27 @@ function startGame() {
  * put true if key press
  */
 window.addEventListener("keydown", (key) => {
-    if(key.which == 38) {
+    if (key.which == 38) {
         keyboard.UP = true;
     }
 
-    if(key.which == 39) {
+    if (key.which == 39) {
         keyboard.RIGHT = true;
     }
 
-    if(key.which == 40) {
+    if (key.which == 40) {
         keyboard.DOWN = true;
     }
 
-    if(key.which == 37) {
+    if (key.which == 37) {
         keyboard.LEFT = true;
     }
 
-    if(key.which == 32) {
+    if (key.which == 32) {
         keyboard.SPACE = true;
     }
 
-    if(key.which == 68) {
+    if (key.which == 68) {
         keyboard.D = true;
         keyboard.currentTime = new Date().getTime();
     }
@@ -76,27 +77,27 @@ window.addEventListener("keydown", (key) => {
  * put key on false if the key is not pressed
  */
 window.addEventListener("keyup", (key) => {
-    if(key.which == 38) {
+    if (key.which == 38) {
         keyboard.UP = false;
     }
 
-    if(key.which == 39) {
+    if (key.which == 39) {
         keyboard.RIGHT = false;
     }
 
-    if(key.which == 40) {
+    if (key.which == 40) {
         keyboard.DOWN = false;
     }
 
-    if(key.which == 37) {
+    if (key.which == 37) {
         keyboard.LEFT = false;
     }
 
-    if(key.which == 32) {
+    if (key.which == 32) {
         keyboard.SPACE = false;
     }
 
-    if(key.which == 68) {
+    if (key.which == 68) {
         keyboard.D = false;
     }
 })
@@ -108,7 +109,7 @@ window.addEventListener("keyup", (key) => {
 function toggleFullscreen() {
     let screen = document.getElementById('main-screen');
     let img = document.getElementById('fullscreen-img');
-    if(!fullscreenIsOn) {
+    if (!fullscreenIsOn) {
         screen.requestFullscreen();
         img.src = 'img/9_intro_outro_screens/exit_fullscreen.png';
     } else {
@@ -123,7 +124,7 @@ function toggleFullscreen() {
  * check if game is on fullscreen or not to change the border color
  */
 window.addEventListener('fullscreenchange', () => {
-    if(document.fullscreenElement) {
+    if (document.fullscreenElement) {
         fullscreenIsOn = true;
         canvas.style.border = '4px solid black';
         canvas.style.minWidth = '90%';
@@ -140,7 +141,7 @@ window.addEventListener('fullscreenchange', () => {
  */
 function togglePlayMode() {
     let img = document.getElementById('play-img');
-    if(!button.play) {
+    if (!button.play) {
         if (!gameStarted) {
             startGame();
             setPauseImg(img);
@@ -178,7 +179,7 @@ function setPlayImg(img) {
  */
 function toggleSoundMode() {
     let img = document.getElementById('sound-img');
-    if(button.sound) {
+    if (button.sound) {
         button.sound = false;
         img.src = 'img/9_intro_outro_screens/sound_on.png';
     } else {
@@ -189,14 +190,17 @@ function toggleSoundMode() {
 
 
 function proofDead() {
-    if(gameStarted) {
-        if(world.character.dead) {
+    if (gameStarted) {
+        if (world.character.dead) {
             document.getElementById('game-over-screen').style.display = 'block';
         }
 
-        if(world.level.endboss[0].dead) {
+        if (world.level.endboss[0].dead) {
             clearInterval(proofing);
-            document.getElementById('win-screen').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('win-screen').style.display = 'block';
+            }, 2500);
+
         }
     }
 }
@@ -205,3 +209,35 @@ function proofDead() {
 proofing = setInterval(() => {
     proofDead();
 }, 1000 / 60);
+
+
+function toggleFaq() {
+    let faq = document.getElementById('faq');
+    if (faqIsOn == false) {
+        faqIsOn = true;
+        faq.style.display = 'block';
+    } else {
+        faqIsOn = false;
+        faq.style.display = 'none';
+    }
+    setClickable();
+    setPause();
+}
+
+
+function setClickable() {
+    let controlPanel = document.querySelector('.control-panel');
+    if (faqIsOn == true) {
+        controlPanel.style.pointerEvents = 'none';
+    } else {
+        controlPanel.style.pointerEvents = 'fill';
+    }
+}
+
+function setPause() {
+    if(gameStarted == true && faqIsOn == true) {
+        console.log('Spiel Pause');
+    } else if (gameStarted == true && faqIsOn == false) {
+        console.log('spiel start');
+    }
+}

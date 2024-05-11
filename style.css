@@ -11,6 +11,8 @@
 body {
     font-family: 'Boogaloo', Arial, Helvetica, sans-serif;
     margin: 0;
+    min-height: 100vh;
+    width: 100vw;
     background-image: url(/img/window-backdrop.png);
     background-position: center;
     background-repeat: no-repeat;
@@ -23,11 +25,25 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+}
+
+.legal-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.legal-div a {
+    color: white;
+    text-decoration: none;
+    margin-top: 16px;
+    margin-right: 16px;
+    text-shadow: 4px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    position: absolute;
+    /* position: absolute; */
     top: 32px;
     font-size: 72px;
     color: rgb(255, 255, 255);
@@ -39,8 +55,8 @@ h1 {
 }
 
 canvas {
-    position: absolute;
-    z-index: 1;
+    /* position: absolute; */
+    z-index: 0;
     background-color: rgba(0, 0, 0);
     border: 4px solid rgb(255, 255, 255);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
@@ -48,7 +64,7 @@ canvas {
 
 .control-panel {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     min-height: 100%;
     width: 0;
     height: 0;
@@ -99,10 +115,72 @@ canvas {
     right: -322px;
 }
 
+.faq-btn {
+    top: -463px;
+    right: -209px;
+}
+
 .main-screen {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
+#faq {
+    width: 660px;
+    height: 400px;
+    z-index: 2;
+    background-color: rgba(252, 193, 15, 0.9);
+    border-radius: 20px;
+    border: 2px solid rgb(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.4);
+
+}
+
+.instruction {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.close-icon {
+    color: white;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    text-decoration: none;
+    padding-top: 16px;
+    margin-right: 20px;
+    font-size: 40px;
+    transition: 20ms ease-out;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+h2 {
+    font-size: 48px;
+    margin-bottom: 16px;
+    margin-top: 0px;
+    color: white;
+    text-shadow: 4px 2px 6px rgba(0, 0, 0, 0.2);
+    user-select: none;
+}
+
+table {
+    color: white;
+    font-size: 32px;
+    border-spacing: 8px;
+    text-shadow: 4px 2px 6px rgba(0, 0, 0, 0.2);
+    user-select: none;
+}
+
+th,
+td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 22px;
+    padding-right: 22px;
+}

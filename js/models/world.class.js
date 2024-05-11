@@ -174,8 +174,8 @@ class World {
             this.checkCollisionsEnemies();
             this.checkCollisionsEndboss();
             this.checkThrowObjects();
-            this.collectObjects(this.coin);
-            this.collectObjects(this.bottle);
+            this.collectObjects(this.coin, this.coinBar);
+            this.collectObjects(this.bottle, this.bottleBar);
         }, 1);
     }
 
@@ -243,13 +243,15 @@ class World {
      * collect the object and delete the collected object
      * @param {array} arr - array of the collectable object
      */
-    collectObjects(arr) {
-        arr.forEach((object, i) => {
-            if (this.character.isColliding(object)) {
-                this.addObject(object);
-                this.deleteObject(arr, i);
-            }
-        })
+    collectObjects(arr, bar) {
+        if (bar.percentage < 100) {
+            arr.forEach((object, i) => {
+                if (this.character.isColliding(object)) {
+                    this.addObject(object);
+                    this.deleteObject(arr, i);
+                }
+            })
+        }
     }
 
 
@@ -273,7 +275,7 @@ class World {
         if (this.coinBar.percentage >= 100) {
             this.coinBar.percentage = 100;
         } else {
-            this.coinBar.percentage += 20;
+            this.coinBar.percentage += 10;
             this.coinBar.setPercentage(this.coinBar.percentage);
         }
     }
