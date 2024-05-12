@@ -77,7 +77,7 @@ class Endboss extends MoveableObject {
 
 
     /**
-     * animate the angry endboss
+     * animate the walking endboss
      */
     animate() {
         this.walking = setInterval(() => {
@@ -87,6 +87,9 @@ class Endboss extends MoveableObject {
     }
 
 
+    /**
+     * animate the dead endboss
+     */
     playDeadAnimation() {
         this.y = 85;
         this.clearIntervals();
@@ -97,6 +100,10 @@ class Endboss extends MoveableObject {
         }, 700);
     }
 
+
+    /**
+     * animate the hurt endboss
+     */
     playHurtAnimation() {
         this.clearIntervals();
         this.hurting = setInterval(() => {
@@ -104,6 +111,10 @@ class Endboss extends MoveableObject {
         }, 1000 / 10);
     }
 
+
+    /**
+     * animate the angry endboss
+     */
     playAngryAnimation() {
         this.clearIntervals();
         this.angry = setInterval(() => {
@@ -111,6 +122,10 @@ class Endboss extends MoveableObject {
         }, 1000 / 2);
     }
 
+
+    /**
+     * clear all animation images
+     */
     clearIntervals() {
             clearInterval(this.walking);
             clearInterval(this.angry);

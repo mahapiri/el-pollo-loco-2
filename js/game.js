@@ -189,6 +189,9 @@ function toggleSoundMode() {
 }
 
 
+/**
+ * proof if character or endboss is dead to display the gameover or win screen
+ */
 function proofDead() {
     if (gameStarted) {
         if (world.character.dead) {
@@ -206,11 +209,17 @@ function proofDead() {
 }
 
 
+/**
+ * proofing if character or endboss is dead
+ */
 proofing = setInterval(() => {
     proofDead();
 }, 1000 / 60);
 
 
+/**
+ * toggle the faq site
+ */
 function toggleFaq() {
     let faq = document.getElementById('faq');
     if (faqIsOn == false) {
@@ -225,6 +234,9 @@ function toggleFaq() {
 }
 
 
+/**
+ * set the clickable buttons 
+ */
 function setClickable() {
     let controlPanel = document.querySelector('.control-panel');
     if (faqIsOn == true) {
@@ -234,6 +246,10 @@ function setClickable() {
     }
 }
 
+
+/**
+ * set pause of the game
+ */
 function setPause() {
     if(gameStarted == true && faqIsOn == true) {
         console.log('Spiel Pause');

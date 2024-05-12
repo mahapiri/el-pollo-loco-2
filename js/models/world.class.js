@@ -175,6 +175,10 @@ class World {
         });
     }
 
+
+    /**
+     * check the collision of the endboss
+     */
     checkCollisionsEndboss() {
         this.level.endboss.forEach((endboss) => {
             if (this.character.isColliding(endboss)) {

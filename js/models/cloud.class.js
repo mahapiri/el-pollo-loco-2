@@ -9,6 +9,7 @@ class Cloud extends MoveableObject {
         'img/5_background/layers/4_clouds/2.png',
     ]
 
+    
     /**
      * load the image of the cloud with the position between 0 and 500 px
      * cloud moving to the left
@@ -30,6 +31,7 @@ class Cloud extends MoveableObject {
             this.changeX();
         }, 25);
     }
+
 
     /**
      * change the x position at -1440 to 480 * 7

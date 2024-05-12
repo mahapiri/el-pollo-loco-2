@@ -22,6 +22,10 @@ class Bottle extends DrawableObject {
         this.animate();
     }
 
+
+    /**
+     * animate the bottle on ground
+     */
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES_GROUND);

@@ -59,6 +59,10 @@ class Chicken extends MoveableObject {
         
     }
 
+
+    /**
+     * set the dead image if the chicken is dead
+     */
     isDead() {
         this.dead = true;
         this.img.src = this.IMAGES_DEAD;

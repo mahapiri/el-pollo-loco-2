@@ -21,6 +21,9 @@ class EndbossBar extends Statusbar {
 
     }
 
+    /**
+     * set the bar at the position of the endboss
+     */
     setPosition() {
         setInterval(() => {
             if(typeof this.world !== 'undefined') {

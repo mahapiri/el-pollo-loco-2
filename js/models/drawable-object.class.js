@@ -39,6 +39,10 @@ class DrawableObject {
     }
 
 
+    /**
+     * drawing the frame
+     * @param {*} ctx - get the ctx of the canvas 
+     */
     drawFrameRed(ctx) {
         if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin || this instanceof Bottle || this instanceof Intro || this instanceof Endboss) {
             let frameX = this.x + this.offset.left;
