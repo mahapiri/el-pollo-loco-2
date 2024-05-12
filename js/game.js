@@ -196,6 +196,7 @@ function proofDead() {
     if (gameStarted) {
         if (world.character.dead) {
             document.getElementById('game-over-screen').style.display = 'block';
+            clearIntervals();
         }
 
         if (world.level.endboss[0].dead) {
@@ -203,7 +204,7 @@ function proofDead() {
             setTimeout(() => {
                 document.getElementById('win-screen').style.display = 'block';
             }, 2500);
-
+            clearIntervals();
         }
     }
 }
@@ -251,9 +252,52 @@ function setClickable() {
  * set pause of the game
  */
 function setPause() {
-    if(gameStarted == true && faqIsOn == true) {
+    if (gameStarted == true && faqIsOn == true) {
         console.log('Spiel Pause');
+        stopAllIntervals();
     } else if (gameStarted == true && faqIsOn == false) {
         console.log('spiel start');
     }
+}
+
+
+/**
+ * stopping all setInterval of all character
+ */
+function stopAllIntervals() {
+    stopInterval(world.level.enemies);
+    stopInterval(world.level.endboss);
+    stopInterval(world.character);
+}
+
+
+/**
+ * stopping the setInterval functions of a character
+ * @param {array} array of the character
+ */
+function stopInterval(arr) {
+    if (arr == world.character) {
+        world.character.stoppableIntervals.forEach(clearInterval);
+    } else {
+        arr.forEach(obj => {
+            obj.stoppableIntervals.forEach((index) => {
+                clearInterval(index);
+            });
+        });
+    }
+}
+
+
+function startInterval() {
+    
+}
+
+
+/**
+ * clear all intervals
+ */
+function clearIntervals() {
+    setTimeout(() => {
+        for (let i = 0; i < 9999; i++) window.clearInterval(i);
+    }, 4000);
 }

@@ -7,6 +7,9 @@ class MoveableObject extends DrawableObject {
     lastHit = 0;
     dead = false;
     gravity;
+    moveAnimation;
+    moveImg;
+    stoppableIntervals = [];
 
 
     /**
@@ -70,27 +73,18 @@ class MoveableObject extends DrawableObject {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     }
 
-    
+
+    /**
+     * proof the colliding up
+     * @param {*} mo moveable object
+     * @returns 
+     */
     isCollidingUp(mo) {
-        return this.y + this.height >= mo.y && 
-            this.y + this.height <= mo.y + mo.height && 
-            this.x < mo.x + mo.width && 
+        return this.y + this.height - this.offset.bottom >= mo.y - mo.offset.top &&
+            this.y + this.height <= mo.y + mo.height &&
+            this.x < mo.x + mo.width &&
             this.x + this.width > mo.x;
     }
-
-
-
-    // /**
-    //  * proof it two characte are colliding
-    //  * @param {object} mo - get the moveableobject
-    //  * @returns 
-    //  */
-    // isColliding(mo) {
-    //     return this.x + this.width > mo.x &&
-    //         this.y + this.height > mo.y &&
-    //         this.x < mo.x &&
-    //         this.y < mo.y + mo.height
-    // }
 
 
     /**
@@ -116,11 +110,31 @@ class MoveableObject extends DrawableObject {
         return timepassed < 0.5;
     }
 
+
     /**
      * returns the energy level by 0 when the character is dead
      * @returns 
      */
     isDead() {
         return this.energy == 0;
+    }
+
+
+    /**
+     * push all stoppable setinterval functions
+     * @param {function} fn function name for the setInterval
+     * @param {number} time interval
+     */
+    setStoppableIntervals(fn, time) {
+        let id = setInterval(fn, time);
+        this.stoppableIntervals.push(id);
+    }
+
+
+    /**
+     * stop the setInterval
+     */
+    stopIntervals() {
+        this.stoppableIntervals.forEach(clearInterval);
     }
 }

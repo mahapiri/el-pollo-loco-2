@@ -63,10 +63,6 @@ class Endboss extends MoveableObject {
      */
     constructor() {
         super().loadImages(this.IMAGE_ANGRY);
-        setInterval(() => {
-            console.log(this.x);
-        }, 10);
-
         this.loadImages(this.IMAGE_WALK);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.IMAGE_HURT);
@@ -80,7 +76,7 @@ class Endboss extends MoveableObject {
      * animate the walking endboss
      */
     animate() {
-        this.walking = setInterval(() => {
+        this.setStoppableIntervals(() => {
             this.playAnimation(this.IMAGE_WALK);
             this.moveLeft();
         }, 1000 / 3);
@@ -92,8 +88,8 @@ class Endboss extends MoveableObject {
      */
     playDeadAnimation() {
         this.y = 85;
-        this.clearIntervals();
-        setInterval(() => {
+        this.stopIntervals();
+        this.setStoppableIntervals(() => {
             this.y += this.speedY
             this.speedY += this.acceleration;
             this.playAnimation(this.IMAGE_DEAD);
@@ -105,8 +101,8 @@ class Endboss extends MoveableObject {
      * animate the hurt endboss
      */
     playHurtAnimation() {
-        this.clearIntervals();
-        this.hurting = setInterval(() => {
+        this.stopIntervals();
+        this.setStoppableIntervals(() => {
             this.playAnimation(this.IMAGE_HURT);
         }, 1000 / 10);
     }
@@ -116,20 +112,9 @@ class Endboss extends MoveableObject {
      * animate the angry endboss
      */
     playAngryAnimation() {
-        this.clearIntervals();
-        this.angry = setInterval(() => {
+        this.stopIntervals();
+        this.setStoppableIntervals(() => {
             this.playAnimation(this.IMAGE_ANGRY);
         }, 1000 / 2);
     }
-
-
-    /**
-     * clear all animation images
-     */
-    clearIntervals() {
-            clearInterval(this.walking);
-            clearInterval(this.angry);
-            clearInterval(this.hurting);
-    }
-
 }

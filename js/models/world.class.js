@@ -96,8 +96,8 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
-        // mo.drawFrameRed(this.ctx);
+        mo.drawFrame(this.ctx);
+        mo.drawFrameRed(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

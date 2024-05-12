@@ -58,6 +58,7 @@ class DrawableObject {
         }
     }
 
+    
     /**
     * it will generate a new Image
     * @param {string} path - here you can put your path from your img file 

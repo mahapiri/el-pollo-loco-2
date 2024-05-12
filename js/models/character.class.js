@@ -96,7 +96,7 @@ class Character extends MoveableObject {
      * animate the character by walking with sound effects, go to the other direction
      */
     animate() {
-        setInterval(() => {
+        this.setStoppableIntervals(() => {
             this.walking_sound.pause();
             if(!this.dead) {
                     if (this.world.keyboard.D) {
@@ -125,7 +125,8 @@ class Character extends MoveableObject {
             }
         }, 1000 / 60);
 
-        setInterval(() => {
+
+        this.setStoppableIntervals(() => {
 
             if (this.isDead()) {
                 this.playAnimation(this.IMAGE_DEAD);
@@ -163,6 +164,7 @@ class Character extends MoveableObject {
         }
     }
 
+    
     /**
      * proof the Time between the actual time and the time where the character is nothing to do 
      */
