@@ -8,6 +8,7 @@ let gameStarted = false;
 let fullscreenIsOn = false;
 let faqIsOn = false;
 let proofing;
+let paused = false;
 
 
 /**
@@ -141,15 +142,21 @@ window.addEventListener('fullscreenchange', () => {
  */
 function togglePlayMode() {
     let img = document.getElementById('play-img');
-    if (!button.play) {
-        if (!gameStarted) {
+
+    if (!button.play) { // pause
+        if (!gameStarted) { // nicht gestartet
             startGame();
             setPauseImg(img);
         } else {
             setPauseImg(img);
+            if (paused) {
+                startAllAnimation();
+            }
         }
-    } else {
+    } else if (!gameStarted){
+        gameStarted = true;
         setPlayImg(img);
+        pauseAllIntervals();
     }
 }
 
@@ -231,7 +238,7 @@ function toggleFaq() {
         faq.style.display = 'none';
     }
     setClickable();
-    setPause();
+    togglePlayMode();
 }
 
 
@@ -249,25 +256,13 @@ function setClickable() {
 
 
 /**
- * set pause of the game
- */
-function setPause() {
-    if (gameStarted == true && faqIsOn == true) {
-        console.log('Spiel Pause');
-        stopAllIntervals();
-    } else if (gameStarted == true && faqIsOn == false) {
-        console.log('spiel start');
-    }
-}
-
-
-/**
  * stopping all setInterval of all character
  */
-function stopAllIntervals() {
-    stopInterval(world.level.enemies);
-    stopInterval(world.level.endboss);
-    stopInterval(world.character);
+function pauseAllIntervals() {
+    paused = true;
+    pauseInterval(world.level.enemies);
+    pauseInterval(world.level.endboss);
+    pauseInterval(world.character);
 }
 
 
@@ -275,21 +270,41 @@ function stopAllIntervals() {
  * stopping the setInterval functions of a character
  * @param {array} array of the character
  */
-function stopInterval(arr) {
+function pauseInterval(arr) {
     if (arr == world.character) {
-        world.character.stoppableIntervals.forEach(clearInterval);
+        world.character.stoppableIntervals.forEach(id => {
+            clearInterval(id);
+            return id;
+        });
     } else {
         arr.forEach(obj => {
-            obj.stoppableIntervals.forEach((index) => {
-                clearInterval(index);
+            obj.stoppableIntervals.forEach((id) => {
+                clearInterval(id);
+                return id;
             });
         });
     }
 }
 
 
-function startInterval() {
-    
+/**
+ * start all animate functions
+ */
+function startAllAnimation() {
+    world.character.animate();
+    world.level.endboss[0].animate();
+    startAnimation(world.level.enemies);
+}
+
+
+/**
+ * start all animate functions of the enemy
+ * @param {array} array of enemies
+ */
+function startAnimation(arr) {
+    arr.forEach(obj => {
+        obj.animate();
+    });
 }
 
 
