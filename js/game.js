@@ -1,14 +1,13 @@
 let canvas;
 let world;
+let intro;
 let keyboard = new Keyboard();
 let button = new Button();
-let intro;
-let introStarted = true;
 let gameStarted = false;
 let fullscreenIsOn = false;
 let faqIsOn = false;
-let proofing;
 let paused = false;
+let deadProofing;
 
 
 /**
@@ -24,7 +23,7 @@ function init() {
  * show the Intro to start the game
  */
 function showIntro() {
-    if (introStarted && !gameStarted) {
+    if (!gameStarted) {
         intro = new Intro(canvas, keyboard);
     }
 }
@@ -35,11 +34,12 @@ function showIntro() {
  */
 async function startGame() {
     if (!gameStarted) {
-        gameStarted = true;
+        button.play = true;
         document.querySelector('.start-btn').style.display = 'none';
         world = await new World(canvas, keyboard, button);
-        togglePlayMode();
     }
+    togglePlayMode();
+    gameStarted = true;
 }
 
 
@@ -105,7 +105,7 @@ window.addEventListener("keyup", (key) => {
 
 
 /**
- * fullscreen mode
+ * toggle fullscreen mode
  */
 function toggleFullscreen() {
     let screen = document.getElementById('main-screen');
@@ -117,7 +117,6 @@ function toggleFullscreen() {
         img.src = 'img/9_intro_outro_screens/fullscreen.png';
         document.exitFullscreen();
     }
-
 }
 
 
@@ -143,20 +142,18 @@ window.addEventListener('fullscreenchange', () => {
 function togglePlayMode() {
     let img = document.getElementById('play-img');
 
-    if (!button.play) { // pause
-        if (!gameStarted) { // nicht gestartet
+    if (!button.play) {
+        if (!gameStarted) {
             startGame();
-            setPauseImg(img);
-        } else {
-            setPauseImg(img);
-            if (paused) {
-                startAllAnimation();
-            }
+        } else if (gameStarted) {
+            pauseAllIntervals();
         }
-    } else if (!gameStarted){
-        gameStarted = true;
         setPlayImg(img);
-        pauseAllIntervals();
+    } else if (button.play) {
+        if (gameStarted) {
+            playAllIntervals();
+        }
+        setPauseImg(img);
     }
 }
 
@@ -166,7 +163,7 @@ function togglePlayMode() {
  * @param {element} img - element of the image 
  */
 function setPauseImg(img) {
-    button.play = true;
+    button.play = false;
     img.src = 'img/9_intro_outro_screens/pause.png';
 }
 
@@ -176,7 +173,7 @@ function setPauseImg(img) {
  * @param {element} img - element of the image 
  */
 function setPlayImg(img) {
-    button.play = false;
+    button.play = true;
     img.src = 'img/9_intro_outro_screens/play.png';
 }
 
@@ -207,10 +204,7 @@ function proofDead() {
         }
 
         if (world.level.endboss[0].dead) {
-            clearInterval(proofing);
-            setTimeout(() => {
-                document.getElementById('win-screen').style.display = 'block';
-            }, 2500);
+            document.getElementById('win-screen').style.display = 'block';
             clearIntervals();
         }
     }
@@ -220,7 +214,7 @@ function proofDead() {
 /**
  * proofing if character or endboss is dead
  */
-proofing = setInterval(() => {
+deadProofing = setInterval(() => {
     proofDead();
 }, 1000 / 60);
 
@@ -238,7 +232,13 @@ function toggleFaq() {
         faq.style.display = 'none';
     }
     setClickable();
-    togglePlayMode();
+    gameMode();
+}
+
+function gameMode() {
+    if (gameStarted) {
+        togglePlayMode();
+    }
 }
 
 
@@ -259,7 +259,7 @@ function setClickable() {
  * stopping all setInterval of all character
  */
 function pauseAllIntervals() {
-    paused = true;
+    button.play = false;
     pauseInterval(world.level.enemies);
     pauseInterval(world.level.endboss);
     pauseInterval(world.character);
@@ -290,10 +290,13 @@ function pauseInterval(arr) {
 /**
  * start all animate functions
  */
-function startAllAnimation() {
-    world.character.animate();
-    world.level.endboss[0].animate();
-    startAnimation(world.level.enemies);
+function playAllIntervals() {
+    if (gameStarted) {
+        paused = false;
+        world.character.animate();
+        world.level.endboss[0].animate();
+        startAnimation(world.level.enemies);
+    }
 }
 
 
@@ -314,5 +317,5 @@ function startAnimation(arr) {
 function clearIntervals() {
     setTimeout(() => {
         for (let i = 0; i < 9999; i++) window.clearInterval(i);
-    }, 4000);
+    }, 5000);
 }
