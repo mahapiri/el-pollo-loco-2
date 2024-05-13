@@ -135,10 +135,12 @@ function togglePlayMode() {
     if (!button.play) {
         if (!gameStarted) {
             startGame();
+            setPauseImg(img);
         } else if (gameStarted) {
+            world.endbossStart = false;
             pauseAllIntervals();
+            setPlayImg(img);
         }
-        setPlayImg(img);
     } else if (button.play) {
         if (gameStarted) {
             playAllIntervals();
@@ -189,13 +191,17 @@ function toggleSoundMode() {
 function proofDead() {
     if (gameStarted) {
         if (world.character.dead) {
-            document.getElementById('game-over-screen').style.display = 'block';
-            clearIntervals();
+            setTimeout(() => {
+                document.getElementById('game-over-screen').style.display = 'block';
+                clearIntervals();
+            }, 3000);
         }
 
         if (world.level.endboss[0].dead) {
-            document.getElementById('win-screen').style.display = 'block';
-            clearIntervals();
+            setTimeout(() => {
+                document.getElementById('win-screen').style.display = 'block';
+                clearIntervals();
+            }, 3000);
         }
     }
 }
@@ -230,7 +236,7 @@ function toggleFaq() {
  * change the play/pause button if the game is started
  */
 function gameMode() {
-    if (gameStarted) {
+    if (gameStarted && !button.play) {
         togglePlayMode();
     }
 }
@@ -287,7 +293,7 @@ function pauseInterval(arr) {
 function playAllIntervals() {
     if (gameStarted) {
         world.character.animate();
-        world.level.endboss[0].animate();
+        startAnimation(world.level.endboss);
         startAnimation(world.level.enemies);
     }
 }
@@ -308,7 +314,5 @@ function startAnimation(arr) {
  * clear all intervals
  */
 function clearIntervals() {
-    setTimeout(() => {
-        for (let i = 0; i < 9999; i++) window.clearInterval(i);
-    }, 5000);
+    for (let i = 0; i < 9999; i++) window.clearInterval(i);
 }

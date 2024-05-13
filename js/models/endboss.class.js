@@ -1,11 +1,12 @@
 class Endboss extends MoveableObject {
-    x = 2300;
+    x = 1000;
     y = 70;
     width = 200;
     height = 380;
     energy = 100;
-    speedY = 1;
-    acceleration = 1;
+    speedY = 25;
+    speed = 0;
+    acceleration = 0.2;
     walking;
     hurting;
     angry;
@@ -67,7 +68,6 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.IMAGE_HURT);
         this.loadImages(this.IMAGE_DEAD);
-        this.speed = 0.75 + Math.random() * 0.5;
         this.animate();
     }
 
@@ -76,14 +76,7 @@ class Endboss extends MoveableObject {
      * animate the walking endboss
      */
     animate() {
-        this.loadImage('img/4_enemie_boss_chicken/1_walk/G2.png');
-
-        // this.setStoppableIntervals(() => {
-        //     this.playAnimation(this.IMAGE_WALK);
-        // }, 1000 / 3);
-    }
-
-    walk() {
+        this.stopIntervals();
         this.setStoppableIntervals(() => {
             this.moveLeft();
             this.playAnimation(this.IMAGE_WALK);
@@ -95,13 +88,23 @@ class Endboss extends MoveableObject {
      * animate the dead endboss
      */
     playDeadAnimation() {
-        this.y = 85;
         this.stopIntervals();
         this.setStoppableIntervals(() => {
             this.y += this.speedY
             this.speedY += this.acceleration;
-            this.playAnimation(this.IMAGE_DEAD);
+            this.deadAnimation(this.IMAGE_DEAD);
         }, 700);
+    }
+
+    deadAnimation(image) {
+        for (let i = 0; i < image.length; i++) {
+            let path = image[i];
+            this.img = this.imageCache[path];
+        }
+        this.loadImage('img/4_enemie_boss_chicken/5_dead/G26.png');
+        setTimeout(() => {
+            this.y = 800;
+        }, 1000);
     }
 
 

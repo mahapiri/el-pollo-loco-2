@@ -28,7 +28,7 @@ class EndbossBar extends Statusbar {
         setInterval(() => {
             if(typeof this.world !== 'undefined') {
                 this.x = this.world.level.endboss[0].x;
-                this.y = this.world.level.endboss[0].y - 15;
+                this.y = this.world.level.endboss[0].y + 360;
             }
         }, 10);
     }

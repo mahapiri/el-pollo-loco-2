@@ -26,7 +26,6 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        
     }
 
 
@@ -100,8 +99,8 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
-        mo.drawFrameRed(this.ctx);
+        // mo.drawFrame(this.ctx);
+        // mo.drawFrameRed(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -131,6 +130,7 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
+
 
     /**
      * play the background music + set the volume
@@ -162,10 +162,10 @@ class World {
     }
 
 
-    endbossWalking () {
+    endbossWalking() {
         if (this.character.x > 1790) {
-            if(!this.endbossStart) {
-                this.level.endboss[0].walk();
+            if (!this.endbossStart && !this.button.play) {
+                this.level.endboss[0].speed = 0.75 + Math.random() * 0.5;
                 this.endbossStart = true;
             }
         }
@@ -226,9 +226,7 @@ class World {
                 if (bottle.isColliding(endboss)) {
                     bottle.hit(bottle.x, bottle.y);
                     this.hitEndboss(j);
-                    setTimeout(() => {
-                        this.deleteObject(this.throwObject, i);
-                    }, 500);
+                    this.throwObject[i].loadImage('');
                 }
             });
         });
@@ -284,7 +282,7 @@ class World {
         if (this.level.bottleBar.percentage >= 100) {
             this.level.bottleBar.percentage = 100;
         } else {
-            this.level.bottleBar.percentage += 20;
+            this.level.bottleBar.percentage += 10;
             this.level.bottleBar.setPercentage(this.level.bottleBar.percentage);
         }
     }
@@ -308,10 +306,12 @@ class World {
             setTimeout(() => {
                 this.level.endboss[0].playAngryAnimation();
             }, 1500);
+            setTimeout(() => {
+                this.level.endboss[0].animate();
+            }, 2000);
         }
-        this.level.endboss[0].energy -= 10;
-        this.level.endbossBar.percentage -= 10;
-        this.level.endbossBar.setPercentage(this.level.endbossBar.percentage);
+        this.level.endboss[0].hit();
+        this.level.endbossBar.setPercentage(this.level.endboss[0].energy);
     }
 
 
