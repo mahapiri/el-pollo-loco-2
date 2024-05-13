@@ -117,7 +117,7 @@ window.addEventListener('fullscreenchange', () => {
     if (document.fullscreenElement) {
         fullscreenIsOn = true;
         canvas.style.border = '4px solid black';
-        canvas.style.minWidth = '90%';
+        canvas.style.minWidth = '100%';
     } else {
         fullscreenIsOn = false;
         canvas.style.border = '4px solid white';

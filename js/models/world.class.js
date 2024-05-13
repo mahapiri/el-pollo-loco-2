@@ -198,6 +198,7 @@ class World {
         this.level.endboss.forEach((endboss) => {
             if (this.character.isColliding(endboss)) {
                 this.character.hit();
+                this.character.x -= 40;
                 this.level.characterBar.setPercentage(this.character.energy);
             }
         });
@@ -214,7 +215,7 @@ class World {
                 return this.timepassed = true;
             }, 300);
             this.character.loadImage('img/2_character_pepe/2_walk/W-21.png');
-            this.level.bottleBar.percentage -= 20;
+            this.level.bottleBar.percentage -= 10;
             this.level.bottleBar.setPercentage(this.level.bottleBar.percentage);
             let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120, this.character.otherDirection);
             this.throwObject.push(bottle);
@@ -226,7 +227,10 @@ class World {
                 if (bottle.isColliding(endboss)) {
                     bottle.hit(bottle.x, bottle.y);
                     this.hitEndboss(j);
-                    this.throwObject[i].loadImage('');
+                    setTimeout(() => {
+                        this.throwObject[i].loadImage('');
+                    }, 500);
+
                 }
             });
         });
