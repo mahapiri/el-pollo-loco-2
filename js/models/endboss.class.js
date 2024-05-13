@@ -76,9 +76,17 @@ class Endboss extends MoveableObject {
      * animate the walking endboss
      */
     animate() {
+        this.loadImage('img/4_enemie_boss_chicken/1_walk/G2.png');
+
+        // this.setStoppableIntervals(() => {
+        //     this.playAnimation(this.IMAGE_WALK);
+        // }, 1000 / 3);
+    }
+
+    walk() {
         this.setStoppableIntervals(() => {
-            this.playAnimation(this.IMAGE_WALK);
             this.moveLeft();
+            this.playAnimation(this.IMAGE_WALK);
         }, 1000 / 3);
     }
 

@@ -3,8 +3,10 @@ class World {
     canvas;
     keyboard;
     button;
+    gameStarted;
     camera_x = 0;
     timepassed = -1100;
+    endbossStart = false;
     level = level1;
     character = new Character();
     throwObject = [];
@@ -15,14 +17,16 @@ class World {
      * draw all objects to the world
      * @param {string} canvas - get the element by id of canvas in game.js
      */
-    constructor(canvas, keyboard, button) {
+    constructor(canvas, keyboard, button, gameStarted) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.button = button;
+        this.gameStarted = gameStarted;
         this.draw();
         this.setWorld();
         this.run();
+        
     }
 
 
@@ -148,12 +152,23 @@ class World {
      */
     run() {
         setInterval(() => {
+            this.endbossWalking();
             this.checkCollisionsEnemies();
             this.checkCollisionsEndboss();
             this.checkThrowObjects();
             this.collectObjects(this.level.coin, this.level.coinBar);
             this.collectObjects(this.level.bottle, this.level.bottleBar);
         }, 1);
+    }
+
+
+    endbossWalking () {
+        if (this.character.x > 1790) {
+            if(!this.endbossStart) {
+                this.level.endboss[0].walk();
+                this.endbossStart = true;
+            }
+        }
     }
 
 

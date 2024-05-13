@@ -10,7 +10,7 @@ class MoveableObject extends DrawableObject {
     moveAnimation;
     moveImg;
     stoppableIntervals = [];
-
+    
 
     /**
      * when characte is in the air, then character will automatically come down
@@ -128,6 +128,7 @@ class MoveableObject extends DrawableObject {
     setStoppableIntervals(fn, time) {
         let id = setInterval(fn, time);
         this.stoppableIntervals.push(id);
+        return id;
     }
 
 

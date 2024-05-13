@@ -6,7 +6,6 @@ let button = new Button();
 let gameStarted = false;
 let fullscreenIsOn = false;
 let faqIsOn = false;
-let paused = false;
 let deadProofing;
 
 
@@ -15,31 +14,22 @@ let deadProofing;
  */
 function init() {
     canvas = document.getElementById('canvas');
-    showIntro();
-}
-
-
-/**
- * show the Intro to start the game
- */
-function showIntro() {
-    if (!gameStarted) {
-        intro = new Intro(canvas, keyboard);
-    }
+    world = new World(canvas, keyboard, button, gameStarted);
+    pauseAllIntervals();
 }
 
 
 /**
  * start the game when pressing the play button
  */
-async function startGame() {
+function startGame() {
     if (!gameStarted) {
         button.play = true;
+        gameStarted = true;
+        document.querySelector('.intro-img').style.display = 'none';
         document.querySelector('.start-btn').style.display = 'none';
-        world = await new World(canvas, keyboard, button);
     }
     togglePlayMode();
-    gameStarted = true;
 }
 
 
@@ -235,6 +225,10 @@ function toggleFaq() {
     gameMode();
 }
 
+
+/**
+ * change the play/pause button if the game is started
+ */
 function gameMode() {
     if (gameStarted) {
         togglePlayMode();
@@ -292,7 +286,6 @@ function pauseInterval(arr) {
  */
 function playAllIntervals() {
     if (gameStarted) {
-        paused = false;
         world.character.animate();
         world.level.endboss[0].animate();
         startAnimation(world.level.enemies);
