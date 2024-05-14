@@ -118,6 +118,17 @@ window.addEventListener("keyup", (key) => {
 })
 
 
+// documents.getElementById('btnLeft').addEventListener('touchstart', (btn) => {
+//     e.preventDefault();
+//     keyboard.LEFT = true;
+// })
+
+// documents.getElementById('btnLeft').addEventListener('touchend', (btn) => {
+//     e.preventDefault();
+//     keyboard.LEFT = false;
+// })
+
+
 /**
  * toggle fullscreen mode
  */
