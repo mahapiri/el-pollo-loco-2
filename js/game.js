@@ -11,13 +11,39 @@ let faqIsOn = false;
 let deadProofing;
 
 
+window.addEventListener('load', () => {
+    canvas = document.getElementById('canvas');
+    getPosition();
+    resizeControlpanel();
+});
+
+window.addEventListener('resize', getPosition);
+
+function getPosition() {
+    if (canvas) {
+        canvasWidth = canvas.offsetWidth;
+        canvasHeight = canvas.offsetHeight;
+        resizeControlpanel(); // Hier direkt aufrufen, kein setInterval notwendig
+    }
+}
+
+
 /**
  * Initialize the 2D Game
  */
 function init() {
-    canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard, button, gameStarted);
-    pauseAllIntervals();
+    try {
+        if (!canvas) {
+            throw new Error('Canvas element not found');
+        }
+        world = new World(canvas, keyboard, button, gameStarted);
+        pauseAllIntervals();
+        canvasWidth = canvas.offsetWidth;
+        canvasHeight = canvas.offsetHeight;
+    } catch (error) {
+        console.error('Error during initialization:', error);
+        init();
+    }
 }
 
 
@@ -130,16 +156,6 @@ window.addEventListener('fullscreenchange', () => {
         canvas.style.minWidth = 'unset';
     }
 })
-
-
-/**
- * get the actual size of the canvas element
- */
-window.onresize = function () {
-    canvasWidth = canvas.offsetWidth;
-    canvasHeight = canvas.offsetHeight;
-    setInterval(() => resizeControlpanel(), 1);
-};
 
 
 /**
