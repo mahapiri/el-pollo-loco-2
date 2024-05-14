@@ -20,11 +20,14 @@ window.addEventListener('load', () => {
 window.addEventListener('resize', getPosition);
 
 function getPosition() {
-    if (canvas) {
-        canvasWidth = canvas.offsetWidth;
-        canvasHeight = canvas.offsetHeight;
-        resizeControlpanel(); // Hier direkt aufrufen, kein setInterval notwendig
-    }
+    setInterval(() => {
+        if (canvas) {
+            canvasWidth = canvas.offsetWidth;
+            canvasHeight = canvas.offsetHeight;
+            resizeControlpanel();
+        }
+    }, 1);
+
 }
 
 
@@ -142,6 +145,7 @@ function toggleFullscreen() {
         img.src = 'img/9_intro_outro_screens/fullscreen.png';
         document.exitFullscreen();
     }
+    getPosition();
 }
 
 
@@ -153,11 +157,14 @@ window.addEventListener('fullscreenchange', () => {
         fullscreenIsOn = true;
         // canvas.style.border = '8px solid black';
         canvas.style.minWidth = '100%';
+        canvas.style.maxHeight = '100vh';
     } else {
         fullscreenIsOn = false;
         // canvas.style.border = '8px solid white';
         canvas.style.minWidth = 'unset';
+        canvas.style.maxHeight = 'unset';
     }
+    getPosition();
 })
 
 
@@ -167,23 +174,29 @@ window.addEventListener('fullscreenchange', () => {
 function resizeControlpanel() {
     let controlPanel = document.querySelector('.control-panel');
     let introImg = document.querySelector('.intro-img');
-    let gameWinScreen = document.querySelector('.game-over-screen');
+    let overScreen = document.getElementById('game-over-screen');
+    let winScreen = document.getElementById('win-screen');
     let title = document.getElementById('title');
     let legal = document.getElementById('legal-div');
+    // let mainScreen = document.getElementById('main-screen');
 
     controlPanel.style.width = (canvasWidth) + 'px';
     controlPanel.style.height = (canvasHeight) + 'px';
     introImg.style.width = (canvasWidth) + 'px';
     introImg.style.height = (canvasHeight) + 'px';
-    gameWinScreen.style.width = (canvasWidth) + 'px';
-    gameWinScreen.style.height = (canvasHeight) + 'px';
-    if (canvasWidth < 720 || canvasHeight < 480) {
-        title.style.display = 'none';
-        legal.style.display = 'none';
-    } else {
-        title.style.display = 'block';
-        legal.style.display = 'block';
-    }
+    overScreen.style.width = (canvasWidth) + 'px';
+    overScreen.style.height = (canvasHeight) + 'px';
+    winScreen.style.width = (canvasWidth) + 'px';
+    winScreen.style.height = (canvasHeight) + 'px';
+    // mainScreen.style.width = (canvasWidth) + 'px';
+    // mainScreen.style.height = (canvasHeight) + 'px';
+    // if (canvasWidth < 720 || canvasHeight < 480) {
+    //     title.style.display = 'none';
+    //     legal.style.display = 'none';
+    // } else {
+    //     title.style.display = 'block';
+    //     legal.style.display = 'block';
+    // }
 }
 
 

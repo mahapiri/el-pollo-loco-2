@@ -90,8 +90,6 @@ canvas {
 
 .buttons img {
     cursor: pointer;
-    width: 40px;
-    height: 40px;
 }
 
 .buttons img:hover {
@@ -118,6 +116,8 @@ canvas {
 }
 
 .start-btn {
+    width: 40px;
+    height: 40px;
     top: 44px;
 }
 
@@ -148,6 +148,11 @@ canvas {
     margin-right: 8px;
 }
 
+.iconBtn {
+    width: 40px;
+    height: 40px;
+}
+
 .main-screen {
     position: relative;
     width: 100%;
@@ -160,6 +165,7 @@ canvas {
 #faq {
     display: block;
     position: absolute;
+    overflow: scroll;
     width: 660px;
     height: 400px;
     z-index: 2;
@@ -234,7 +240,7 @@ a {
 }
 
 /* Smartphone */
-@media only screen and (max-width: 720px) {
+@media screen and (max-width: 720px) {
     canvas {
         width: 100%;
     }
@@ -243,15 +249,84 @@ a {
         width: 80%;
         height: 80%;
     }
+
+    #title {
+        font-size: 44px;
+    }
+
+    .legal-div a {
+        font-size: 16px;
+    }
+
+    .gaming-btn img {
+        width: 88px;
+        height: 32px;
+    }
+
+    .start-btn {
+        top: 22px;
+    }
+
+    .iconBtn {
+        width: 22px;
+        height: 22px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    table {
+        font-size: 22px
+    }
+
+    .close-icon {
+        font-size: 22px;
+    }
 }
 
 /* Smartphone */
-@media only screen and (max-height: 480px) {
+@media screen and (max-height: 480px) {
     canvas {
         height: 100vh;
     }
 
     #faq {
         height: 90vh;
+    }
+
+    #title {
+        display: none;
+    }
+
+    .legal-div {
+        display: none;
+    }
+}
+
+/* Smartphone */
+@media screen and (max-height: 625px) {
+    #faq {
+        height: 90vh;
+    }
+
+    #title {
+        display: none;
+    }
+
+    .legal-div {
+        display: none;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    table {
+        font-size: 22px
+    }
+
+    .close-icon {
+        font-size: 22px;
     }
 }
