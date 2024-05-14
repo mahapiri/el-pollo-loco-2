@@ -1,4 +1,6 @@
 let canvas;
+let canvasWidth;
+let canvasHeight;
 let world;
 let intro;
 let keyboard = new Keyboard();
@@ -110,20 +112,45 @@ function toggleFullscreen() {
 }
 
 
+
+
+
 /**
  * check if game is on fullscreen or not to change the border color
  */
 window.addEventListener('fullscreenchange', () => {
     if (document.fullscreenElement) {
         fullscreenIsOn = true;
-        canvas.style.border = '4px solid black';
+        canvas.style.border = '8px solid black';
         canvas.style.minWidth = '100%';
     } else {
         fullscreenIsOn = false;
-        canvas.style.border = '4px solid white';
+        canvas.style.border = '8px solid white';
         canvas.style.minWidth = 'unset';
     }
 })
+
+
+window.onresize = function () {
+    canvasWidth = canvas.offsetWidth;
+    canvasHeight = canvas.offsetHeight;
+    setInterval(() => resizeControlpanel(), 1);
+    console.log(canvasWidth);
+};
+
+function resizeControlpanel() {
+    let controlPanel = document.querySelector('.control-panel');
+    let introImg = document.querySelector('.intro-img');
+    let gameWinScreen = document.querySelector('.game-over-screen');
+
+    controlPanel.style.width = (canvas.offsetWidth - 16) + 'px';
+    controlPanel.style.height = (canvas.offsetHeight - 16) + 'px';
+    introImg.style.width = (canvas.offsetWidth - 16) + 'px';
+    introImg.style.height = (canvas.offsetHeight - 16) + 'px';
+    gameWinScreen.style.width = (canvas.offsetWidth - 16) + 'px';
+    gameWinScreen.style.height = (canvas.offsetHeight - 16) + 'px';
+}
+
 
 
 /**
