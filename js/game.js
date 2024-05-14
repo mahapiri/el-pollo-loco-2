@@ -34,6 +34,10 @@ function startGame() {
     togglePlayMode();
 }
 
+function restartGame () {
+    location.reload();
+}
+
 
 /**
  * put true if key press
@@ -112,9 +116,6 @@ function toggleFullscreen() {
 }
 
 
-
-
-
 /**
  * check if game is on fullscreen or not to change the border color
  */
@@ -131,6 +132,9 @@ window.addEventListener('fullscreenchange', () => {
 })
 
 
+/**
+ * get the actual size of the canvas element
+ */
 window.onresize = function () {
     canvasWidth = canvas.offsetWidth;
     canvasHeight = canvas.offsetHeight;
@@ -138,6 +142,10 @@ window.onresize = function () {
     console.log(canvasWidth);
 };
 
+
+/**
+ * make the control panel responsive
+ */
 function resizeControlpanel() {
     let controlPanel = document.querySelector('.control-panel');
     let introImg = document.querySelector('.intro-img');
@@ -219,14 +227,16 @@ function proofDead() {
     if (gameStarted) {
         if (world.character.dead) {
             setTimeout(() => {
-                document.getElementById('game-over-screen').style.display = 'block';
+                document.getElementById('game-over-screen').style.display = 'flex';
+                document.querySelector('.try-btn').style.display = 'flex';
                 clearIntervals();
             }, 3000);
         }
 
         if (world.level.endboss[0].dead) {
             setTimeout(() => {
-                document.getElementById('win-screen').style.display = 'block';
+                document.getElementById('win-screen').style.display = 'flex';
+                document.querySelector('.replay-btn').style.display = 'flex';
                 clearIntervals();
             }, 3000);
         }

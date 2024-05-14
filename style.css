@@ -104,17 +104,32 @@ canvas {
     user-select: none;
 }
 
-.start-btn {
+.gaming-btn {
     display: flex;
     justify-content: center;
     user-select: none;
     position: absolute;
-    top: 32px;
 }
 
-.start-btn img {
-    width: 240px;
-    height: 120px;
+.gaming-btn img {
+    width: 160px;
+    height: 60px;
+}
+
+.start-btn {
+    top: 44px;
+}
+
+.replay-btn {
+    display: none;
+    bottom: 150px;
+    z-index: 1;
+}
+
+.try-btn {
+    display: none;
+    bottom: 150px;
+    z-index: 1;
 }
 
 .fullscreen-btn {
