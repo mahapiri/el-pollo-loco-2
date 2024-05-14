@@ -122,11 +122,11 @@ function toggleFullscreen() {
 window.addEventListener('fullscreenchange', () => {
     if (document.fullscreenElement) {
         fullscreenIsOn = true;
-        canvas.style.border = '8px solid black';
+        // canvas.style.border = '8px solid black';
         canvas.style.minWidth = '100%';
     } else {
         fullscreenIsOn = false;
-        canvas.style.border = '8px solid white';
+        // canvas.style.border = '8px solid white';
         canvas.style.minWidth = 'unset';
     }
 })
@@ -139,7 +139,6 @@ window.onresize = function () {
     canvasWidth = canvas.offsetWidth;
     canvasHeight = canvas.offsetHeight;
     setInterval(() => resizeControlpanel(), 1);
-    console.log(canvasWidth);
 };
 
 
@@ -150,13 +149,22 @@ function resizeControlpanel() {
     let controlPanel = document.querySelector('.control-panel');
     let introImg = document.querySelector('.intro-img');
     let gameWinScreen = document.querySelector('.game-over-screen');
+    let title = document.getElementById('title');
+    let legal = document.getElementById('legal-div');
 
-    controlPanel.style.width = (canvas.offsetWidth - 16) + 'px';
-    controlPanel.style.height = (canvas.offsetHeight - 16) + 'px';
-    introImg.style.width = (canvas.offsetWidth - 16) + 'px';
-    introImg.style.height = (canvas.offsetHeight - 16) + 'px';
-    gameWinScreen.style.width = (canvas.offsetWidth - 16) + 'px';
-    gameWinScreen.style.height = (canvas.offsetHeight - 16) + 'px';
+    controlPanel.style.width = (canvasWidth) + 'px';
+    controlPanel.style.height = (canvasHeight) + 'px';
+    introImg.style.width = (canvasWidth) + 'px';
+    introImg.style.height = (canvasHeight) + 'px';
+    gameWinScreen.style.width = (canvasWidth) + 'px';
+    gameWinScreen.style.height = (canvasHeight) + 'px';
+    if (canvasWidth < 720 || canvasHeight < 480) {
+        title.style.display = 'none';
+        legal.style.display = 'none';
+    } else {
+        title.style.display = 'block';
+        legal.style.display = 'block';
+    }
 }
 
 
