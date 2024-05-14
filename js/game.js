@@ -32,18 +32,10 @@ function getPosition() {
  * Initialize the 2D Game
  */
 function init() {
-    try {
-        if (!canvas) {
-            throw new Error('Canvas element not found');
-        }
         world = new World(canvas, keyboard, button, gameStarted);
         pauseAllIntervals();
         canvasWidth = canvas.offsetWidth;
         canvasHeight = canvas.offsetHeight;
-    } catch (error) {
-        console.error('Error during initialization:', error);
-        init();
-    }
 }
 
 
