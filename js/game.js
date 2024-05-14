@@ -121,15 +121,50 @@ window.addEventListener("keyup", (key) => {
 })
 
 
-// documents.getElementById('btnLeft').addEventListener('touchstart', (btn) => {
-//     e.preventDefault();
-//     keyboard.LEFT = true;
-// })
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    });
 
-// documents.getElementById('btnLeft').addEventListener('touchend', (btn) => {
-//     e.preventDefault();
-//     keyboard.LEFT = false;
-// })
+    document.getElementById('btnRight').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    });
+
+    document.getElementById('btnUp').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    });
+
+    document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.D = true;
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('btnLeft').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    });
+
+    document.getElementById('btnRight').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+
+    document.getElementById('btnUp').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    });
+
+    document.getElementById('btnThrow').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.D = false;
+    });
+});
 
 
 /**
@@ -158,6 +193,8 @@ window.addEventListener('fullscreenchange', () => {
         // canvas.style.border = '8px solid black';
         canvas.style.minWidth = '100%';
         canvas.style.maxHeight = '100vh';
+        // document.getElementById('fullscreen-img').style.display = 'none';
+
     } else {
         fullscreenIsOn = false;
         // canvas.style.border = '8px solid white';
