@@ -12,7 +12,7 @@ let deadProofing;
 
 function isTouchDevice() {
     return window.matchMedia('(pointer: coarse)').matches;
-  }
+}
 
 
 window.addEventListener('load', () => {
@@ -82,10 +82,10 @@ function resizeControlpanel() {
  * Initialize the 2D Game
  */
 function init() {
-        world = new World(canvas, keyboard, button, gameStarted);
-        pauseAllIntervals();
-        canvasWidth = canvas.offsetWidth;
-        canvasHeight = canvas.offsetHeight;
+    world = new World(canvas, keyboard, button, gameStarted);
+    pauseAllIntervals();
+    canvasWidth = canvas.offsetWidth;
+    canvasHeight = canvas.offsetHeight;
 }
 
 
@@ -102,7 +102,7 @@ function startGame() {
     togglePlayMode();
 }
 
-function restartGame () {
+function restartGame() {
     location.reload();
 }
 

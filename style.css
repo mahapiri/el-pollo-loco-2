@@ -287,10 +287,6 @@ a {
         height: 32px;
     }
 
-    .start-btn {
-        top: 22px;
-    }
-
     .iconBtn {
         width: 22px;
         height: 22px;
@@ -306,6 +302,13 @@ a {
 
     .close-icon {
         font-size: 22px;
+    }
+}
+
+/* Smartphone */
+@media screen and (max-width: 550px) {
+    .start-btn {
+        top: 32px;
     }
 }
 
