@@ -88,20 +88,16 @@ class Endboss extends MoveableObject {
      * animate the dead endboss
      */
     playDeadAnimation() {
-        this.stopIntervals();
-        this.setStoppableIntervals(() => {
             this.y += this.speedY
             this.speedY += this.acceleration;
-            this.deadAnimation(this.IMAGE_DEAD);
-        }, 700);
+            this.oneTimeAnimation(this.IMAGE_DEAD, 'img/4_enemie_boss_chicken/5_dead/G26.png');
+            this.setY();
     }
 
-    deadAnimation(image) {
-        for (let i = 0; i < image.length; i++) {
-            let path = image[i];
-            this.img = this.imageCache[path];
-        }
-        this.loadImage('img/4_enemie_boss_chicken/5_dead/G26.png');
+    /**
+     * set the y-position at 800
+     */
+    setY() {
         setTimeout(() => {
             this.y = 800;
         }, 1000);
@@ -111,11 +107,11 @@ class Endboss extends MoveableObject {
     /**
      * animate the hurt endboss
      */
-    playHurtAnimation() {
+    playHurtAnimation(i) {
         this.stopIntervals();
-        this.setStoppableIntervals(() => {
-            this.playAnimation(this.IMAGE_HURT);
-        }, 1000 / 10);
+        this.playAnimation(this.IMAGE_HURT);
+        i++;
+        return i;
     }
 
 
@@ -124,8 +120,15 @@ class Endboss extends MoveableObject {
      */
     playAngryAnimation() {
         this.stopIntervals();
-        this.setStoppableIntervals(() => {
-            this.playAnimation(this.IMAGE_ANGRY);
-        }, 1000 / 2);
+        this.playAnimation(this.IMAGE_ANGRY);
     }
+
+    /**
+     * animate the angry endboss
+     */
+    playAttackAnimation() {
+        this.stopIntervals();
+        this.playAnimation(this.IMAGE_ATTACK);
+    }
+
 }

@@ -129,7 +129,7 @@ class Character extends MoveableObject {
         this.setStoppableIntervals(() => {
 
             if (this.isDead()) {
-                this.playAnimation(this.IMAGE_DEAD);
+                this.oneTimeAnimation(this.IMAGE_DEAD, 'img/2_character_pepe/5_dead/D-56.png');
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
                 this.dead = true;
@@ -147,7 +147,7 @@ class Character extends MoveableObject {
                     this.nothingToDo();
                 }
             }
-        }, 1000 / 15);
+        }, 1000 / 10);
     }
 
 

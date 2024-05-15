@@ -98,4 +98,17 @@ class DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+
+    
+    /**
+     * play all images to create a anmimation but only once time
+     * @param {path} image path
+     */
+    oneTimeAnimation(image, endImg) {
+        for (let i = 0; i < image.length; i++) {
+            let path = image[i];
+            this.img = this.imageCache[path];
+        }
+        this.loadImage(endImg);
+    }
 }

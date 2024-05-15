@@ -340,7 +340,7 @@ function proofDead() {
  */
 deadProofing = setInterval(() => {
     proofDead();
-}, 1000 / 60);
+}, 1500);
 
 
 /**
