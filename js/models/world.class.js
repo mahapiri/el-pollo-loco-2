@@ -58,6 +58,7 @@ class World {
         this.addToMap(this.level.bottleBar);
         this.addToMap(this.level.characterBar);
         this.addToMap(this.level.coinBar);
+        this.addToMap(this.level.endbossBar);
         this.ctx.translate(this.camera_x, 0);
 
 
@@ -66,7 +67,6 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
-        this.addToMap(this.level.endbossBar);
         this.addObjectsToMap(this.throwObject);
 
 
@@ -167,6 +167,7 @@ class World {
             if (!this.endbossStart && !this.button.play) {
                 this.level.endboss[0].speed = 0.75 + Math.random() * 0.5;
                 this.endbossStart = true;
+                this.level.endbossBar.y = 60;
             }
         }
     }

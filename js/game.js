@@ -60,10 +60,10 @@ function resizeControlpanel() {
     winScreen.style.width = (canvasWidth) + 'px';
     winScreen.style.height = (canvasHeight) + 'px';
     if (isTouchDevice()) {
-        fullscreen.style.display = 'none';
+        // fullscreen.style.display = 'none';
         touchDashboard.style.display = 'flex';
     } else {
-        fullscreen.style.display = 'block';
+        // fullscreen.style.display = 'block';
         touchDashboard.style.display = 'none';
     }
     // mainScreen.style.width = (canvasWidth) + 'px';
