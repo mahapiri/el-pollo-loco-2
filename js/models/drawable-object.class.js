@@ -14,7 +14,6 @@ class DrawableObject {
     }
 
 
-
     /**
      * drawing the objects
      * @param {*} ctx - canvas

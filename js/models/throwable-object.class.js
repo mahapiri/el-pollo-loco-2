@@ -48,16 +48,16 @@ class ThrowableObject extends MoveableObject {
      * validate which direction and then throw the object
      */
     throw() {
-        this.speedY =  12;
+        this.speedY =  6;
         this.applyGravity();
         this.throwInterval = setInterval(() => {
             if(this.otherDirection) {
-                this.x -= 25;
+                this.x -= 80;
             } else {
-                this.x += 25; 
+                this.x += 80; 
             }
             this.playAnimation(this.BOTTLE_ROTATION);
-        }, 35);
+        }, 50);
     }
 
 
@@ -69,7 +69,7 @@ class ThrowableObject extends MoveableObject {
     hit(x, y) {
         clearInterval(this.throwInterval);
         clearInterval(this.gravity);
-        this.x = x -5;
+        this.x = x;
         this.y = y;
         this.speedY = 0;
         this.speed = 0;

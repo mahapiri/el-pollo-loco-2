@@ -5,12 +5,14 @@ class World {
     button;
     gameStarted;
     camera_x = 0;
-    timepassed = -1100;
-    endbossStart = false;
+    timepassed = true;
+    firstContact = false;
     level = level1;
     character = new Character();
     throwObject = [];
     i = 0;
+    distance;
+    hit = false;
 
 
     /**
@@ -35,7 +37,6 @@ class World {
      */
     setWorld() {
         this.character.world = this;
-        this.level.endbossBar.world = this;
     }
 
 
@@ -153,22 +154,32 @@ class World {
      */
     run() {
         setInterval(() => {
+            this.distance = Math.abs(this.level.endboss[0].x - this.character.x);
             this.endbossWalking();
             this.checkCollisionsEnemies();
             this.checkCollisionsEndboss();
             this.checkThrowObjects();
             this.collectObjects(this.level.coin, this.level.coinBar);
             this.collectObjects(this.level.bottle, this.level.bottleBar);
+            if(this.character.x < 0) {
+                this.character.x = 0;
+            }
+            if(this.level.endboss[0].x < 300) {
+                this.level.endboss[0].otherDirection = true;
+            } else if (this.level.endboss[0].x > 2300) {
+                this.level.endboss[0].otherDirection = false;
+            }
         }, 1);
     }
 
 
     endbossWalking() {
-        if (this.character.x > 1790) {
-            if (!this.endbossStart && !this.button.play) {
+        if (this.character.x > 200) {
+            if (!this.firstContact && !this.button.play) {
                 this.level.endboss[0].speed = 0.75 + Math.random() * 0.5;
-                this.endbossStart = true;
+                this.firstContact = true;
                 this.level.endbossBar.y = 60;
+                this.endbossFight();
             }
         }
     }
@@ -186,6 +197,7 @@ class World {
                     this.deleteObject(this.level.enemies, i)
                 }, 500);
             } else if (this.character.isColliding(enemy) && !this.character.isCollidingUp(enemy)) {
+                this.character.x -= 10;
                 this.character.hit();
                 this.level.characterBar.setPercentage(this.character.energy);
             }
@@ -226,17 +238,14 @@ class World {
 
         this.throwObject.forEach((bottle, i) => {
             this.level.endboss.forEach((endboss, j) => {
-                if (bottle.isColliding(endboss)) {
+                if (bottle.isColliding(endboss) && !this.hit) {
+                    this.hit = true;
                     bottle.hit(bottle.x, bottle.y);
                     this.hitEndboss(j);
-                    // setTimeout(() => {
-                    //     this.throwObject[i].loadImage('');
-                    // }, 500);
                     setTimeout(() => {
                         this.deleteObject(this.throwObject, i);
-
-                    }, 500);
-
+                        this.hit = false;
+                    }, 250);
                 }
             });
         });
@@ -300,33 +309,54 @@ class World {
 
     /**
      * get the right function when the endboss was hitting
-     * @param {*} j - position of the array 
+     * @param {array} j - position of the array 
      */
     hitEndboss(j) {
         if (this.level.endbossBar.percentage <= 0) {
-            this.level.endboss[0].dead = true;
-            // this.level.endboss[0].energy = 0;
-            this.level.endboss[0].playDeadAnimation();
-            // setTimeout(() => {
-            //     this.deleteObject(this.level.endboss, j);
-            //     this.deleteObject(this.level.endbossBar);
-            // }, 4000);
-        } else if (this.level.endbossBar.percentage > 0 && !this.level.endboss[0].dead) {
-            this.level.endboss[0].playHurtAnimation(this.i);
-            console.log('hurt')
-            this.i = this.level.endboss[0].playHurtAnimation(this.i);
-            if (this.i < 4) {
-                this.level.endboss[0].playAngryAnimation();
-                console.log('angry')
+            this.endbossIsDead();
+        }
+        // else if (this.level.endbossBar.percentage > 0 && !this.level.endboss[0].dead) {
+        //     this.endbossFight();
+        // }
+        this.setEndbossHealth();
+    }
+
+
+    endbossFight() {
+        setInterval(() => {
+            this.level.endboss[0].playHurtAnimation();
+            if (this.distance > 300) {
+                this.level.endboss[0].animate();
+            } 
+            
+            if (this.distance < 150) {
+                if (this.i < 3) {
+                    this.level.endboss[0].playAttackAnimation();
+                    this.i++;
+                    this.level.endboss[0].animate();
+                } else {
+                    this.i = 0;
+                }
+
             }
 
-            if(this.i > 3) {
-                console.log('attack')
-                this.level.endboss[0].playAttackAnimation();
+            if (this.distance < 150) {
                 this.level.endboss[0].animate();
-                this.i = 0;
             }
-        }
+        }, 300);
+    }
+
+    // this.level.endboss[0].playHurtAnimation();
+    // this.level.endboss[0].playAngryAnimation();
+
+    endbossIsDead() {
+        this.level.endboss[0].dead = true;
+        this.level.endboss[0].isDead();
+        this.level.endboss[0].playDeadAnimation();
+    }
+
+
+    setEndbossHealth() {
         this.level.endboss[0].hit();
         this.level.endbossBar.setPercentage(this.level.endboss[0].energy);
     }

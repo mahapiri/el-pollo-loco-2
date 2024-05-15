@@ -91,11 +91,13 @@ class MoveableObject extends DrawableObject {
      * reduce the energy level by hitting
      */
     hit() {
-        this.energy -= 5;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+        if (!this.isHurt()) {
+            this.energy -= 10;
+            if (this.energy < 0) {
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
         }
     }
 

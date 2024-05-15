@@ -1,5 +1,4 @@
 class EndbossBar extends Statusbar {
-    world;
     percentage = 100;
     x = 510;
     y = -60;
@@ -16,19 +15,5 @@ class EndbossBar extends Statusbar {
     constructor() {
         super().loadImages(this.IMAGE);
         this.setPercentage(this.percentage);
-        // this.setPosition();
-
     }
-
-    // /**
-    //  * set the bar at the position of the endboss
-    //  */
-    // setPosition() {
-    //     setInterval(() => {
-    //         if(typeof this.world !== 'undefined') {
-    //             this.x = this.world.level.endboss[0].x;
-    //             this.y = this.world.level.endboss[0].y + 360;
-    //         }
-    //     }, 10);
-    // }
 }
