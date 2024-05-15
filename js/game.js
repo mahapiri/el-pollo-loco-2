@@ -16,6 +16,7 @@ function isTouchDevice() {
 
 
 window.addEventListener('load', () => {
+    document.getElementById('loader').style.display = 'none';
     canvas = document.getElementById('canvas');
     getPosition();
     isTouchDevice();

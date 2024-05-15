@@ -8,6 +8,16 @@
     src: url(fonts/Boogaloo-Regular.ttf);
 }
 
+.loader {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    z-index: 10;
+}
+
 body {
     font-family: 'Boogaloo', Arial, Helvetica, sans-serif;
     margin: 0;

@@ -229,12 +229,13 @@ class World {
                 if (bottle.isColliding(endboss)) {
                     bottle.hit(bottle.x, bottle.y);
                     this.hitEndboss(j);
-                    setTimeout(() => {
-                        this.throwObject[i].loadImage('');
-                    }, 500);
+                    // setTimeout(() => {
+                    //     this.throwObject[i].loadImage('');
+                    // }, 500);
                     setTimeout(() => {
                         this.deleteObject(this.throwObject, i);
-                    }, 1500);
+
+                    }, 500);
 
                 }
             });
@@ -312,13 +313,17 @@ class World {
             // }, 4000);
         } else if (this.level.endbossBar.percentage > 0 && !this.level.endboss[0].dead) {
             this.level.endboss[0].playHurtAnimation(this.i);
+            console.log('hurt')
             this.i = this.level.endboss[0].playHurtAnimation(this.i);
             if (this.i < 4) {
                 this.level.endboss[0].playAngryAnimation();
+                console.log('angry')
             }
 
             if(this.i > 3) {
+                console.log('attack')
                 this.level.endboss[0].playAttackAnimation();
+                this.level.endboss[0].animate();
                 this.i = 0;
             }
         }
