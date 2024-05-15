@@ -10,10 +10,15 @@ let fullscreenIsOn = false;
 let faqIsOn = false;
 let deadProofing;
 
+function isTouchDevice() {
+    return window.matchMedia('(pointer: coarse)').matches;
+  }
+
 
 window.addEventListener('load', () => {
     canvas = document.getElementById('canvas');
     getPosition();
+    isTouchDevice();
     resizeControlpanel();
 });
 
@@ -24,10 +29,52 @@ function getPosition() {
         if (canvas) {
             canvasWidth = canvas.offsetWidth;
             canvasHeight = canvas.offsetHeight;
+            isTouchDevice();
             resizeControlpanel();
         }
     }, 1);
 
+}
+
+
+/**
+ * make the control panel responsive
+ */
+function resizeControlpanel() {
+    let controlPanel = document.querySelector('.control-panel');
+    let touchDashboard = document.querySelector('.touch-dashboard');
+    let introImg = document.querySelector('.intro-img');
+    let overScreen = document.getElementById('game-over-screen');
+    let winScreen = document.getElementById('win-screen');
+    let title = document.getElementById('title');
+    let legal = document.getElementById('legal-div');
+    let fullscreen = document.getElementById('fullscreen-img');
+    // let mainScreen = document.getElementById('main-screen');
+
+    controlPanel.style.width = (canvasWidth) + 'px';
+    controlPanel.style.height = (canvasHeight) + 'px';
+    introImg.style.width = (canvasWidth) + 'px';
+    introImg.style.height = (canvasHeight) + 'px';
+    overScreen.style.width = (canvasWidth) + 'px';
+    overScreen.style.height = (canvasHeight) + 'px';
+    winScreen.style.width = (canvasWidth) + 'px';
+    winScreen.style.height = (canvasHeight) + 'px';
+    if (isTouchDevice()) {
+        fullscreen.style.display = 'none';
+        touchDashboard.style.display = 'flex';
+    } else {
+        fullscreen.style.display = 'block';
+        touchDashboard.style.display = 'none';
+    }
+    // mainScreen.style.width = (canvasWidth) + 'px';
+    // mainScreen.style.height = (canvasHeight) + 'px';
+    // if (canvasWidth < 720 || canvasHeight < 480) {
+    //     title.style.display = 'none';
+    //     legal.style.display = 'none';
+    // } else {
+    //     title.style.display = 'block';
+    //     legal.style.display = 'block';
+    // }
 }
 
 
@@ -203,39 +250,6 @@ window.addEventListener('fullscreenchange', () => {
     }
     getPosition();
 })
-
-
-/**
- * make the control panel responsive
- */
-function resizeControlpanel() {
-    let controlPanel = document.querySelector('.control-panel');
-    let introImg = document.querySelector('.intro-img');
-    let overScreen = document.getElementById('game-over-screen');
-    let winScreen = document.getElementById('win-screen');
-    let title = document.getElementById('title');
-    let legal = document.getElementById('legal-div');
-    // let mainScreen = document.getElementById('main-screen');
-
-    controlPanel.style.width = (canvasWidth) + 'px';
-    controlPanel.style.height = (canvasHeight) + 'px';
-    introImg.style.width = (canvasWidth) + 'px';
-    introImg.style.height = (canvasHeight) + 'px';
-    overScreen.style.width = (canvasWidth) + 'px';
-    overScreen.style.height = (canvasHeight) + 'px';
-    winScreen.style.width = (canvasWidth) + 'px';
-    winScreen.style.height = (canvasHeight) + 'px';
-    // mainScreen.style.width = (canvasWidth) + 'px';
-    // mainScreen.style.height = (canvasHeight) + 'px';
-    // if (canvasWidth < 720 || canvasHeight < 480) {
-    //     title.style.display = 'none';
-    //     legal.style.display = 'none';
-    // } else {
-    //     title.style.display = 'block';
-    //     legal.style.display = 'block';
-    // }
-}
-
 
 
 /**
