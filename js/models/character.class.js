@@ -98,59 +98,125 @@ class Character extends MoveableObject {
     animate() {
         this.setStoppableIntervals(() => {
             this.walking_sound.pause();
-            if(!this.dead) {
-                    if (this.world.keyboard.D) {
-                        this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-                        this.currentTime = new Date().getTime();
-                    }
-
-                    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                        this.moveRight();
-                        this.otherDirection = false;
-                        this.walking_sound.play();
-                    }
-
-                    if (this.world.keyboard.LEFT && this.x > -615) {
-                        this.moveLeft();
-                        this.otherDirection = true;
-                        this.walking_sound.play();
-                    }
-
-                    if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                        this.jump(20);
-                        this.currentTime = new Date().getTime();
-                    }
-
-                    this.world.camera_x = -this.x + 100;
+            if (!this.dead) {
+                this.movements();
+                this.world.camera_x = -this.x + 100;
             }
         }, 1000 / 60);
 
-
         this.setStoppableIntervals(() => {
-
-            if (this.isDead()) {
-                this.oneTimeAnimation(this.IMAGE_DEAD, 'img/2_character_pepe/5_dead/D-56.png');
-                this.y -= this.speedY;
-                this.speedY -= this.acceleration;
-                this.dead = true;
-            } else if (this.isHurt()) {
-                this.currentTime = new Date().getTime();
-                this.playAnimation(this.IMAGE_HURT);
-                this.x += -5;
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGE_JUMPING);
-            } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGE_WALKING);
-                    this.currentTime = new Date().getTime();
-                } else if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT || !this.world.keyboard.SPACE || !this.isHurt()) {
-                    this.nothingToDo();
-                }
-            }
+            this.movementsAnimation();
         }, 1000 / 10);
     }
 
 
+    /**
+     * movements of the character
+     */
+    movements() {
+        if (this.world.keyboard.D) {
+            this.stand();
+        }
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.walkRight();
+        }
+        if (this.world.keyboard.LEFT && this.x > -615) {
+            this.walkLeft();
+        }
+        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            this.jumping();
+        }
+    }
+
+
+    /**
+     * stand movement
+     */
+    stand() {
+        this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+        this.currentTime = new Date().getTime();
+    }
+
+
+    /**
+     * move right 
+     */
+    walkRight() {
+        this.moveRight();
+        this.otherDirection = false;
+        this.walking_sound.play();
+    }
+
+
+    /**
+     * move left
+     */
+    walkLeft() {
+        this.moveLeft();
+        this.otherDirection = true;
+        this.walking_sound.play();
+    }
+
+
+    /**
+     * jumps
+     */
+    jumping() {
+        this.jump(20);
+        this.currentTime = new Date().getTime();
+    }
+
+
+    /**
+     * animation of the movements
+     */
+    movementsAnimation() {
+        if (this.isDead()) {
+            this.deadAnimation();
+        } else if (this.isHurt()) {
+            this.hurtAnimation();
+        } else if (this.isAboveGround()) {
+            this.playAnimation(this.IMAGE_JUMPING);
+        } else {
+            this.walkAnimation();
+        }
+    }
+
+
+    /**
+     * dead animation
+     */
+    deadAnimation() {
+        this.oneTimeAnimation(this.IMAGE_DEAD, 'img/2_character_pepe/5_dead/D-56.png');
+        this.y -= this.speedY;
+        this.speedY -= this.acceleration;
+        this.dead = true;
+    }
+
+
+    /**
+     * hurt animation
+     */
+    hurtAnimation() {
+        this.currentTime = new Date().getTime();
+        this.playAnimation(this.IMAGE_HURT);
+        this.x += -5;
+    }
+
+
+    /**
+     * walk animation
+     */
+    walkAnimation() {
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGE_WALKING);
+            this.currentTime = new Date().getTime();
+        } else if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT || !this.world.keyboard.SPACE || !this.isHurt()) {
+            this.nothingToDo();
+        }
+    }
+
+    
     /**
      * when the character nothing do
      */
@@ -164,7 +230,7 @@ class Character extends MoveableObject {
         }
     }
 
-    
+
     /**
      * proof the Time between the actual time and the time where the character is nothing to do 
      */
