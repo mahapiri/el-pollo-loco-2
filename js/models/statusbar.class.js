@@ -8,6 +8,10 @@ class Statusbar extends DrawableObject {
 
     IMAGE = [];
 
+
+    /**
+     * load the methods of the parent class
+     */
     constructor() {
         super();
     }
@@ -21,7 +25,6 @@ class Statusbar extends DrawableObject {
         this.percentage = percentage;
         let path = this.IMAGE[this.resolvePercentage()];
         this.img = this.imageCache[path];
-
     }
 
 

@@ -11,6 +11,10 @@ class CharacterBar extends Statusbar {
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png'
     ]
 
+
+    /**
+     * load image of the character bar and invalidate the percentage of it
+     */
     constructor() {
         super().loadImages(this.IMAGE);
         this.setPercentage(this.percentage);

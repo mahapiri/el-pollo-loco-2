@@ -74,6 +74,5 @@ class ThrowableObject extends MoveableObject {
         this.speedY = 0;
         this.speed = 0;
         this.playAnimation(this.BOTTLE_SPLASH);
-    }
-    
+    }  
 }

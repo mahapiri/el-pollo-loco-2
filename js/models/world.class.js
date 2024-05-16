@@ -366,5 +366,4 @@ class World {
     deleteObject(arr, object) {
         delete arr[object];
     }
-
 }

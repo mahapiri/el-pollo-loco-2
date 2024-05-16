@@ -12,6 +12,10 @@ class EndbossBar extends Statusbar {
         'img/7_statusbars/2_statusbar_endboss/blue/blue100.png',
     ]
 
+
+    /**
+     * load image of the endboss bar and invalidate the percentage of it
+     */
     constructor() {
         super().loadImages(this.IMAGE);
         this.setPercentage(this.percentage);

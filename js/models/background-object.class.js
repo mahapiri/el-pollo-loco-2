@@ -10,8 +10,9 @@ class BackgroundObject extends MoveableObject {
         'img/5_background/layers/1_first_layer/1.png'
     ];
 
+
     /**
-     * it will load the image
+     * load all background images and set the position to x
      * @param {string} path - get the image source file
      */
     constructor(path, x) {

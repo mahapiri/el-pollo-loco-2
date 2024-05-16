@@ -25,7 +25,6 @@ class DrawableObject {
             console.warn('Failed to load', e);
             console.log('Image Fail', this.img.src);
         }
-
     }
 
 

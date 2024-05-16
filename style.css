@@ -63,6 +63,10 @@ body {
     font-size: 22px;
 }
 
+.legal-div-faq {
+    display: none;
+}
+
 .privacy-main {
     padding-left: 32px;
     padding-right: 32px;
@@ -358,6 +362,10 @@ a {
     .legal-div {
         display: none;
     }
+
+    .legal-div-faq {
+        display: flex;
+    }
 }
 
 /* Smartphone */
@@ -375,6 +383,10 @@ a {
 
     .legal-div {
         display: none;
+    }
+
+    .legal-div-faq {
+        display: flex;
     }
 
     h2 {

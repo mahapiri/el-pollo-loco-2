@@ -9,11 +9,18 @@ let fullscreenIsOn = false;
 let faqIsOn = false;
 let deadProofing;
 
+
+/**
+ * proof if it is a touch device
+ * @returns 
+ */
 function isTouchDevice() {
     return window.matchMedia('(pointer: coarse)').matches;
 }
 
-
+/**
+ * if the site is complete loaded, then clear the white screen and make the compatiablity to the device
+ */
 window.addEventListener('load', () => {
     document.getElementById('loader').style.display = 'none';
     canvas = document.getElementById('canvas');
@@ -22,8 +29,16 @@ window.addEventListener('load', () => {
     resizeControlpanel();
 });
 
+
+/**
+ * get the right position by resizing
+ */
 window.addEventListener('resize', getPosition);
 
+
+/**
+ * get the right position for the device
+ */
 function getPosition() {
     setInterval(() => {
         if (canvas) {
@@ -32,8 +47,7 @@ function getPosition() {
             isTouchDevice();
             resizeControlpanel();
         }
-    }, 1);
-
+    }, 1000 / 60);
 }
 
 
@@ -102,6 +116,10 @@ function startGame() {
     togglePlayMode();
 }
 
+
+/**
+ * reloaded the page to restart the game
+ */
 function restartGame() {
     location.reload();
 }

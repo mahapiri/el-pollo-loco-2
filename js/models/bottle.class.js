@@ -15,11 +15,15 @@ class Bottle extends DrawableObject {
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'
     ];
 
+
+    /**
+     * load the bottle image and place it to a random position
+     */
     constructor() {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGES_GROUND);
-        // this.x = 400 + Math.random() * 1500;
-        this.x = 150;
+        this.x = 400 + Math.random() * 1500;
+        // this.x = 150;
         this.animate();
     }
 

@@ -24,6 +24,7 @@ class MoveableObject extends DrawableObject {
         }, 1000 / 70);
     }
 
+    
     /**
      * 
      * @returns check if character is above ground expect Throwable Object

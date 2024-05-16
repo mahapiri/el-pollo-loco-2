@@ -10,6 +10,10 @@ class CoinBar extends Statusbar {
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png',
     ]
 
+
+    /**
+     * load image of the coinbar bar and invalidate the percentage of it
+     */
     constructor() {
         super().loadImages(this.IMAGE);
         this.setPercentage(this.percentage);
