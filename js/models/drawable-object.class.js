@@ -21,7 +21,7 @@ class DrawableObject {
     draw(ctx) {
         try {
             ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        } catch(e) {
+        } catch (e) {
             console.warn('Failed to load', e);
             console.log('Image Fail', this.img.src);
         }
@@ -53,7 +53,7 @@ class DrawableObject {
             let frameY = this.y + this.offset.top;
             let frameWidth = this.width - this.offset.left - this.offset.right;
             let frameHeight = this.height - this.offset.top - this.offset.bottom;
-            
+
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'red';
@@ -62,7 +62,7 @@ class DrawableObject {
         }
     }
 
-    
+
     /**
     * it will generate a new Image
     * @param {string} path - here you can put your path from your img file 
@@ -95,5 +95,27 @@ class DrawableObject {
         let path = image[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }
+
+
+    /**
+     * play all images to create a anmimation but only once time
+     * @param {path} image path
+     */
+    oneTimeAnimation(image, endImg) {
+        for (let i = 0; i < image.length; i++) {
+            let path = image[i];
+            this.img = this.imageCache[path];
+        }
+        this.loadImage(endImg);
+    }
+
+
+    /**
+    * play the sound
+    */
+    playSound(file, volume) {
+        file.volume = volume;
+        file.play();
     }
 }

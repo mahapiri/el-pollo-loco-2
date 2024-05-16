@@ -8,6 +8,8 @@ let gameStarted = false;
 let fullscreenIsOn = false;
 let faqIsOn = false;
 let deadProofing;
+const WIN_SOUND = new Audio('audio/win.mp3');
+const LOST_SOUND = new Audio('audio/lost.mp3');
 
 
 /**
@@ -229,6 +231,7 @@ function characterDead() {
         setTimeout(() => {
             document.getElementById('game-over-screen').style.display = 'flex';
             document.querySelector('.try-btn').style.display = 'flex';
+            LOST_SOUND.play();
             clearIntervals();
         }, 2000);
     }
@@ -243,6 +246,7 @@ function endbossDead() {
         setTimeout(() => {
             document.getElementById('win-screen').style.display = 'flex';
             document.querySelector('.replay-btn').style.display = 'flex';
+            WIN_SOUND.play();
             clearIntervals();
         }, 2000);
     }

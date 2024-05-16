@@ -130,7 +130,6 @@ class Endboss extends MoveableObject {
             this.y += this.speedY
             this.speedY += this.acceleration;
             this.playAnimation(this.IMAGE_DEAD);
-            // this.oneTimeAnimation(this.IMAGE_DEAD, 'img/4_enemie_boss_chicken/5_dead/G26.png');
             setTimeout(() => {
                 this.setY();
             }, 100); 

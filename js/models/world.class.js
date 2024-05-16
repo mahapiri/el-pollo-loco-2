@@ -14,6 +14,9 @@ class World {
     distance;
     hit = false;
 
+    bottle_sound = new Audio ('audio/bottle.mp3');
+    coin_sound = new Audio ('audio/coin.mp3');
+
 
     /**
      * create a canvas field in 2D
@@ -47,7 +50,6 @@ class World {
      * 3. Draw all objects to the canvas depending of the graphic performance
      */
     draw() {
-        // this.playBackgroundMusic();
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
 
@@ -59,7 +61,7 @@ class World {
         this.repeatDrawing();
     }
 
-    
+
     /**
      * drawing background
      */
@@ -163,11 +165,11 @@ class World {
      * play the background music + set the volume
      */
     playBackgroundMusic() {
-        if (!this.button.sound || this.character.dead) {
-            this.level.background_music[0].pause();
-        } else {
-            this.level.background_music[0].play();
-            this.level.background_music[0].volume = 1;
+        if (!this.button.sound || this.character.dead || this.level.endboss.dead) {
+            this.level.background_music.pause();
+        } else if (gameStarted && this.button.sound && !this.character.dead) {
+            this.level.background_music.play();
+            this.level.background_music.volume = 0.05;
         }
     }
 
@@ -179,6 +181,7 @@ class World {
      */
     run() {
         setInterval(() => {
+            this.playBackgroundMusic();
             this.distance = Math.abs(this.level.endboss.x - this.character.x);
             this.endbossFirstContact();
             this.checkCollisionsEnemies();
@@ -354,6 +357,7 @@ class World {
     addObject(object) {
         if (object instanceof Coin) {
             this.addCoin();
+            this.character.playSound
         } else if (object instanceof Bottle) {
             this.addBottle();
         }
@@ -364,12 +368,10 @@ class World {
      * add coins to the coin bar 
      */
     addCoin() {
-        if (this.level.coinBar.percentage >= 100) {
-            this.level.coinBar.percentage = 100;
-        } else {
-            this.level.coinBar.percentage += 10;
-            this.level.coinBar.setPercentage(this.level.coinBar.percentage);
-        }
+        this.level.coinBar.percentage += 10;
+        this.level.coinBar.setPercentage(this.level.coinBar.percentage);
+        this.coin_sound.play();
+        this.coin_sound.volume = 0.05;
     }
 
 
@@ -377,12 +379,10 @@ class World {
      * add bottles to the bottle bar
      */
     addBottle() {
-        if (this.level.bottleBar.percentage >= 100) {
-            this.level.bottleBar.percentage = 100;
-        } else {
-            this.level.bottleBar.percentage += 10;
-            this.level.bottleBar.setPercentage(this.level.bottleBar.percentage);
-        }
+        this.level.bottleBar.percentage += 10;
+        this.level.bottleBar.setPercentage(this.level.bottleBar.percentage);
+        this.bottle_sound.play();
+        this.bottle_sound.volume = 0.05;
     }
 
 

@@ -71,9 +71,8 @@ const level1 = new Level (
         new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719 * 5),
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 5),
     ],
-    [
-        new Audio('audio/background-music.mp3')
-    ],
+    
+    new Audio('audio/background-music.mp3'),
     new BottleBar(),
     new CharacterBar(),
     new CoinBar(),
