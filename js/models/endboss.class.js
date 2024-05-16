@@ -1,15 +1,12 @@
 class Endboss extends MoveableObject {
-    x = 400;
+    x = 300;
     y = 70;
     width = 200;
     height = 380;
     energy = 100;
     speedY = 25;
-    speed = 1;
+    speed = 0;
     acceleration = 0.2;
-    walking;
-    hurting;
-    angry;
     offset = {
         top: 140,
         bottom: 30,
@@ -119,21 +116,16 @@ class Endboss extends MoveableObject {
      * animate the angry endboss
      */
     playAngryAnimation() {
-        // this.stopIntervals();
         this.playAnimation(this.IMAGE_ANGRY);
+        console.log(this.otherDirection);
     }
 
     /**
      * animate the angry endboss
      */
     playAttackAnimation() {
-        let i = 0;
-        this.speed += 3.75 + Math.random() * 0.5;
-        this.moveLeft();
-        if (i < 2) {
+            // this.speed += 0.5;
+            this.animate();
             this.playAnimation(this.IMAGE_ATTACK);
-            i++;
-        }
     }
-
 }
