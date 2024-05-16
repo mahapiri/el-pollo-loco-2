@@ -19,12 +19,7 @@ class DrawableObject {
      * @param {*} ctx - canvas
      */
     draw(ctx) {
-        try {
-            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        } catch (e) {
-            console.warn('Failed to load', e);
-            console.log('Image Fail', this.img.src);
-        }
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
 

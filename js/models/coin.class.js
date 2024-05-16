@@ -15,7 +15,7 @@ class Coin extends DrawableObject {
         'img/8_coin/coin_2.png',
     ];
 
-    
+
     /**
      * load the coin images and placed in a random position
      */
@@ -33,7 +33,7 @@ class Coin extends DrawableObject {
      */
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGE); 
+            this.playAnimation(this.IMAGE);
         }, 250);
     }
 }

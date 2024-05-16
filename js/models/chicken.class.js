@@ -29,7 +29,6 @@ class Chicken extends MoveableObject {
 
     /**
      * all images are loading while modular operator is repeating the images
-     * 
      */
     animate() {
         this.setStoppableIntervals(() => {
@@ -48,6 +47,6 @@ class Chicken extends MoveableObject {
     isDead() {
         this.dead = true;
         this.img.src = this.IMAGES_DEAD;
-        this.speed = 0; 
+        this.speed = 0;
     }
 }

@@ -14,8 +14,8 @@ class World {
     distance;
     hit = false;
 
-    bottle_sound = new Audio ('audio/bottle.mp3');
-    coin_sound = new Audio ('audio/coin.mp3');
+    bottle_sound = new Audio('audio/bottle.mp3');
+    coin_sound = new Audio('audio/coin.mp3');
 
 
     /**
