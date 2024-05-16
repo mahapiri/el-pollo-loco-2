@@ -24,7 +24,6 @@ class MoveableObject extends DrawableObject {
         }, 1000 / 70);
     }
 
-    
     /**
      * 
      * @returns check if character is above ground expect Throwable Object
@@ -93,7 +92,7 @@ class MoveableObject extends DrawableObject {
      */
     hit() {
         if (!this.isHurt()) {
-            this.energy -= 90;
+            this.energy -= 10;
             if (this.energy < 0) {
                 this.energy = 0;
             } else {

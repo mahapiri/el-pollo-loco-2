@@ -230,7 +230,7 @@ function characterDead() {
             document.getElementById('game-over-screen').style.display = 'flex';
             document.querySelector('.try-btn').style.display = 'flex';
             clearIntervals();
-        }, 3000);
+        }, 2000);
     }
 }
 
@@ -244,7 +244,7 @@ function endbossDead() {
             document.getElementById('win-screen').style.display = 'flex';
             document.querySelector('.replay-btn').style.display = 'flex';
             clearIntervals();
-        }, 3000);
+        }, 2000);
     }
 }
 

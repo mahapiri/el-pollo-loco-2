@@ -195,7 +195,7 @@ class World {
      * initials the first contact to move
      */
     endbossFirstContact() {
-        if (this.character.x > 200) {
+        if (this.character.x > 1780) {
             if (!this.firstContact) {
                 this.level.endboss.speed = 10;
                 this.firstContact = true;
@@ -243,7 +243,7 @@ class World {
     checkCollisionsEnemies() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingUp(enemy) || enemy.dead) {
-                this.enemyIsDead();
+                this.enemyIsDead(enemy, i);
             } else if (this.character.isColliding(enemy) && !this.character.isCollidingUp(enemy)) {
                 this.characterIsInjured();
             }
@@ -254,9 +254,9 @@ class World {
     /**
      * enemy is dead 
      */
-    enemyIsDead() {
+    enemyIsDead(enemy, i) {
         enemy.isDead();
-        this.character.jump(5);
+        this.character.jump(3);
         setTimeout(() => {
             this.deleteObject(this.level.enemies, i)
         }, 500);
@@ -267,7 +267,6 @@ class World {
      * character is hurting
      */
     characterIsInjured() {
-        this.character.x -= 10;
         this.character.hit();
         this.level.characterBar.setPercentage(this.character.energy);
     }

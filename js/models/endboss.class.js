@@ -1,13 +1,13 @@
 class Endboss extends MoveableObject {
     world;
-    x = 300;
+    x = 2300;
     y = 70;
     width = 200;
     height = 380;
     energy = 100;
     speedY = 25;
     speed = 0;
-    acceleration = 0.2;
+    acceleration = 0.3;
     offset = {
         top: 140,
         bottom: 30,
@@ -91,7 +91,7 @@ class Endboss extends MoveableObject {
                     this.world.hit = false;
                 }, 200);
             }
-        }, 300);
+        }, 250);
     }
 
 
@@ -102,12 +102,11 @@ class Endboss extends MoveableObject {
         if (this.world.distance < 600) {
             if (this.x < this.world.character.x) {
                 this.otherDirection = true;
-            } else {
+            } else if (this.x - 250 > this.world.character.x) {
                 this.otherDirection = false;
             }
         }
     }
-
 
 
     /**
@@ -126,12 +125,16 @@ class Endboss extends MoveableObject {
      * animate the dead endboss
      */
     playDeadAnimation() {
+        this.stopIntervals();
         this.setStoppableIntervals(() => {
-        this.y += this.speedY
-        this.speedY += this.acceleration;
-        this.oneTimeAnimation(this.IMAGE_DEAD, 'img/4_enemie_boss_chicken/5_dead/G26.png');
-        this.setY();
-        }, 1000 / 10);
+            this.y += this.speedY
+            this.speedY += this.acceleration;
+            this.playAnimation(this.IMAGE_DEAD);
+            // this.oneTimeAnimation(this.IMAGE_DEAD, 'img/4_enemie_boss_chicken/5_dead/G26.png');
+            setTimeout(() => {
+                this.setY();
+            }, 100); 
+        }, 300);
     }
 
     /**
@@ -163,7 +166,7 @@ class Endboss extends MoveableObject {
      * animate the angry endboss
      */
     playAttackAnimation() {
-        // this.speed += 0.5;
+        this.speed += 5;
         this.animate();
         this.playAnimation(this.IMAGE_ATTACK);
     }

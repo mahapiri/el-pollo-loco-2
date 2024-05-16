@@ -1,6 +1,6 @@
 class Character extends MoveableObject {
     world;
-    speed = 5;
+    speed = 7;
     y = 155;
     currentTime = new Date().getTime();
     offset = {
@@ -120,7 +120,7 @@ class Character extends MoveableObject {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.walkRight();
         }
-        if (this.world.keyboard.LEFT && this.x > -615) {
+        if (this.world.keyboard.LEFT && this.x > -1000) {
             this.walkLeft();
         }
         if (this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -200,7 +200,7 @@ class Character extends MoveableObject {
     hurtAnimation() {
         this.currentTime = new Date().getTime();
         this.playAnimation(this.IMAGE_HURT);
-        this.x += -5;
+
     }
 
 
@@ -223,7 +223,7 @@ class Character extends MoveableObject {
     nothingToDo() {
         let timepassed = this.proofTime();
         this.loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
-        if (timepassed > 9) {
+        if (timepassed > 10) {
             this.longWait();
         } else if (timepassed > 4) {
             this.wait();
