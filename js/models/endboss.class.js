@@ -1,4 +1,5 @@
 class Endboss extends MoveableObject {
+    world;
     x = 300;
     y = 70;
     width = 200;
@@ -71,10 +72,49 @@ class Endboss extends MoveableObject {
 
 
     /**
+     * initiates the animation loop for the end boss.
+     */
+    endbossFight() {
+        this.speed = 10;
+        this.setStoppableIntervals(() => {
+            if (!this.world.hit) {
+                if (this.world.distance < 250) {
+                    this.playAttackAnimation();
+                } else if (this.world.distance < 1000) {
+                    this.animate();
+                } else {
+                    this.playAngryAnimation();
+                }
+            } else {
+                this.playHurtAnimation();
+                setTimeout(() => {
+                    this.world.hit = false;
+                }, 200);
+            }
+        }, 300);
+    }
+
+
+    /**
+     * moves the end boss towards the character
+     */
+    moveTowardsCharacter() {
+        if (this.world.distance < 600) {
+            if (this.x < this.world.character.x) {
+                this.otherDirection = true;
+            } else {
+                this.otherDirection = false;
+            }
+        }
+    }
+
+
+
+    /**
      * animate the walking endboss
      */
     animate() {
-        if(!this.otherDirection) {
+        if (!this.otherDirection) {
             this.moveLeft();
         } else {
             this.moveRight();
@@ -86,12 +126,12 @@ class Endboss extends MoveableObject {
      * animate the dead endboss
      */
     playDeadAnimation() {
-        // this.setStoppableIntervals(() => {
+        this.setStoppableIntervals(() => {
         this.y += this.speedY
         this.speedY += this.acceleration;
         this.oneTimeAnimation(this.IMAGE_DEAD, 'img/4_enemie_boss_chicken/5_dead/G26.png');
         this.setY();
-        // }, 1000 / 2);
+        }, 1000 / 10);
     }
 
     /**
@@ -117,15 +157,14 @@ class Endboss extends MoveableObject {
      */
     playAngryAnimation() {
         this.playAnimation(this.IMAGE_ANGRY);
-        console.log(this.otherDirection);
     }
 
     /**
      * animate the angry endboss
      */
     playAttackAnimation() {
-            // this.speed += 0.5;
-            this.animate();
-            this.playAnimation(this.IMAGE_ATTACK);
+        // this.speed += 0.5;
+        this.animate();
+        this.playAnimation(this.IMAGE_ATTACK);
     }
 }

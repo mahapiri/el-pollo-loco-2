@@ -37,6 +37,7 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        this.level.endboss.world = this;
     }
 
 
@@ -161,26 +162,21 @@ class World {
             this.checkThrowObjects();
             this.collectObjects(this.level.coin, this.level.coinBar);
             this.collectObjects(this.level.bottle, this.level.bottleBar);
-            this.moveTowardsCharacter();
+            this.level.endboss.moveTowardsCharacter();
         }, 100 / 60);
     }
 
-    moveTowardsCharacter() {
-        if (this.level.endboss.x < this.character.x) {
-            this.level.endboss.otherDirection = true;
-        } else {
-            this.level.endboss.otherDirection = false;
-        }
-    }
 
-
+    /**
+     * initials the first contact to move
+     */
     endbossFirstContact() {
         if (this.character.x > 200) {
             if (!this.firstContact) {
                 this.level.endboss.speed = 10;
                 this.firstContact = true;
                 this.level.endbossBar.y = 60;
-                this.endbossFight();
+                this.level.endboss.endbossFight();
             }
         }
     }
@@ -197,30 +193,6 @@ class World {
         this.setEndbossHealth();
     }
 
-
-    endbossFight() {
-        setInterval(() => {
-            console.log(this.hit);
-            if (!this.hit) {
-                // this.level.endboss.stopIntervals();
-                if (this.distance < 250) {
-                    this.level.endboss.playAttackAnimation();
-                } else if (this.distance < 1000) {
-                    this.level.endboss.animate();
-                } else {
-                    this.level.endboss.playAngryAnimation();
-                }
-            } else {
-                this.level.endboss.playHurtAnimation();
-                setTimeout(() => {
-                    this.hit = false;
-                }, 1500);
-            }
-        }, 300);
-    }
-
-    // this.level.endboss.playHurtAnimation();
-    // this.level.endboss.playAngryAnimation();
 
     endbossIsDead() {
         this.level.endboss.dead = true;

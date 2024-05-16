@@ -5,7 +5,7 @@ class ThrowableObject extends MoveableObject {
     throwInterval;
     i = 0;
 
-    
+
     BOTTLE_ROTATION = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -38,7 +38,7 @@ class ThrowableObject extends MoveableObject {
      * set the x position of the bottle
      */
     setX() {
-        if(this.otherDirection) {
+        if (this.otherDirection) {
             this.x = this.x - 60;
         }
     }
@@ -48,13 +48,13 @@ class ThrowableObject extends MoveableObject {
      * validate which direction and then throw the object
      */
     throw() {
-        this.speedY =  6;
+        this.speedY = 6;
         this.applyGravity();
         this.throwInterval = setInterval(() => {
-            if(this.otherDirection) {
+            if (this.otherDirection) {
                 this.x -= 80;
             } else {
-                this.x += 80; 
+                this.x += 80;
             }
             this.playAnimation(this.BOTTLE_ROTATION);
         }, 50);
@@ -74,5 +74,5 @@ class ThrowableObject extends MoveableObject {
         this.speedY = 0;
         this.speed = 0;
         this.playAnimation(this.BOTTLE_SPLASH);
-    }  
+    }
 }
