@@ -34,7 +34,7 @@ class DrawableObject {
      * @param {string} ctx - our data of the canvas
      */
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin || this instanceof Bottle || this instanceof Intro || this instanceof Endboss) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin || this instanceof Bottle || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'blue';
@@ -49,7 +49,7 @@ class DrawableObject {
      * @param {*} ctx - get the ctx of the canvas 
      */
     drawFrameRed(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin || this instanceof Bottle || this instanceof Intro || this instanceof Endboss) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Chick || this instanceof Coin || this instanceof Bottle || this instanceof Endboss) {
             let frameX = this.x + this.offset.left;
             let frameY = this.y + this.offset.top;
             let frameWidth = this.width - this.offset.left - this.offset.right;

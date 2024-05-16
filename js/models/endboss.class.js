@@ -11,7 +11,7 @@ class Endboss extends MoveableObject {
     hurting;
     angry;
     offset = {
-        top: 70,
+        top: 140,
         bottom: 30,
         left: 30,
         right: 30

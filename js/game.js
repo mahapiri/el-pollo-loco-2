@@ -2,7 +2,6 @@ let canvas;
 let canvasWidth;
 let canvasHeight;
 let world;
-let intro;
 let keyboard = new Keyboard();
 let button = new Button();
 let gameStarted = false;
@@ -325,7 +324,7 @@ function proofDead() {
             }, 3000);
         }
 
-        if (world.level.endboss[0].dead) {
+        if (world.level.endboss.dead) {
             setTimeout(() => {
                 document.getElementById('win-screen').style.display = 'flex';
                 document.querySelector('.replay-btn').style.display = 'flex';
@@ -400,7 +399,7 @@ function pauseAllIntervals() {
  * @param {array} array of the character
  */
 function pauseInterval(arr) {
-    if (arr == world.character) {
+    if (arr == world.character || arr == world.level.endboss) {
         world.character.stoppableIntervals.forEach(id => {
             clearInterval(id);
             return id;
@@ -422,7 +421,7 @@ function pauseInterval(arr) {
 function playAllIntervals() {
     if (gameStarted) {
         world.character.animate();
-        startAnimation(world.level.endboss);
+        world.level.endboss.animate();
         startAnimation(world.level.enemies);
     }
 }
