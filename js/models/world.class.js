@@ -163,14 +163,13 @@ class World {
 
 
     /**
-     * play the background music + set the volume
+     * toggle the background music + set the volume
      */
-    playBackgroundMusic() {
+    toggleBackgroundMusic() {
         if (!this.button.sound || this.character.dead || this.level.endboss.dead) {
             this.level.background_music.pause();
         } else if (gameStarted && this.button.sound && !this.character.dead) {
-            this.level.background_music.play();
-            this.level.background_music.volume = 0.05;
+            this.character.playSound(this.level.background_music, 0.05);
         }
     }
 
@@ -182,7 +181,7 @@ class World {
      */
     run() {
         setInterval(() => {
-            this.playBackgroundMusic();
+            this.toggleBackgroundMusic();
             this.distance = Math.abs(this.level.endboss.x - this.character.x);
             this.endbossFirstContact();
             this.checkCollisionsEnemies();
@@ -258,7 +257,7 @@ class World {
         });
     }
 
-    
+
     /**
      * set hitEnemy variable after 1 sec to false
      */
@@ -385,8 +384,7 @@ class World {
     addCoin() {
         this.level.coinBar.percentage += 10;
         this.level.coinBar.setPercentage(this.level.coinBar.percentage);
-        this.coin_sound.play();
-        this.coin_sound.volume = 0.05;
+        this.character.playSound(this.coin_sound, 0.05);
     }
 
 
@@ -396,8 +394,7 @@ class World {
     addBottle() {
         this.level.bottleBar.percentage += 10;
         this.level.bottleBar.setPercentage(this.level.bottleBar.percentage);
-        this.bottle_sound.play();
-        this.bottle_sound.volume = 0.05;
+        this.character.playSound(this.bottle_sound, 0.05);
     }
 
 

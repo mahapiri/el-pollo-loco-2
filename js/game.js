@@ -8,6 +8,7 @@ let gameStarted = false;
 let fullscreenIsOn = false;
 let faqIsOn = false;
 let deadProofing;
+let win;
 const WIN_SOUND = new Audio('audio/win.mp3');
 const LOST_SOUND = new Audio('audio/lost.mp3');
 
@@ -219,6 +220,7 @@ function proofDead() {
     if (gameStarted) {
         characterDead();
         endbossDead();
+        endSound();
     }
 }
 
@@ -227,11 +229,11 @@ function proofDead() {
  * proof if character is dead
  */
 function characterDead() {
+    win = true;
     if (world.character.dead) {
         setTimeout(() => {
             document.getElementById('game-over-screen').style.display = 'flex';
             document.querySelector('.try-btn').style.display = 'flex';
-            LOST_SOUND.play();
             clearIntervals();
         }, 2000);
     }
@@ -243,12 +245,27 @@ function characterDead() {
  */
 function endbossDead() {
     if (world.level.endboss.dead) {
+        win = false;
         setTimeout(() => {
             document.getElementById('win-screen').style.display = 'flex';
             document.querySelector('.replay-btn').style.display = 'flex';
-            WIN_SOUND.play();
             clearIntervals();
         }, 2000);
+    }
+}
+
+
+/**
+ * proof if sound is on to play the end sound
+ */
+function endSound() {
+    if (button.sound) {
+        if (world.level.endboss.dead) {
+            WIN_SOUND.play();
+        }
+        if (world.character.dead) {
+            LOST_SOUND.play();
+        }
     }
 }
 
