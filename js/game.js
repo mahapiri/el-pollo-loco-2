@@ -119,7 +119,7 @@ function startGame() {
  * reloaded the page to restart the game
  */
 function restartGame() {
-    location.reload();
+    init();
 }
 
 

@@ -240,7 +240,7 @@ class Character extends MoveableObject {
      */
     nothingToDo() {
         let timepassed = this.proofTime();
-        if (timepassed > 4 && gameStarted) {
+        if (timepassed > 3 && gameStarted) {
             this.longWait();
         } else {
             this.wait();
@@ -273,5 +273,4 @@ class Character extends MoveableObject {
     longWait() {
         this.playAnimation(this.IMAGE_LONG_IDLE);
     }
-
 }
