@@ -13,6 +13,7 @@ class World {
     i = 0;
     distance;
     hit = false;
+    hitEnemy = false;
 
     bottle_sound = new Audio('audio/bottle.mp3');
     coin_sound = new Audio('audio/coin.mp3');
@@ -245,12 +246,26 @@ class World {
      */
     checkCollisionsEnemies() {
         this.level.enemies.forEach((enemy, i) => {
-            if (this.character.isCollidingUp(enemy) || enemy.dead) {
-                this.enemyIsDead(enemy, i);
-            } else if (this.character.isColliding(enemy) && !this.character.isCollidingUp(enemy)) {
-                this.characterIsInjured();
+            if (this.character.isColliding(enemy)) {
+                if (this.character.isAboveGround() && this.character.speedY <= 0) {
+                    this.enemyIsDead(enemy, i);
+                    this.hitEnemy = true;
+                    this.setHitEnemy();
+                } else if (!this.hitEnemy) {
+                    this.characterIsInjured();
+                }
             }
         });
+    }
+
+    
+    /**
+     * set hitEnemy variable after 1 sec to false
+     */
+    setHitEnemy() {
+        setTimeout(() => {
+            this.hitEnemy = false;
+        }, 1000);
     }
 
 
@@ -259,7 +274,7 @@ class World {
      */
     enemyIsDead(enemy, i) {
         enemy.isDead();
-        this.character.jump(3);
+        this.character.jump(5);
         setTimeout(() => {
             this.deleteObject(this.level.enemies, i)
         }, 500);

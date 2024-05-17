@@ -74,17 +74,17 @@ class MoveableObject extends DrawableObject {
     }
 
 
-    /**
-     * proof the colliding up
-     * @param {*} mo moveable object
-     * @returns 
-     */
-    isCollidingUp(mo) {
-        return this.y + this.height - this.offset.bottom >= mo.y - mo.offset.top &&
-            this.y + this.height <= mo.y + mo.height &&
-            this.x < mo.x + mo.width &&
-            this.x + this.width > mo.x;
-    }
+    // /**
+    //  * proof the colliding up
+    //  * @param {*} mo moveable object
+    //  * @returns 
+    //  */
+    // isCollidingUp(mo) {
+    //     return this.y + this.height - this.offset.bottom >= mo.y - mo.offset.top &&
+    //         this.y + this.height <= mo.y + mo.height &&
+    //         this.x < mo.x + mo.width &&
+    //         this.x + this.width > mo.x;
+    // }
 
 
     /**
