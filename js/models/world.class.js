@@ -14,6 +14,7 @@ class World {
     distance;
     hit = false;
     hitEnemy = false;
+    currentTime;
 
     bottle_sound = new Audio('audio/bottle.mp3');
     coin_sound = new Audio('audio/coin.mp3');
@@ -24,12 +25,13 @@ class World {
      * draw all objects to the world
      * @param {string} canvas - get the element by id of canvas in game.js
      */
-    constructor(canvas, keyboard, button, gameStarted) {
+    constructor(canvas, keyboard, button, gameStarted, currentTime) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.button = button;
         this.gameStarted = gameStarted;
+        this.currentTime = currentTime;
         this.draw();
         this.setWorld();
         this.run();

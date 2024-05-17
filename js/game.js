@@ -9,6 +9,7 @@ let fullscreenIsOn = false;
 let faqIsOn = false;
 let deadProofing;
 let win;
+let currentTime;
 const WIN_SOUND = new Audio('audio/win.mp3');
 const LOST_SOUND = new Audio('audio/lost.mp3');
 
@@ -92,7 +93,7 @@ function toggleTouchDashboard() {
  * Initialize the 2D Game
  */
 function init() {
-    world = new World(canvas, keyboard, button, gameStarted);
+    world = new World(canvas, keyboard, button, gameStarted, currentTime);
     pauseAllIntervals();
     canvasWidth = canvas.offsetWidth;
     canvasHeight = canvas.offsetHeight;
@@ -104,6 +105,7 @@ function init() {
  */
 function startGame() {
     if (!gameStarted) {
+        currentTime = new Date().getTime();
         button.play = true;
         gameStarted = true;
         document.querySelector('.intro-img').style.display = 'none';
