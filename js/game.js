@@ -14,7 +14,7 @@ const LOST_SOUND = new Audio('audio/lost.mp3');
 
 /**
  * proof if it is a touch device
- * @returns 
+ * @returns true or false 
  */
 function isTouchDevice() {
     return window.matchMedia('(pointer: coarse)').matches;
