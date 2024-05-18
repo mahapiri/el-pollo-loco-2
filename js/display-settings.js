@@ -77,3 +77,37 @@ function toggleTouchDashboard() {
         fullscreen.style.display = 'block';
     }
 }
+
+
+/**
+ * toggle fullscreen mode
+ */
+function toggleFullscreen() {
+    let screen = document.getElementById('main-screen');
+    let img = document.getElementById('fullscreen-img');
+    if (!fullscreenIsOn) {
+        screen.requestFullscreen();
+        img.src = 'img/9_intro_outro_screens/exit_fullscreen.png';
+    } else {
+        img.src = 'img/9_intro_outro_screens/fullscreen.png';
+        document.exitFullscreen();
+    }
+    getPosition();
+}
+
+
+/**
+ * check if game is on fullscreen or not to change the border color
+ */
+window.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement) {
+        fullscreenIsOn = true;
+        canvas.style.minWidth = '100%';
+        canvas.style.maxHeight = '100vh';
+    } else {
+        fullscreenIsOn = false;
+        canvas.style.minWidth = 'unset';
+        canvas.style.maxHeight = 'unset';
+    }
+    getPosition();
+})
