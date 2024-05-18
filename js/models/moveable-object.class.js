@@ -9,7 +9,7 @@ class MoveableObject extends DrawableObject {
     gravity;
     moveAnimation;
     moveImg;
-    stoppableIntervals = [];
+
 
 
     /**
@@ -106,24 +106,5 @@ class MoveableObject extends DrawableObject {
      */
     isDead() {
         return this.energy == 0;
-    }
-
-
-    /**
-     * push all stoppable setinterval functions
-     * @param {function} fn function name for the setInterval
-     * @param {number} time interval
-     */
-    setStoppableIntervals(fn, time) {
-        let id = setInterval(fn, time);
-        this.stoppableIntervals.push(id);
-    }
-
-
-    /**
-     * stop the setInterval
-     */
-    stopIntervals() {
-        this.stoppableIntervals.forEach(clearInterval);
     }
 }

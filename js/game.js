@@ -1,98 +1,21 @@
 let canvas;
-let canvasWidth;
-let canvasHeight;
 let world;
 let keyboard = new Keyboard();
 let button = new Button();
 let gameStarted = false;
+let win = undefined;
 let fullscreenIsOn = false;
 let faqIsOn = false;
-let deadProofing;
-let win;
 let currentTime;
 const WIN_SOUND = new Audio('audio/win.mp3');
 const LOST_SOUND = new Audio('audio/lost.mp3');
 
 
 /**
- * proof if it is a touch device
- * @returns true or false 
- */
-function isTouchDevice() {
-    return window.matchMedia('(pointer: coarse)').matches;
-}
-
-
-/**
- * if the site is complete loaded, then clear the white screen and make the compatiablity to the device
- */
-window.addEventListener('load', () => {
-    document.getElementById('loader').style.display = 'none';
-    canvas = document.getElementById('canvas');
-    getPosition();
-    isTouchDevice();
-    resizeControlpanel();
-});
-
-
-/**
- * get the right position by resizing
- */
-window.addEventListener('resize', getPosition);
-
-
-/**
- * get the right position for the device
- */
-function getPosition() {
-    setInterval(() => {
-        if (canvas) {
-            canvasWidth = canvas.offsetWidth;
-            canvasHeight = canvas.offsetHeight;
-            isTouchDevice();
-            resizeControlpanel();
-        }
-    }, 1000 / 60);
-}
-
-
-/**
- * make the control panel responsive
- */
-function resizeControlpanel() {
-    let controlPanel = document.querySelector('.control-panel');
-    let introImg = document.querySelector('.intro-img');
-    let overScreen = document.getElementById('game-over-screen');
-    let winScreen = document.getElementById('win-screen');
-    controlPanel.style.width = (canvasWidth) + 'px';
-    controlPanel.style.height = (canvasHeight) + 'px';
-    introImg.style.width = (canvasWidth) + 'px';
-    introImg.style.height = (canvasHeight) + 'px';
-    overScreen.style.width = (canvasWidth) + 'px';
-    overScreen.style.height = (canvasHeight) + 'px';
-    winScreen.style.width = (canvasWidth) + 'px';
-    winScreen.style.height = (canvasHeight) + 'px';
-    toggleTouchDashboard();
-}
-
-
-/**
- * toggle touch dashboard
- */
-function toggleTouchDashboard() {
-    let touchDashboard = document.querySelector('.touch-dashboard');
-    if (isTouchDevice()) {
-        touchDashboard.style.display = 'flex';
-    } else {
-        touchDashboard.style.display = 'none';
-    }
-}
-
-
-/**
  * Initialize the 2D Game
  */
 function init() {
+    initLevel();
     world = new World(canvas, keyboard, button, gameStarted, currentTime);
     pauseAllIntervals();
     canvasWidth = canvas.offsetWidth;
@@ -112,6 +35,7 @@ function startGame() {
         document.querySelector('.start-btn').style.display = 'none';
     }
     togglePlayMode();
+    deadProofing();
 }
 
 
@@ -119,7 +43,36 @@ function startGame() {
  * reloaded the page to restart the game
  */
 function restartGame() {
-    init();
+    hideEndScreen();
+    resetValues();
+    setTimeout(() => {
+        win = undefined;
+        init();
+        startGame();
+    }, 1000);
+}
+
+
+/**
+ * hide the endscreen of winscreen or lostscreen
+ */
+function hideEndScreen() {
+    if (world.level.endboss.dead) {
+        document.getElementById('win-screen').style.display = 'none';
+        document.querySelector('.replay-btn').style.display = 'none';
+    } else if (world.character.dead) {
+        document.getElementById('game-over-screen').style.display = 'none';
+        document.querySelector('.try-btn').style.display = 'none';
+    }
+}
+
+
+/**
+ * reset values to play again
+ */
+function resetValues() {
+    gameStarted = false;
+    world = null;
 }
 
 
@@ -231,8 +184,8 @@ function proofDead() {
  * proof if character is dead
  */
 function characterDead() {
-    win = true;
     if (world.character.dead) {
+        win = false;
         setTimeout(() => {
             document.getElementById('game-over-screen').style.display = 'flex';
             document.querySelector('.try-btn').style.display = 'flex';
@@ -247,7 +200,7 @@ function characterDead() {
  */
 function endbossDead() {
     if (world.level.endboss.dead) {
-        win = false;
+        win = true;
         setTimeout(() => {
             document.getElementById('win-screen').style.display = 'flex';
             document.querySelector('.replay-btn').style.display = 'flex';
@@ -275,10 +228,11 @@ function endSound() {
 /**
  * proofing if character or endboss is dead
  */
-deadProofing = setInterval(() => {
-    proofDead();
-}, 1000 / 60);
-
+function deadProofing() {
+    setInterval(() => {
+        proofDead();
+    }, 1000 / 60);
+}
 
 /**
  * toggle the faq site
@@ -328,6 +282,9 @@ function pauseAllIntervals() {
     pauseInterval(world.level.enemies);
     pauseInterval(world.level.endboss);
     pauseInterval(world.character);
+    pauseInterval(world.level.bottle);
+    pauseInterval(world.level.coin);
+    pauseInterval(world.level.cloud);
 }
 
 
@@ -363,6 +320,9 @@ function playAllIntervals() {
             world.level.endboss.endbossFight();
         }
         startAnimation(world.level.enemies);
+        startAnimation(world.level.bottle);
+        startAnimation(world.level.coin);
+        startAnimation(world.level.cloud);
     }
 }
 

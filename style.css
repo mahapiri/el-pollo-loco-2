@@ -139,7 +139,6 @@ canvas {
 }
 
 .gaming-btn {
-    display: flex;
     justify-content: center;
     user-select: none;
     position: absolute;
@@ -152,6 +151,7 @@ canvas {
 }
 
 .start-btn {
+    display: flex;
     width: 40px;
     height: 40px;
     top: 44px;

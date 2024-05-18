@@ -218,7 +218,7 @@ class Character extends MoveableObject {
     hurtAnimation() {
         this.currentTime = new Date().getTime();
         this.playAnimation(this.IMAGE_HURT);
-        this.playSound(this.hurt_sound, 0.05);
+        this.playSound(this.hurt_sound, 0.1);
     }
 
 

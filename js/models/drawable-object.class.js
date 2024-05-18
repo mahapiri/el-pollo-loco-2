@@ -5,6 +5,7 @@ class DrawableObject {
     height = 280;
     img;
     imageCache = {};
+    stoppableIntervals = [];
     currentImage = 0;
     offset = {
         top: 0,
@@ -116,6 +117,24 @@ class DrawableObject {
         } else {
             file.pause();
         }
+    }
 
+
+    /**
+    * push all stoppable setinterval functions
+    * @param {function} fn function name for the setInterval
+    * @param {number} time interval
+    */
+    setStoppableIntervals(fn, time) {
+        let id = setInterval(fn, time);
+        this.stoppableIntervals.push(id);
+    }
+
+
+    /**
+     * stop the setInterval
+     */
+    stopIntervals() {
+        this.stoppableIntervals.forEach(clearInterval);
     }
 }

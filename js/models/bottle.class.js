@@ -31,7 +31,7 @@ class Bottle extends DrawableObject {
      * animate the bottle on ground
      */
     animate() {
-        setInterval(() => {
+        this.setStoppableIntervals(() => {
             this.playAnimation(this.IMAGES_GROUND);
         }, 200 + Math.random() * 200);
     }

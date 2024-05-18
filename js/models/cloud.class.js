@@ -17,7 +17,6 @@ class Cloud extends MoveableObject {
     constructor(path, x) {
         super().loadImage(path);
         this.x = x;
-
         this.animate();
     }
 
@@ -26,7 +25,7 @@ class Cloud extends MoveableObject {
      * animate the movement of the cloud
      */
     animate() {
-        setInterval(() => {
+        this.setStoppableIntervals(() => {
             this.moveLeft();
             this.changeX();
         }, 25);
