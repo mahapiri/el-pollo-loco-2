@@ -131,8 +131,6 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
-        // mo.drawFrameRed(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -168,10 +166,12 @@ class World {
      * toggle the background music + set the volume
      */
     toggleBackgroundMusic() {
-        if (!this.button.sound || this.character.dead || this.level.endboss.dead) {
+        if (gameStarted && this.button.sound || !this.character.dead) {
+            this.level.background_music.play();
+            this.level.background_music.volume = 0.5;
+            this.level.background_music.loop = true;
+        } else if (!this.button.sound || this.character.dead || this.level.endboss.dead) {
             this.level.background_music.pause();
-        } else if (gameStarted && this.button.sound && !this.character.dead) {
-            this.character.playSound(this.level.background_music, 0.05);
         }
     }
 
@@ -192,7 +192,7 @@ class World {
             this.collectObjects(this.level.coin, this.level.coinBar);
             this.collectObjects(this.level.bottle, this.level.bottleBar);
             this.level.endboss.moveTowardsCharacter();
-        }, 100 / 60);
+        }, 1000 / 30);
     }
 
 
@@ -373,7 +373,6 @@ class World {
     addObject(object) {
         if (object instanceof Coin) {
             this.addCoin();
-            this.character.playSound
         } else if (object instanceof Bottle) {
             this.addBottle();
         }

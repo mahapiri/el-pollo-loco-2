@@ -106,7 +106,7 @@ class Character extends MoveableObject {
                 this.movements();
                 this.world.camera_x = -this.x + 100;
             } else {
-                this.playSound(this.dead_sound, 0.05);
+                this.playSound(this.dead_sound, 0.5);
             }
         }, 1000 / 60);
 
@@ -161,7 +161,7 @@ class Character extends MoveableObject {
     walkRight() {
         this.moveRight();
         this.otherDirection = false;
-        this.playSound(this.walking_sound, 1);
+        this.playSound(this.walking_sound, 0.5);
     }
 
 
@@ -171,7 +171,7 @@ class Character extends MoveableObject {
     walkLeft() {
         this.moveLeft();
         this.otherDirection = true;
-        this.playSound(this.walking_sound, 1);
+        this.playSound(this.walking_sound, 0.5);
     }
 
 
@@ -180,7 +180,7 @@ class Character extends MoveableObject {
      */
     jumping() {
         this.jump(20);
-        this.playSound(this.jumping_sound, 1);
+        this.playSound(this.jumping_sound, 0.5);
         this.currentTime = new Date().getTime();
     }
 
@@ -218,7 +218,7 @@ class Character extends MoveableObject {
     hurtAnimation() {
         this.currentTime = new Date().getTime();
         this.playAnimation(this.IMAGE_HURT);
-        this.playSound(this.hurt_sound, 0.1);
+        this.playSound(this.hurt_sound, 0.5);
     }
 
 

@@ -182,9 +182,11 @@ function endbossDead() {
 function endSound() {
     if (button.sound) {
         if (world.level.endboss.dead) {
+            WIN_SOUND.volume = 0.5;
             WIN_SOUND.play();
         }
         if (world.character.dead) {
+            LOST_SOUND.volume = 0.5;
             LOST_SOUND.play();
         }
     }
@@ -197,8 +199,9 @@ function endSound() {
 function deadProofing() {
     setInterval(() => {
         proofDead();
-    }, 1000 / 60);
+    }, 1000 / 40);
 }
+
 
 /**
  * toggle the faq site

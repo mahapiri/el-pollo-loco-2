@@ -77,7 +77,7 @@ class Keyboard {
     * check event on touch
     */
     touchEvents() {
-        document.addEventListener('DOMContentLoaded', (event) => {
+        document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 keyboard.LEFT = true;
@@ -100,7 +100,7 @@ class Keyboard {
         });
 
 
-        document.addEventListener('DOMContentLoaded', (event) => {
+        document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('btnLeft').addEventListener('touchend', (e) => {
                 e.preventDefault();
                 keyboard.LEFT = false;

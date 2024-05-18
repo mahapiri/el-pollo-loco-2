@@ -52,9 +52,9 @@ class ThrowableObject extends MoveableObject {
      * validate which direction and then throw the object
      */
     throw() {
+        this.playSound(this.throwing_sound, 0.5);
         this.speedY = 6;
         this.applyGravity();
-        this.playSound(this.throwing_sound, 0.2);
         this.throwInterval = setInterval(() => {
             if (this.otherDirection) {
                 this.x -= 80;
@@ -62,7 +62,6 @@ class ThrowableObject extends MoveableObject {
                 this.x += 80;
             }
             this.playAnimation(this.BOTTLE_ROTATION);
-
         }, 50);
     }
 
@@ -80,6 +79,6 @@ class ThrowableObject extends MoveableObject {
         this.speedY = 0;
         this.speed = 0;
         this.playAnimation(this.BOTTLE_SPLASH);
-        this.playSound(this.splashing_sound, 0.05);
+        this.playSound(this.splashing_sound, 0.5);
     }
 }
