@@ -77,6 +77,7 @@ class DrawableObject {
     */
     playSound(file, volume) {
         if (file.paused) {
+            console.log('paused')
             if (button.sound && gameStarted) {
                 file.volume = volume;
                 file.play();
