@@ -16,10 +16,17 @@ const LOST_SOUND = new Audio('audio/lost.mp3');
  */
 function init() {
     initLevel();
+    preloadAudio();
     world = new World(canvas, keyboard, button, gameStarted, currentTime);
     pauseAllIntervals();
     canvasWidth = canvas.offsetWidth;
     canvasHeight = canvas.offsetHeight;
+}
+
+
+function preloadAudio() {
+    WIN_SOUND.load();
+    LOST_SOUND.load();
 }
 
 
@@ -184,7 +191,7 @@ function endSound() {
         if (win == true) {
             WIN_SOUND.volume = 0.5;
             WIN_SOUND.play();
-        } else if(win == false) {
+        } else if (win == false) {
             LOST_SOUND.volume = 0.5;
             LOST_SOUND.play();
         }

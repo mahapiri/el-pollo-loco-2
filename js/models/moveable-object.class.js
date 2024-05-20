@@ -11,7 +11,6 @@ class MoveableObject extends DrawableObject {
     moveImg;
 
 
-
     /**
      * when characte is in the air, then character will automatically come down
      */
@@ -23,6 +22,7 @@ class MoveableObject extends DrawableObject {
             }
         }, 1000 / 70);
     }
+
 
     /**
      * 

@@ -62,12 +62,21 @@ class Endboss extends MoveableObject {
      * load the endboss
      */
     constructor() {
-        super().loadImages(this.IMAGE_ANGRY);
+        super();
+        this.preloadImage();
+        this.animate();
+    }
+
+
+    /**
+     * loading all images
+     */
+    preloadImage() {
+        this.loadImages(this.IMAGE_ANGRY);
         this.loadImages(this.IMAGE_WALK);
         this.loadImages(this.IMAGE_ATTACK);
         this.loadImages(this.IMAGE_HURT);
         this.loadImages(this.IMAGE_DEAD);
-        this.animate();
     }
 
 
@@ -121,6 +130,7 @@ class Endboss extends MoveableObject {
         this.playAnimation(this.IMAGE_WALK);
     }
 
+
     /**
      * animate the dead endboss
      */
@@ -135,6 +145,7 @@ class Endboss extends MoveableObject {
             }, 100);
         }, 300);
     }
+
 
     /**
      * set the y-position at 800

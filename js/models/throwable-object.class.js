@@ -29,12 +29,30 @@ class ThrowableObject extends MoveableObject {
 
     constructor(x, y, otherDirection) {
         super().loadImage('img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
-        this.loadImages(this.BOTTLE_ROTATION);
-        this.loadImages(this.BOTTLE_SPLASH);
+        this.preloadImages();
+        this.preloadAudio();
         this.x = x;
         this.y = y;
         this.otherDirection = otherDirection;
         this.setX();
+    }
+
+
+    /**
+     * preload Images
+     */
+    preloadImages() {
+        this.loadImages(this.BOTTLE_ROTATION);
+        this.loadImages(this.BOTTLE_SPLASH);
+    }
+
+
+    /**
+     * preload Audio
+     */
+    preloadAudio() {
+        throwing_sound.load();
+        splashing_sound.load();
     }
 
 

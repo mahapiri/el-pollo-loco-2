@@ -35,6 +35,16 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        preloadAudio();
+    }
+
+
+    /**
+     * preload Sound
+     */
+    preloadAudio() {
+        bottle_sound.load();
+        coin_sound.load();
     }
 
 

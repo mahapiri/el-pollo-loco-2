@@ -86,14 +86,34 @@ class Character extends MoveableObject {
      */
     constructor() {
         super().loadImage('img/2_character_pepe/1_idle/idle/I-1.png');
+        this.preloadImage();
+        this.preloadAudio();
+        this.applyGravity();
+        this.animate();
+    }
+
+
+    /**
+     * loading all images
+     */
+    preloadImage() {
         this.loadImages(this.IMAGE_IDLE);
         this.loadImages(this.IMAGE_LONG_IDLE);
         this.loadImages(this.IMAGE_WALKING);
         this.loadImages(this.IMAGE_JUMPING);
         this.loadImages(this.IMAGE_DEAD);
         this.loadImages(this.IMAGE_HURT);
-        this.applyGravity();
-        this.animate();
+    }
+
+
+    /**
+    * 
+    */
+    preloadAudio() {
+        walking_sound.load();
+        jumping_sound.load();
+        dead_sound.load();
+        hurt_sound.load();
     }
 
 
@@ -118,8 +138,10 @@ class Character extends MoveableObject {
 
 
     pauseWalkingSound() {
-        if(this.walking) {
-            this.walking_sound.pause();
+        if (gameStarted && button.sound) {
+            if (this.walking) {
+                this.walking_sound.pause();
+            }
         }
     }
 
@@ -170,7 +192,7 @@ class Character extends MoveableObject {
         this.moveRight();
         this.otherDirection = false;
         this.playSound(this.walking_sound, 1);
-        this.walking = true; 
+        this.walking = true;
     }
 
 
@@ -181,7 +203,7 @@ class Character extends MoveableObject {
         this.moveLeft();
         this.otherDirection = true;
         this.playSound(this.walking_sound, 1);
-        this.walking = true; 
+        this.walking = true;
     }
 
 
