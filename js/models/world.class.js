@@ -194,15 +194,17 @@ class World {
      */
     run() {
         setInterval(() => {
-            this.toggleBackgroundMusic();
-            this.distance = Math.abs(this.level.endboss.x - this.character.x);
-            this.endbossFirstContact();
-            this.checkCollisionsEnemies();
-            this.checkCollisionsEndboss();
-            this.checkThrowObjects();
-            this.collectObjects(this.level.coin, this.level.coinBar);
-            this.collectObjects(this.level.bottle, this.level.bottleBar);
-            this.level.endboss.moveTowardsCharacter();
+            if(this.button.play == false) {
+                this.toggleBackgroundMusic();
+                this.distance = Math.abs(this.level.endboss.x - this.character.x);
+                this.endbossFirstContact();
+                this.checkCollisionsEnemies();
+                this.checkCollisionsEndboss();
+                this.checkThrowObjects();
+                this.collectObjects(this.level.coin, this.level.coinBar);
+                this.collectObjects(this.level.bottle, this.level.bottleBar);
+                this.level.endboss.moveTowardsCharacter();
+            }
         }, 1000 / 30);
     }
 

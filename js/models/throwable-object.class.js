@@ -51,8 +51,8 @@ class ThrowableObject extends MoveableObject {
      * preload Audio
      */
     preloadAudio() {
-        throwing_sound.load();
-        splashing_sound.load();
+        this.throwing_sound.load();
+        this.splashing_sound.load();
     }
 
 
