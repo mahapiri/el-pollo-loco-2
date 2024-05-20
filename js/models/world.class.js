@@ -35,7 +35,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        preloadAudio();
+        this.preloadAudio();
     }
 
 
@@ -43,8 +43,8 @@ class World {
      * preload Sound
      */
     preloadAudio() {
-        bottle_sound.load();
-        coin_sound.load();
+        this.bottle_sound.load();
+        this.coin_sound.load();
     }
 
 

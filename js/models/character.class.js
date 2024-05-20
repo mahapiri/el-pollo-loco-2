@@ -107,13 +107,13 @@ class Character extends MoveableObject {
 
 
     /**
-    * 
+    * loading all audios
     */
     preloadAudio() {
-        walking_sound.load();
-        jumping_sound.load();
-        dead_sound.load();
-        hurt_sound.load();
+        this.walking_sound.load();
+        this.jumping_sound.load();
+        this.dead_sound.load();
+        this.hurt_sound.load();
     }
 
 
