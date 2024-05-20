@@ -172,6 +172,7 @@ class World {
             this.level.background_music.loop = true;
         } else if (!this.button.sound || this.character.dead || this.level.endboss.dead) {
             this.level.background_music.pause();
+            this.level.background_music.loop = false;
         }
     }
 

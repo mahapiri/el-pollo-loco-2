@@ -10,6 +10,7 @@ class Character extends MoveableObject {
         right: 20
     }
     toWorld = false;
+    walking = false;
 
     IMAGE_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
@@ -101,7 +102,6 @@ class Character extends MoveableObject {
      */
     animate() {
         this.setStoppableIntervals(() => {
-            this.walking_sound.pause();
             if (!this.dead) {
                 this.movements();
                 this.world.camera_x = -this.x + 100;
@@ -117,10 +117,18 @@ class Character extends MoveableObject {
     }
 
 
+    pauseWalkingSound() {
+        if(this.walking) {
+            this.walking_sound.pause();
+        }
+    }
+
+
     /**
      * movements of the character
      */
     movements() {
+        this.pauseWalkingSound();
         if (this.world.keyboard.D) {
             this.stand();
         }
@@ -162,6 +170,7 @@ class Character extends MoveableObject {
         this.moveRight();
         this.otherDirection = false;
         this.playSound(this.walking_sound, 0.5);
+        this.walking = true; 
     }
 
 

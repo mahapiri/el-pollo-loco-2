@@ -102,7 +102,7 @@ class Endboss extends MoveableObject {
         if (this.world.distance < 600) {
             if (this.x < this.world.character.x) {
                 this.otherDirection = true;
-            } else if (this.x - 250 > this.world.character.x) {
+            } else if (this.x - 200 > this.world.character.x) {
                 this.otherDirection = false;
             }
         }
