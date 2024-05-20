@@ -77,13 +77,17 @@ class DrawableObject {
     */
     playSound(file, volume) {
         if (button.sound || gameStarted) {
-            file.volume = volume;
-            file.play();
-        } else if (!button.sound || !gameStarted) {
-            file.pause();
+            if (file.paused) {
+                file.volume = volume;
+                file.play();
+            }
+        } else {
+            if (!file.paused) {
+                file.pause();
+            }
         }
     }
-
+    
 
     /**
     * push all stoppable setinterval functions

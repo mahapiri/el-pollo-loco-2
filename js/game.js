@@ -3,7 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let button = new Button();
 let gameStarted = false;
-let win = undefined;
+let win = null;
 let fullscreenIsOn = false;
 let faqIsOn = false;
 let currentTime;
@@ -46,7 +46,7 @@ function restartGame() {
     hideEndScreen();
     resetValues();
     setTimeout(() => {
-        win = undefined;
+        win = null;
         init();
         startGame();
     }, 1000);
@@ -57,10 +57,10 @@ function restartGame() {
  * hide the endscreen of winscreen or lostscreen
  */
 function hideEndScreen() {
-    if (world.level.endboss.dead) {
+    if (win == true) {
         document.getElementById('win-screen').style.display = 'none';
         document.querySelector('.replay-btn').style.display = 'none';
-    } else if (world.character.dead) {
+    } else if (win == false) {
         document.getElementById('game-over-screen').style.display = 'none';
         document.querySelector('.try-btn').style.display = 'none';
     }
@@ -181,11 +181,10 @@ function endbossDead() {
  */
 function endSound() {
     if (button.sound) {
-        if (world.level.endboss.dead) {
+        if (win == true) {
             WIN_SOUND.volume = 0.5;
             WIN_SOUND.play();
-        }
-        if (world.character.dead) {
+        } else if(win == false) {
             LOST_SOUND.volume = 0.5;
             LOST_SOUND.play();
         }

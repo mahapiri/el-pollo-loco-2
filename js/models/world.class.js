@@ -166,7 +166,7 @@ class World {
      * toggle the background music + set the volume
      */
     toggleBackgroundMusic() {
-        if (gameStarted && this.button.sound && !this.character.dead) {
+        if (gameStarted && this.button.sound && !this.character.dead && !this.level.endboss.dead) {
             this.level.background_music.play();
             this.level.background_music.volume = 0.5;
             this.level.background_music.loop = true;

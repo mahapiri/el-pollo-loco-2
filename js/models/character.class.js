@@ -169,7 +169,7 @@ class Character extends MoveableObject {
     walkRight() {
         this.moveRight();
         this.otherDirection = false;
-        this.playSound(this.walking_sound, 0.5);
+        this.playSound(this.walking_sound, 1);
         this.walking = true; 
     }
 
@@ -180,7 +180,8 @@ class Character extends MoveableObject {
     walkLeft() {
         this.moveLeft();
         this.otherDirection = true;
-        this.playSound(this.walking_sound, 0.5);
+        this.playSound(this.walking_sound, 1);
+        this.walking = true; 
     }
 
 
