@@ -76,11 +76,13 @@ class DrawableObject {
     * play the sound
     */
     playSound(file, volume) {
-        if (button.sound && gameStarted) {
-            file.volume = volume;
-            file.play();
-            } else if (!button.sound && !gameStarted) {
-            file.pause();
+        if (file.paused) {
+            if (button.sound && gameStarted) {
+                file.volume = volume;
+                file.play();
+                } else if (!button.sound && !gameStarted) {
+                file.pause();
+            }
         }
     }
     
