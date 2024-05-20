@@ -237,7 +237,7 @@ class Character extends MoveableObject {
      * dead animation
      */
     deadAnimation() {
-        this.oneTimeAnimation(this.IMAGE_DEAD, 'img/2_character_pepe/5_dead/D-56.png');
+        this.oneTimeAnimation(this.IMAGE_DEAD, this.IMAGE_DEAD[5]);
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
         this.dead = true;

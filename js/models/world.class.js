@@ -337,7 +337,7 @@ class World {
         setTimeout(() => {
             return this.timepassed = true;
         }, 300);
-        this.character.loadImage('img/2_character_pepe/2_walk/W-21.png');
+        this.character.loadImage(this.character.IMAGE_WALKING[0]);
         this.level.bottleBar.percentage -= 10;
         this.level.bottleBar.setPercentage(this.level.bottleBar.percentage);
         let bottle = new ThrowableObject(this.character.x + 60, this.character.y + 120, this.character.otherDirection);

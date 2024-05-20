@@ -24,6 +24,9 @@ function init() {
 }
 
 
+/**
+ * load all audios
+ */
 function preloadAudio() {
     WIN_SOUND.load();
     LOST_SOUND.load();
