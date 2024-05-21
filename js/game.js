@@ -98,7 +98,8 @@ function togglePlayMode() {
         } else if (gameStarted) {
             world.endbossStart = false;
             pauseAllIntervals();
-            setPlayImg(img);
+            button.sound = true;
+            setPlayImg(img); 
         }
     } else if (button.play) {
         if (gameStarted) {

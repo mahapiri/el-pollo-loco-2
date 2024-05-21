@@ -194,8 +194,8 @@ class World {
      */
     run() {
         setInterval(() => {
+            this.toggleBackgroundMusic();
             if(this.button.play == false) {
-                this.toggleBackgroundMusic();
                 this.distance = Math.abs(this.level.endboss.x - this.character.x);
                 this.endbossFirstContact();
                 this.checkCollisionsEnemies();
