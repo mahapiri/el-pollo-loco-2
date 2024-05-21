@@ -78,47 +78,30 @@ class Keyboard {
     */
     touchEvents() {
         document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                keyboard.LEFT = true;
-            });
+            const buttons = [
+                { id: 'btnLeft', key: 'LEFT' },
+                { id: 'btnRight', key: 'RIGHT' },
+                { id: 'btnUp', key: 'SPACE' },
+                { id: 'btnThrow', key: 'D' }
+            ];
 
-            document.getElementById('btnRight').addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                keyboard.RIGHT = true;
-            });
+            buttons.forEach(button => {
+                const element = document.getElementById(button.id);
+                if (element) {
+                    element.addEventListener('touchstart', (e) => {
+                        if (e.cancelable) {
+                            e.preventDefault();
+                        }
+                        keyboard[button.key] = true;
+                    }, { passive: false });
 
-            document.getElementById('btnUp').addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                keyboard.SPACE = true;
-            });
-
-            document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                keyboard.D = true;
-            });
-        });
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('btnLeft').addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keyboard.LEFT = false;
-            });
-
-            document.getElementById('btnRight').addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keyboard.RIGHT = false;
-            });
-
-            document.getElementById('btnUp').addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keyboard.SPACE = false;
-            });
-
-            document.getElementById('btnThrow').addEventListener('touchend', (e) => {
-                e.preventDefault();
-                keyboard.D = false;
+                    element.addEventListener('touchend', (e) => {
+                        if (e.cancelable) {
+                            e.preventDefault();
+                        }
+                        keyboard[button.key] = false;
+                    }, { passive: false });
+                }
             });
         });
     }

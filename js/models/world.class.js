@@ -13,6 +13,7 @@ class World {
     i = 0;
     distance;
     hit = false;
+    hurt = false;
     hitEnemy = false;
     currentTime;
 
@@ -195,7 +196,7 @@ class World {
     run() {
         setInterval(() => {
             this.toggleBackgroundMusic();
-            if(this.button.play == false) {
+            if (this.button.play == false) {
                 this.distance = Math.abs(this.level.endboss.x - this.character.x);
                 this.endbossFirstContact();
                 this.checkCollisionsEnemies();
@@ -300,6 +301,10 @@ class World {
      */
     characterIsInjured() {
         this.character.hit();
+        this.hurt = true;
+        setTimeout(() => {
+            this.hurt = false;
+        }, 300);
         this.level.characterBar.setPercentage(this.character.energy);
     }
 
@@ -310,6 +315,10 @@ class World {
     checkCollisionsEndboss() {
         if (this.character.isColliding(this.level.endboss)) {
             this.character.hit();
+            this.hurt = true;
+            setTimeout(() => {
+                this.hurt = false;
+            }, 300);
             this.level.characterBar.setPercentage(this.character.energy);
         }
     }
@@ -319,7 +328,7 @@ class World {
      * if you press keyboard "D" then it will create a new Bottel to throw.
      */
     checkThrowObjects() {
-        if (this.keyboard.D && this.level.bottleBar.percentage > 0 && this.timepassed) {
+        if (this.keyboard.D && this.level.bottleBar.percentage > 0 && this.timepassed && !this.hurt) {
             this.throwNewBottle();
         }
 

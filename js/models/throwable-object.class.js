@@ -77,11 +77,11 @@ class ThrowableObject extends MoveableObject {
         this.applyGravity();
         this.throwInterval = setInterval(() => {
             if (this.otherDirection) {
-                this.x -= 20;
+                this.x -= 200;
             } else {
                 this.x += 200;
             }
-            
+
         }, 200);
         this.rotation = setInterval(() => {
             this.playAnimation(this.BOTTLE_ROTATION);
