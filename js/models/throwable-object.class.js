@@ -4,8 +4,8 @@ class ThrowableObject extends MoveableObject {
     otherDirection = false;
     throwInterval;
     rotation;
-    acceleration = 0.10;
-    speedY = 3;
+    acceleration = 1;
+    speedY = 15;
     i = 0;
 
 
@@ -77,15 +77,14 @@ class ThrowableObject extends MoveableObject {
         this.applyGravity();
         this.throwInterval = setInterval(() => {
             if (this.otherDirection) {
-                this.x -= 200;
+                this.x -= 10;
             } else {
-                this.x += 200;
+                this.x += 10;
             }
-
-        }, 200);
+        }, 10);
         this.rotation = setInterval(() => {
             this.playAnimation(this.BOTTLE_ROTATION);
-        }, 70);
+        }, 20);
     }
 
 

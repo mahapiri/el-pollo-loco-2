@@ -214,7 +214,7 @@ class World {
      * initials the first contact to move
      */
     endbossFirstContact() {
-        if (this.character.x > 1780) {
+        if (this.character.x > 1715) {
             if (!this.firstContact) {
                 this.level.endboss.speed = 10;
                 this.firstContact = true;
@@ -264,6 +264,7 @@ class World {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround() && this.character.speedY <= 0) {
                     this.enemyIsDead(enemy, i);
+                    this.character.jump(5);
                     this.hitEnemy = true;
                     this.setHitEnemy();
                 } else if (!this.hitEnemy) {
@@ -289,7 +290,6 @@ class World {
      */
     enemyIsDead(enemy, i) {
         enemy.isDead();
-        this.character.jump(5);
         setTimeout(() => {
             this.deleteObject(this.level.enemies, i)
         }, 500);
@@ -333,7 +333,8 @@ class World {
         }
 
         this.throwObject.forEach((bottle, i) => {
-            this.checkCollisionsBottle(bottle, i);
+            this.checkCollisionsBottleEndboss(bottle, i);
+            this.checkCollisionsBottleEnemies(bottle, i);
         });
     }
 
@@ -360,7 +361,7 @@ class World {
      * @param {array} bottle of the array throwObjects
      * @param {number} i position of the array
      */
-    checkCollisionsBottle(bottle, i) {
+    checkCollisionsBottleEndboss(bottle, i) {
         if (bottle.isColliding(this.level.endboss) && !this.hit) {
             this.hit = true;
             bottle.hit(bottle.x, bottle.y);
@@ -369,6 +370,26 @@ class World {
                 this.deleteObject(this.throwObject, i);
             }, 250);
         }
+    }
+
+
+    /**
+     * check collision with the bottle
+     * @param {array} bottle of the array throwObjects
+     * @param {number} i position of the array
+     */
+    checkCollisionsBottleEnemies(bottle, i) {
+        this.level.enemies.forEach((enemy, j) => {
+            if (bottle.isColliding(enemy)) {
+                bottle.hit(bottle.x, bottle.y + 10);
+                this.enemyIsDead(enemy, j);
+                this.hitEnemy = true;
+                this.setHitEnemy();
+                setTimeout(() => {
+                    this.deleteObject(this.throwObject, i);
+                }, 250);
+            }
+        });
     }
 
 
