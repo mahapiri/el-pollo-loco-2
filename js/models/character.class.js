@@ -2,6 +2,7 @@ class Character extends MoveableObject {
     world;
     speed = 7;
     y = 155;
+    speedY = 15;
     currentTime;
     offset = {
         top: 150,
