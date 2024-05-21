@@ -86,7 +86,7 @@ class Keyboard {
             ];
 
             buttons.forEach(button => {
-                const element = document.getElementById(button.id);
+                let element = document.getElementById(button.id);
                 if (element) {
                     element.addEventListener('touchstart', (e) => {
                         if (e.cancelable) {
