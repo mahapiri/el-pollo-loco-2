@@ -3,6 +3,9 @@ class ThrowableObject extends MoveableObject {
     width = 40;
     otherDirection = false;
     throwInterval;
+    rotation;
+    acceleration = 0.10;
+    speedY = 3;
     i = 0;
 
 
@@ -71,16 +74,18 @@ class ThrowableObject extends MoveableObject {
      */
     throw() {
         this.playSound(this.throwing_sound, 0.5);
-        this.speedY = 6;
         this.applyGravity();
         this.throwInterval = setInterval(() => {
             if (this.otherDirection) {
-                this.x -= 80;
+                this.x -= 20;
             } else {
-                this.x += 80;
+                this.x += 200;
             }
+            
+        }, 200);
+        this.rotation = setInterval(() => {
             this.playAnimation(this.BOTTLE_ROTATION);
-        }, 50);
+        }, 70);
     }
 
 
@@ -91,6 +96,7 @@ class ThrowableObject extends MoveableObject {
      */
     hit(x, y) {
         clearInterval(this.throwInterval);
+        clearInterval(this.rotation);
         clearInterval(this.gravity);
         this.x = x;
         this.y = y;
